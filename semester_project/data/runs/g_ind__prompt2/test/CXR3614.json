@@ -1,0 +1,118 @@
+{
+ "arm": "g_ind__prompt2",
+ "system": "g_ind",
+ "prompt_version": 2,
+ "study": "CXR3614",
+ "image": "CXR3614_IM-1787-4001",
+ "indication": "",
+ "neighbours": [
+  {
+   "study": "CXR340",
+   "similarity": 0.949024498462677
+  },
+  {
+   "study": "CXR614",
+   "similarity": 0.9465463161468506
+  },
+  {
+   "study": "CXR2726",
+   "similarity": 0.9406017065048218
+  },
+  {
+   "study": "CXR1499",
+   "similarity": 0.9376772046089172
+  },
+  {
+   "study": "CXR1818",
+   "similarity": 0.9344325065612793
+  },
+  {
+   "study": "CXR1072",
+   "similarity": 0.9342107772827148
+  },
+  {
+   "study": "CXR1282",
+   "similarity": 0.9331375956535339
+  },
+  {
+   "study": "CXR2218",
+   "similarity": 0.9328223466873169
+  },
+  {
+   "study": "CXR2908",
+   "similarity": 0.9313839077949524
+  },
+  {
+   "study": "CXR925",
+   "similarity": 0.9309166073799133
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nSimilar cases (most similar first):\nCase CXR340 (similarity 0.949): FINDINGS: Heart size moderately enlarged, stable mediastinal contours. Lateral view curvilinear densities over the heart suggestive of coronary artery stents. Diaphragm eventration. No focal alveolar consolidation, no definite pleural effusion seen. No typical findings of pulmonary edema. IMPRESSION: Cardiomegaly, no acute pulmonary findings\nCase CXR614 (similarity 0.947): no report text\nCase CXR2726 (similarity 0.941): FINDINGS: The heart is normal in size. The mediastinum is within normal limits. The study is somewhat limited. No focal consolidation is seen. IMPRESSION: No acute disease.\nCase CXR1499 (similarity 0.938): FINDINGS: Cardiomediastinal silhouettes are within normal limits. Low lung volumes. Lungs are clear without focal consolidation, pneumothorax, or pleural effusion. Bony thorax is unremarkable. IMPRESSION: No acute cardiopulmonary abnormalities.\nCase CXR1818 (similarity 0.934): IMPRESSION: Very low lung volumes, bronchovascular crowding and bibasilar areas of atelectasis. No lobar consolidation. No appreciable pleural effusion or pneumothorax. Heart size within normal limits.\nCase CXR1072 (similarity 0.934): FINDINGS: The heart and mediastinal contours are stable. Aorta is calcified and tortuous, compatible with atherosclerotic disease. Since the prior study, there's been interval development of left lower lobe airspace disease. The right lung is clear. IMPRESSION: 1. Interval development of left lower lobe airspace disease. This may be due to atelectasis or infiltrate.\nCase CXR1282 (similarity 0.933): FINDINGS: Normal heart size and mediastinal contours. Patchy right lower lobe airspace opacities. No pleural effusion or pneumothorax. Visualized osseous structures are unremarkable in appearance. IMPRESSION: Mild, nonconsolidating right lower lobe airspace disease. This may represent an early pneumonia.\nCase CXR2218 (similarity 0.933): FINDINGS: The opacity at the left lung base appears stable from prior exam. There is elevation of the left hemidiaphragm is stable. The cardiomediastinal silhouette is enlarged but unchanged. XXXX sternotomy XXXX are again noted. There is a large amount of XXXX distending the stomach, which incidentally was also seen on prior exam of 3 years ago. There is no pneumothorax. IMPRESSION: 1. Left basilar opacity XXXX represents atelectasis/scarring with associated elevated hemidiaphragm. 2. Stable cardiomegaly. 3. No XXXX airspace disease.\nCase CXR2908 (similarity 0.931): FINDINGS: Heart size is upper limits of normal but stable. Mediastinal contours are within normal limits.. Chronically increased interstitial markings without focal airspace consolidation, pleural effusion, pneumothorax. Degenerative changes of the spine. IMPRESSION: 1. No acute radiographic cardiopulmonary process.\nCase CXR925 (similarity 0.931): FINDINGS: Increased interstitial lung changes with superimposed pulmonary edema. Cardiomegaly. Negative for effusion or pneumothorax. Degenerative changes of the thoracic spine. IMPRESSION: Cardiomegaly with pulmonary edema superimposed on chronic interstitial lung changes.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\n  \"findings\": [\n    {\n      \"finding\": \"Lung Opacity\",\n      \"status\": \"present\",\n      \"probability\": 0.85,\n      \"cited_case_ids\": [\n        \"CXR1072\",\n        \"CXR1282\"\n      ],\n      \"rationale\": \"Hazy bibasilar opacities are noted, which likely represent a combination of airspace disease and compressive effects from low lung volumes.\"\n    },\n    {\n      \"finding\": \"Cardiomegaly\",\n      \"status\": \"uncertain\",\n      \"probability\": 0.45,\n      \"cited_case_ids\": [\n        \"CXR340\",\n        \"CXR2218\"\n      ],\n      \"rationale\": \"The cardiomediastinal silhouette appears widened, but this is difficult to accurately assess due to the patient's extremely low lung volumes and poor inspiratory effort.\"\n    },\n    {\n      \"finding\": \"Atelectasis\",\n      \"status\": \"present\",\n      \"probability\": 0.9,\n      \"cited_case_ids\": [\n        \"CXR1818\",\n        \"CXR2218\"\n      ],\n      \"rationale\": \"The very low lung volumes and bibasilar crowding of bronchovascular markings are highly suggestive of dependent atelectasis.\"\n    },\n    {\n      \"finding\": \"Lung Lesion\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [],\n      \"rationale\": \"No discrete pulmonary nodules or masses are identified in the lung parenchyma.\"\n    },\n    {\n      \"finding\": \"Pleural Effusion\",\n      \"status\": \"absent\",\n      \"probability\": 0.2,\n      \"cited_case_ids\": [],\n      \"rationale\": \"Although the costophrenic angles are poorly visualized due to low inspiration, there is no definite evidence of significant pleural fluid.\"\n    },\n    {\n      \"finding\": \"Fracture\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [],\n      \"rationale\": \"Visible osseous structures, including the ribs and clavicles, appear intact without evidence of fracture.\"\n    }\n  ],\n  \"impression\": \"Technically limited study due to extremely low lung volumes; bibasilar opacities most likely reflect atelectasis, though underlying pneumonia is difficult to exclude.\"\n}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "present",
+    "probability": 0.85,
+    "cited_case_ids": [
+     "CXR1072",
+     "CXR1282"
+    ],
+    "rationale": "Hazy bibasilar opacities are noted, which likely represent a combination of airspace disease and compressive effects from low lung volumes."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "uncertain",
+    "probability": 0.45,
+    "cited_case_ids": [
+     "CXR340",
+     "CXR2218"
+    ],
+    "rationale": "The cardiomediastinal silhouette appears widened, but this is difficult to accurately assess due to the patient's extremely low lung volumes and poor inspiratory effort."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.9,
+    "cited_case_ids": [
+     "CXR1818",
+     "CXR2218"
+    ],
+    "rationale": "The very low lung volumes and bibasilar crowding of bronchovascular markings are highly suggestive of dependent atelectasis."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [],
+    "rationale": "No discrete pulmonary nodules or masses are identified in the lung parenchyma."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.2,
+    "cited_case_ids": [],
+    "rationale": "Although the costophrenic angles are poorly visualized due to low inspiration, there is no definite evidence of significant pleural fluid."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [],
+    "rationale": "Visible osseous structures, including the ribs and clavicles, appear intact without evidence of fracture."
+   }
+  ],
+  "impression": "Technically limited study due to extremely low lung volumes; bibasilar opacities most likely reflect atelectasis, though underlying pneumonia is difficult to exclude."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2251,
+  "output": 573,
+  "thinking": 1203,
+  "total": 4027
+ },
+ "time": "2026-10-18T14:59:48"
+}

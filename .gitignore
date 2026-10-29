@@ -1,0 +1,22 @@
+# Secrets: the Gemini API key lives here; never commit it
+.env
+**/.env
+
+# Local environments and caches
+.venv/
+**/.venv/
+.cache/
+**/.cache/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Dataset and everything derived from it (IU X-Ray is CC BY-NC-ND 4.0). Raw images and reports,
+# processed data and all embeddings stay local. Exception (decision 2026-10-18, SETUP.md §4):
+# data/runs/ (model answers, evaluation outputs, logs, review judgements) is committed because
+# this repository is PRIVATE; it quotes report text verbatim and contains derived labels, so it
+# must be removed before the repository is ever made public.
+semester_project/data/*
+!semester_project/data/runs/
+semester_project/data/runs/**/*.npy
+semester_project/data/runs/**/*.npz

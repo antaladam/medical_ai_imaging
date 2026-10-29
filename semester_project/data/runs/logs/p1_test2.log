@@ -1,0 +1,17 @@
+ERROR   Error in Agent run: Max retries with guidance reached. Error: Generation ended with finish reason: FinishReason.MALFORMED_FUNCTION_CALL
+API attempts this run: 1
+Traceback (most recent call last):
+  File "C:\Users\antal\Desktop\Project 4\semester_project\scripts\starters\p1_adapted.py", line 170, in <module>
+    main()
+  File "C:\Users\antal\Desktop\Project 4\semester_project\scripts\starters\p1_adapted.py", line 151, in main
+    run = with_retry(lambda: run_checked(agent, path))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\antal\Desktop\Project 4\semester_project\scripts\common.py", line 76, in with_retry
+    return fn()
+           ^^^^
+  File "C:\Users\antal\Desktop\Project 4\semester_project\scripts\starters\p1_adapted.py", line 151, in <lambda>
+    run = with_retry(lambda: run_checked(agent, path))
+                             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\antal\Desktop\Project 4\semester_project\scripts\starters\p1_adapted.py", line 90, in run_checked
+    raise RuntimeError(f"agno run failed (status {status}): {str(run.content)[:300]}")
+RuntimeError: agno run failed (status ERROR): Max retries with guidance reached. Error: Generation ended with finish reason: FinishReason.MALFORMED_FUNCTION_CALL

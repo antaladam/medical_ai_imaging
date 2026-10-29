@@ -1,0 +1,68 @@
+{
+ "arm": "g_img__prompt2",
+ "system": "g_img",
+ "prompt_version": 2,
+ "study": "CXR2184",
+ "image": "CXR2184_IM-0795-1001",
+ "indication": "",
+ "neighbours": [],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically.\n2. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"present\",\"probability\":0.85,\"cited_case_ids\":[],\"rationale\":\"There is a faint area of increased density in the left lower lobe, partially obscuring the left hemidiaphragm, consistent with consolidation or infiltrate.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"absent\",\"probability\":0.15,\"cited_case_ids\":[],\"rationale\":\"The cardiac silhouette size appears within the normal range for this projection.\"},{\"finding\":\"Atelectasis\",\"status\":\"present\",\"probability\":0.75,\"cited_case_ids\":[],\"rationale\":\"The opacity at the left base has features suggesting component atelectasis, given the mild loss of volume in that region.\"},{\"finding\":\"Lung Lesion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[],\"rationale\":\"No discrete pulmonary nodules or masses are seen in the visualized lung fields.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"absent\",\"probability\":0.2,\"cited_case_ids\":[],\"rationale\":\"The right costophrenic angle is sharp; while the left is obscured by basal opacity, there is no definitive evidence of a large pleural effusion.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[],\"rationale\":\"The visualized ribs, clavicles, and spine show no evidence of acute or old fractures.\"}],\"impression\":\"Left lower lobe opacity, likely representing a combination of consolidation and atelectasis. No evidence of cardiomegaly or large pleural effusion.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "present",
+    "probability": 0.85,
+    "cited_case_ids": [],
+    "rationale": "There is a faint area of increased density in the left lower lobe, partially obscuring the left hemidiaphragm, consistent with consolidation or infiltrate."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.15,
+    "cited_case_ids": [],
+    "rationale": "The cardiac silhouette size appears within the normal range for this projection."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.75,
+    "cited_case_ids": [],
+    "rationale": "The opacity at the left base has features suggesting component atelectasis, given the mild loss of volume in that region."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [],
+    "rationale": "No discrete pulmonary nodules or masses are seen in the visualized lung fields."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.2,
+    "cited_case_ids": [],
+    "rationale": "The right costophrenic angle is sharp; while the left is obscured by basal opacity, there is no definitive evidence of a large pleural effusion."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [],
+    "rationale": "The visualized ribs, clavicles, and spine show no evidence of acute or old fractures."
+   }
+  ],
+  "impression": "Left lower lobe opacity, likely representing a combination of consolidation and atelectasis. No evidence of cardiomegaly or large pleural effusion."
+ },
+ "problems": [],
+ "usage": {
+  "input": 1431,
+  "output": 337,
+  "thinking": 975,
+  "total": 2743
+ },
+ "time": "2026-10-18T14:18:11"
+}

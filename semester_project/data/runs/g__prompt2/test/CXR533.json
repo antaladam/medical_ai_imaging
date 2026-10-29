@@ -1,0 +1,153 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR533",
+ "image": "CXR533_IM-2140-1001",
+ "indication": "XXXX-year-old female, rule out dissection.",
+ "neighbours": [
+  {
+   "study": "CXR2411",
+   "similarity": 0.9526797533035278
+  },
+  {
+   "study": "CXR3052",
+   "similarity": 0.943987250328064
+  },
+  {
+   "study": "CXR3550",
+   "similarity": 0.9317668080329895
+  },
+  {
+   "study": "CXR3491",
+   "similarity": 0.9292307496070862
+  },
+  {
+   "study": "CXR335",
+   "similarity": 0.9282803535461426
+  },
+  {
+   "study": "CXR1242",
+   "similarity": 0.9261387586593628
+  },
+  {
+   "study": "CXR2586",
+   "similarity": 0.9253777265548706
+  },
+  {
+   "study": "CXR548",
+   "similarity": 0.9223127365112305
+  },
+  {
+   "study": "CXR3394",
+   "similarity": 0.9215726256370544
+  },
+  {
+   "study": "CXR230",
+   "similarity": 0.9201037287712097
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: XXXX-year-old female, rule out dissection.\n\nSimilar cases (most similar first):\nCase CXR2411 (similarity 0.953): FINDINGS: Mild cardiomegaly, stable mediastinal contours. No focal alveolar consolidation, no definite pleural effusion seen. Mild bronchovascular crowding without typical findings of pulmonary edema. IMPRESSION: Mild cardiomegaly, no acute pulmonary findings\nCase CXR3052 (similarity 0.944): FINDINGS: Normal heart size. Density surrounding superior mediastinum reflex combination of vascular, osseous common pleural structures. No focal airspace consolidation. Moderate degenerative disc disease with osteophyte formation bridging. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR3550 (similarity 0.932): FINDINGS: Normal heart size. Prominent contour of the ascending aorta, consistent with ectasia. Normal mediastinal contours. No focal airspace consolidation. No pleural effusion or pneumothorax. Minimal degenerative changes of the thoracic spine. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR3491 (similarity 0.929): FINDINGS: The heart size and pulmonary vascularity appear within normal limits. The thoracic aorta is prominent with calcification within the aorta. Azygos lobe is noted. Lungs are free of focal airspace disease. No pleural effusion or pneumothorax is seen. Degenerative changes noted in the spine. IMPRESSION: Prominent transverse aorta. Otherwise clear.\nCase CXR335 (similarity 0.928): FINDINGS: A left-sided hemodialysis catheter is in XXXX with its distal tip at the right atrium. The cardiac silhouette and mediastinal contours are within normal limits. There is no focal opacity. There is no pneumothorax. No large pleural effusion. IMPRESSION: Stable position of the left-sided hemodialysis catheter otherwise no acute cardiopulmonary disease.\nCase CXR1242 (similarity 0.926): FINDINGS: The heart is normal in size. The mediastinum is stable with tortuous aorta. There are chronic changes particularly noted in the lung apices. The XXXX are mildly prominent but stable. No acute infiltrate is seen. There is no pleural effusion. IMPRESSION: Chronic parenchymal changes XXXX reflecting sequela of patient's known sarcoidosis. No acute disease.\nCase CXR2586 (similarity 0.925): IMPRESSION: Lungs are clear. Heart size normal. Dilated aorta secondary to aortic dissection.\nCase CXR548 (similarity 0.922): FINDINGS: Cardiomediastinal silhouette is within normal limits in overall size and appearance. Central vascular markings are symmetric and within normal limits. The lungs are normally inflated with no focal airspace disease, pleural effusion or pneumothorax. No acute bony abnormality. Stable scarring in the right lung apex. IMPRESSION: 1. No acute cardiopulmonary process.\nCase CXR3394 (similarity 0.922): FINDINGS: The cardiac contours are normal. XXXX scarring left base. The lungs are clear. Thoracic spondylosis. IMPRESSION: No acute preoperative process.\nCase CXR230 (similarity 0.920): IMPRESSION: Stable cardiomediastinal silhouette. Stable lingular nodule, presumably granuloma . No pleural effusion, pneumothorax or interval airspace consolidation to suggest pneumonia.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR2411\",\"CXR3052\",\"CXR3550\",\"CXR3491\",\"CXR335\",\"CXR548\",\"CXR3394\",\"CXR230\"],\"rationale\":\"The lung parenchyma is clear with no evidence of focal consolidation or infiltrates.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"absent\",\"probability\":0.1,\"cited_case_ids\":[\"CXR3052\",\"CXR3550\",\"CXR3491\",\"CXR335\",\"CXR1242\",\"CXR2586\",\"CXR548\",\"CXR3394\",\"CXR230\"],\"rationale\":\"The heart size is within normal limits, although the mediastinum shows a prominent aortic contour.\"},{\"finding\":\"Atelectasis\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR2411\",\"CXR3550\",\"CXR3491\",\"CXR548\"],\"rationale\":\"There is no evidence of linear opacities or volume loss to suggest atelectasis.\"},{\"finding\":\"Lung Lesion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR2411\",\"CXR3052\",\"CXR3550\",\"CXR3491\",\"CXR335\",\"CXR1242\",\"CXR548\",\"CXR3394\",\"CXR230\"],\"rationale\":\"No suspicious nodules or masses are identified within the lung fields.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR2411\",\"CXR3550\",\"CXR3491\",\"CXR335\",\"CXR1242\",\"CXR548\",\"CXR230\"],\"rationale\":\"The costophrenic angles are well-defined, with no signs of pleural fluid.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR548\"],\"rationale\":\"No acute bony fractures are seen, though degenerative changes are present in the thoracic spine.\"}],\"impression\":\"No acute cardiopulmonary process. The prominent and tortuous thoracic aorta may represent ectasia, warranting clinical correlation given the indication to rule out dissection.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2411",
+     "CXR3052",
+     "CXR3550",
+     "CXR3491",
+     "CXR335",
+     "CXR548",
+     "CXR3394",
+     "CXR230"
+    ],
+    "rationale": "The lung parenchyma is clear with no evidence of focal consolidation or infiltrates."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR3052",
+     "CXR3550",
+     "CXR3491",
+     "CXR335",
+     "CXR1242",
+     "CXR2586",
+     "CXR548",
+     "CXR3394",
+     "CXR230"
+    ],
+    "rationale": "The heart size is within normal limits, although the mediastinum shows a prominent aortic contour."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2411",
+     "CXR3550",
+     "CXR3491",
+     "CXR548"
+    ],
+    "rationale": "There is no evidence of linear opacities or volume loss to suggest atelectasis."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2411",
+     "CXR3052",
+     "CXR3550",
+     "CXR3491",
+     "CXR335",
+     "CXR1242",
+     "CXR548",
+     "CXR3394",
+     "CXR230"
+    ],
+    "rationale": "No suspicious nodules or masses are identified within the lung fields."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2411",
+     "CXR3550",
+     "CXR3491",
+     "CXR335",
+     "CXR1242",
+     "CXR548",
+     "CXR230"
+    ],
+    "rationale": "The costophrenic angles are well-defined, with no signs of pleural fluid."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR548"
+    ],
+    "rationale": "No acute bony fractures are seen, though degenerative changes are present in the thoracic spine."
+   }
+  ],
+  "impression": "No acute cardiopulmonary process. The prominent and tortuous thoracic aorta may represent ectasia, warranting clinical correlation given the indication to rule out dissection."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2246,
+  "output": 556,
+  "thinking": 3164,
+  "total": 5966
+ },
+ "time": "2026-10-18T13:54:31"
+}

@@ -1,0 +1,133 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR1789",
+ "image": "CXR1789_IM-0513-1001",
+ "indication": "History of syncope",
+ "neighbours": [
+  {
+   "study": "CXR1119",
+   "similarity": 0.9629831910133362
+  },
+  {
+   "study": "CXR545",
+   "similarity": 0.9594641923904419
+  },
+  {
+   "study": "CXR2048",
+   "similarity": 0.9557444453239441
+  },
+  {
+   "study": "CXR3338",
+   "similarity": 0.9534185528755188
+  },
+  {
+   "study": "CXR1434",
+   "similarity": 0.9520097970962524
+  },
+  {
+   "study": "CXR2371",
+   "similarity": 0.9511231184005737
+  },
+  {
+   "study": "CXR1529",
+   "similarity": 0.9486405849456787
+  },
+  {
+   "study": "CXR685",
+   "similarity": 0.948583722114563
+  },
+  {
+   "study": "CXR1398",
+   "similarity": 0.9483733177185059
+  },
+  {
+   "study": "CXR3086",
+   "similarity": 0.9478985071182251
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: History of syncope\n\nSimilar cases (most similar first):\nCase CXR1119 (similarity 0.963): FINDINGS: Low lung volumes with bronchovascular crowding. Sequela of prior granulomatous disease. Otherwise lungs clear. Heart size normal. Stable severe L1 XXXX deformity. IMPRESSION: Low lung volumes with bronchovascular crowding, no acute cardiopulmonary finding.\nCase CXR545 (similarity 0.959): FINDINGS: Lung volumes are XXXX. XXXX opacities are present in both lung bases. A hiatal hernia is present. Heart and pulmonary XXXX are normal. IMPRESSION: Hypoinflation with bibasilar focal atelectasis.\nCase CXR2048 (similarity 0.956): FINDINGS: The lungs and pleural spaces show no acute abnormality. Stable right lower lobe calcified granulomas. Thin XXXX lingular scar, unchanged. Heart size and pulmonary vascularity within normal limits. Surgical clips are visualized in the right upper quadrant. IMPRESSION: 1. No acute pulmonary abnormality.\nCase CXR3338 (similarity 0.953): IMPRESSION: No comparison chest x-XXXX Clear lungs. No effusions. Unremarkable mediastinal contour. No acute cardiopulmonary abnormality identified.\nCase CXR1434 (similarity 0.952): FINDINGS: Both lungs are clear and expanded. Heart and mediastinum normal. IMPRESSION: No active disease.\nCase CXR2371 (similarity 0.951): FINDINGS: There are T-spine osteophytes. The cardiomediastinal silhouette and pulmonary vasculature are within normal limits. There is no pneumothorax or pleural effusion. There are no focal areas of consolidation. There are low lung volumes. IMPRESSION: Lung volumes with streaky left basilar opacity consistent with subsegmental atelectasis.\nCase CXR1529 (similarity 0.949): FINDINGS: The lungs are clear. There is no focal airspace consolidation. No pleural effusion or pneumothorax. Heart size is within normal limits. Right paratracheal density is stable from prior radiographs and may reflect tortuous vasculature. There is aortic atherosclerotic vascular calcification. There are mild degenerative changes of the spine. Surgical clips are noted in the region of the left breast. There is mild diaphragm eventration. IMPRESSION: No evidence of active disease.\nCase CXR685 (similarity 0.949): FINDINGS: The trachea is midline. The cardiomediastinal silhouette is normal and unchanged compared to prior examination. Tubular densities overlying the heart XXXX are XXXX coronary artery stents. There are small round calcific densities in the bilateral lobes which are unchanged from prior exam and XXXX represent sequelae from old granulomatous disease. Otherwise lungs are clear, without evidence of acute infiltrate or effusion. There is no pneumothorax. The visualized bony structures reveal no acute abnormalities. Lateral view reveals mild degenerative changes of the thoracic spine. IMPRESSION: No acute cardiopulmonary abnormalities.\nCase CXR1398 (similarity 0.948): FINDINGS: The lungs are clear bilaterally. Specifically, no evidence of focal consolidation, pneumothorax, or pleural effusion. Mild right basilar atelectasis and relative elevation of the right hemidiaphragm noted. Cardiomediastinal silhouette is unremarkable. Visualized osseous structures of the thorax are without acute abnormality. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR3086 (similarity 0.948): FINDINGS: No airspace disease, effusion or noncalcified nodule. Calcified granuloma seen bilaterally. Normal heart size. Elevated right hemidiaphragm, with a nodular soft tissue contour, containing liver. Degenerative changes demonstrated within the visualized thoracic spine. There is neurostimulator, overlying the mid and lower thoracic spine. IMPRESSION: 1. No acute cardiopulmonary abnormality. 2. Elevation of the right XXXX diaphragm, containing liver.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR1529\",\"CXR2371\",\"CXR1398\",\"CXR3086\"],\"rationale\":\"The lungs are clear of focal consolidation or infiltrates, consistent with reports from several similar cases.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR1119\",\"CXR1434\",\"CXR1529\",\"CXR1398\"],\"rationale\":\"The cardiomediastinal silhouette size is within normal limits, comparable to similar clear-lung cases.\"},{\"finding\":\"Atelectasis\",\"status\":\"present\",\"probability\":0.85,\"cited_case_ids\":[\"CXR545\",\"CXR2371\",\"CXR1398\"],\"rationale\":\"Streaky opacities at the lung bases are present, likely representing subsegmental atelectasis exacerbated by the low lung volumes.\"},{\"finding\":\"Lung Lesion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR3086\"],\"rationale\":\"No nodules or masses are identified in the lung parenchyma.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR2371\",\"CXR1529\",\"CXR1398\",\"CXR3086\"],\"rationale\":\"The costophrenic angles are clear where not obscured by low volumes, and no fluid collections are seen.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.02,\"cited_case_ids\":[\"CXR685\",\"CXR1398\"],\"rationale\":\"There are no acute or healing fractures visible in the thoracic cage or visualized spine.\"}],\"impression\":\"Hypoinflated lungs with associated minor bibasilar subsegmental atelectasis. No acute cardiopulmonary disease is identified.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR1529",
+     "CXR2371",
+     "CXR1398",
+     "CXR3086"
+    ],
+    "rationale": "The lungs are clear of focal consolidation or infiltrates, consistent with reports from several similar cases."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR1119",
+     "CXR1434",
+     "CXR1529",
+     "CXR1398"
+    ],
+    "rationale": "The cardiomediastinal silhouette size is within normal limits, comparable to similar clear-lung cases."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.85,
+    "cited_case_ids": [
+     "CXR545",
+     "CXR2371",
+     "CXR1398"
+    ],
+    "rationale": "Streaky opacities at the lung bases are present, likely representing subsegmental atelectasis exacerbated by the low lung volumes."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR3086"
+    ],
+    "rationale": "No nodules or masses are identified in the lung parenchyma."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2371",
+     "CXR1529",
+     "CXR1398",
+     "CXR3086"
+    ],
+    "rationale": "The costophrenic angles are clear where not obscured by low volumes, and no fluid collections are seen."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.02,
+    "cited_case_ids": [
+     "CXR685",
+     "CXR1398"
+    ],
+    "rationale": "There are no acute or healing fractures visible in the thoracic cage or visualized spine."
+   }
+  ],
+  "impression": "Hypoinflated lungs with associated minor bibasilar subsegmental atelectasis. No acute cardiopulmonary disease is identified."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2373,
+  "output": 442,
+  "thinking": 1846,
+  "total": 4661
+ },
+ "time": "2026-10-18T14:18:50"
+}

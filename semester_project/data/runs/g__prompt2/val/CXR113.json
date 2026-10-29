@@ -1,0 +1,129 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR113",
+ "image": "CXR113_IM-0086-1001",
+ "indication": "Chest pain.",
+ "neighbours": [
+  {
+   "study": "CXR1481",
+   "similarity": 0.9484630823135376
+  },
+  {
+   "study": "CXR982",
+   "similarity": 0.9479129910469055
+  },
+  {
+   "study": "CXR3168",
+   "similarity": 0.9465073347091675
+  },
+  {
+   "study": "CXR238",
+   "similarity": 0.9462549686431885
+  },
+  {
+   "study": "CXR1124",
+   "similarity": 0.9457858800888062
+  },
+  {
+   "study": "CXR2604",
+   "similarity": 0.943722665309906
+  },
+  {
+   "study": "CXR3613",
+   "similarity": 0.9420579075813293
+  },
+  {
+   "study": "CXR3440",
+   "similarity": 0.9400008320808411
+  },
+  {
+   "study": "CXR3265",
+   "similarity": 0.9393399953842163
+  },
+  {
+   "study": "CXR3289",
+   "similarity": 0.9381508231163025
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: Chest pain.\n\nSimilar cases (most similar first):\nCase CXR1481 (similarity 0.948): FINDINGS: The lungs are clear, and without focal airspace opacity. The cardiomediastinal silhouette is normal in size and contour, and stable. There is no pneumothorax or large pleural effusion. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR982 (similarity 0.948): FINDINGS: Lungs are clear. No focal airspace consolidation. No pleural effusion or pneumothorax. Normal cardiomediastinal silhouette. There are postoperative changes of cervical spine fusion. IMPRESSION: No active disease.\nCase CXR3168 (similarity 0.947): FINDINGS: Normal heart size and mediastinal contours. No focal airspace consolidation. No pleural effusion or pneumothorax. Chronic appearing left lateral rib deformities. IMPRESSION: 1. No acute cardiopulmonary abnormality. 2. Interval development of healing left sided rib fractures.\nCase CXR238 (similarity 0.946): FINDINGS: Stable cardiomediastinal silhouette. No focal pulmonary opacity, pleural effusion or pneumothorax. No acute bony abnormality. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR1124 (similarity 0.946): FINDINGS: There are postoperative changes of sternotomy. Heart size is within normal limits. There is aortic atherosclerotic vascular calcification. The lungs are mildly hyperexpanded. There is no focal airspace consolidation. No pleural effusion or pneumothorax. There are diffuse degenerative changes of the spine. IMPRESSION: 1. No focal airspace consolidation. 2. Hyperexpanded lungs, suggestive of obstructive lung disease.\nCase CXR2604 (similarity 0.944): IMPRESSION: No active disease.\nCase CXR3613 (similarity 0.942): IMPRESSION: Bilateral calcified granulomas. No acute airspace disease. No effusions. Heart size upper limits of normal. Unremarkable mediastinal contour. No acute cardiopulmonary abnormality identified.\nCase CXR3440 (similarity 0.940): FINDINGS: Mild dextroscoliosis of the lower thoracic spine. Cardiomediastinal silhouette is within normal in size and appearance. Pulmonary vascular is unremarkable. Lungs are expanded and clear airspace disease. Negative for pneumothorax or pleural effusion. Limited evaluation of the XXXX XXXX to be grossly intact IMPRESSION: 1. No acute cardiopulmonary abnormality.\nCase CXR3265 (similarity 0.939): FINDINGS: The heart size and mediastinal contours appear within normal limits. No focal airspace consolidation, pleural effusion or pneumothorax. No acute bony abnormalities. IMPRESSION: No acute cardiopulmonary findings.\nCase CXR3289 (similarity 0.938): FINDINGS: Normal cardiac size and contour, unremarkable mediastinal silhouette. Normal pulmonary XXXX. Lungs clear, no airspace disease, pleural effusion, or pneumothorax. IMPRESSION: No active or acute cardiopulmonary disease.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\n  \"findings\": [\n    {\n      \"finding\": \"Lung Opacity\",\n      \"status\": \"absent\",\n      \"probability\": 0.02,\n      \"cited_case_ids\": [\n        \"CXR1481\",\n        \"CXR982\",\n        \"CXR3168\",\n        \"CXR238\",\n        \"CXR1124\"\n      ],\n      \"rationale\": \"The lungs are clear and without focal airspace consolidation or opacity.\"\n    },\n    {\n      \"finding\": \"Cardiomegaly\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR1481\",\n        \"CXR982\",\n        \"CXR3168\",\n        \"CXR238\",\n        \"CXR1124\"\n      ],\n      \"rationale\": \"The cardiomediastinal silhouette is normal in size and contour.\"\n    },\n    {\n      \"finding\": \"Atelectasis\",\n      \"status\": \"absent\",\n      \"probability\": 0.03,\n      \"cited_case_ids\": [],\n      \"rationale\": \"No linear or plate-like opacities suggesting volume loss are visualized.\"\n    },\n    {\n      \"finding\": \"Lung Lesion\",\n      \"status\": \"absent\",\n      \"probability\": 0.04,\n      \"cited_case_ids\": [],\n      \"rationale\": \"There are no nodules or masses identified in the lung parenchyma.\"\n    },\n    {\n      \"finding\": \"Pleural Effusion\",\n      \"status\": \"absent\",\n      \"probability\": 0.01,\n      \"cited_case_ids\": [\n        \"CXR1481\",\n        \"CXR982\",\n        \"CXR238\",\n        \"CXR1124\"\n      ],\n      \"rationale\": \"The costophrenic angles are sharp, indicating no significant pleural fluid.\"\n    },\n    {\n      \"finding\": \"Fracture\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR238\",\n        \"CXR3265\"\n      ],\n      \"rationale\": \"The visualized ribs and other bony structures appear intact without evidence of acute fracture.\"\n    }\n  ],\n  \"impression\": \"No acute cardiopulmonary abnormality.\"\n}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.02,
+    "cited_case_ids": [
+     "CXR1481",
+     "CXR982",
+     "CXR3168",
+     "CXR238",
+     "CXR1124"
+    ],
+    "rationale": "The lungs are clear and without focal airspace consolidation or opacity."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR1481",
+     "CXR982",
+     "CXR3168",
+     "CXR238",
+     "CXR1124"
+    ],
+    "rationale": "The cardiomediastinal silhouette is normal in size and contour."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.03,
+    "cited_case_ids": [],
+    "rationale": "No linear or plate-like opacities suggesting volume loss are visualized."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.04,
+    "cited_case_ids": [],
+    "rationale": "There are no nodules or masses identified in the lung parenchyma."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.01,
+    "cited_case_ids": [
+     "CXR1481",
+     "CXR982",
+     "CXR238",
+     "CXR1124"
+    ],
+    "rationale": "The costophrenic angles are sharp, indicating no significant pleural fluid."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR238",
+     "CXR3265"
+    ],
+    "rationale": "The visualized ribs and other bony structures appear intact without evidence of acute fracture."
+   }
+  ],
+  "impression": "No acute cardiopulmonary abnormality."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2183,
+  "output": 592,
+  "thinking": 1678,
+  "total": 4453
+ },
+ "time": "2026-10-18T11:24:51"
+}

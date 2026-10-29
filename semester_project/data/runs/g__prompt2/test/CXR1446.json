@@ -1,0 +1,132 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR1446",
+ "image": "CXR1446_IM-0288-1001",
+ "indication": "lung cancer followup",
+ "neighbours": [
+  {
+   "study": "CXR549",
+   "similarity": 0.9308867454528809
+  },
+  {
+   "study": "CXR3011",
+   "similarity": 0.9259891510009766
+  },
+  {
+   "study": "CXR1160",
+   "similarity": 0.9214353561401367
+  },
+  {
+   "study": "CXR1203",
+   "similarity": 0.9171242713928223
+  },
+  {
+   "study": "CXR945",
+   "similarity": 0.9112436771392822
+  },
+  {
+   "study": "CXR2112",
+   "similarity": 0.9101434350013733
+  },
+  {
+   "study": "CXR2969",
+   "similarity": 0.8984448909759521
+  },
+  {
+   "study": "CXR1417",
+   "similarity": 0.8962585926055908
+  },
+  {
+   "study": "CXR3847",
+   "similarity": 0.8948265314102173
+  },
+  {
+   "study": "CXR1471",
+   "similarity": 0.894491970539093
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: lung cancer followup\n\nSimilar cases (most similar first):\nCase CXR549 (similarity 0.931): FINDINGS: Stable appearance of the left upper lung lobe with scarring, volume loss, and pleural thickening. Cardiomediastinal silhouette is within normal limits normal appearance, similar to prior. Volume loss in the left lung, stable. Right lung is clear. There is no XXXX focal airspace disease, pleural effusion, or pneumothorax. Mild scarring at the right apex. No acute bony abnormality. IMPRESSION: 1. No acute cardiopulmonary process. 2. Stable appearance of the left upper lobe.\nCase CXR3011 (similarity 0.926): FINDINGS: Aortic atherosclerotic calcifications. Large hiatal hernia. No pleural effusion or pneumothorax. No focal opacity. Cardiomediastinal silhouette is stable in size and appearance. IMPRESSION: 1. No acute pulmonary process. 2. Large hiatal hernia. .\nCase CXR1160 (similarity 0.921): FINDINGS: The left hilum is retracted superiorly. In the collapsed left upper lobe are stranding and pneumatoceles. Additionally, pleural thickening is present in the left apex. No infiltrates are present in the left lower lobe or in the right lung. Heart size is normal. These findings are similar to the previous outside examination. IMPRESSION: Stable left upper lobe collapse associated with parenchymal scarring and pleural thickening. Findings consistent with previous active pulmonary tuberculosis pneumonia.\nCase CXR1203 (similarity 0.917): FINDINGS: The heart is normal in size. The mediastinum is unremarkable. There is XXXX patchy opacity in the left upper lobe. Possibility of tuberculosis should be excluded. No pleural effusion is seen. There is no pneumothorax the lungs are hyperinflated. IMPRESSION: XXXX left upper lobe infiltrate.\nCase CXR945 (similarity 0.911): FINDINGS: In the interval, consolidation has developed in the left upper lobe. Also, anterior segment XXXX opacity is present. Right lung remains clear. Heart size is normal. IMPRESSION: Developing left upper lobe consolidation and focal atelectasis, consistent with pneumonitis.\nCase CXR2112 (similarity 0.910): FINDINGS: There is 1.9 cm interruption of the tunneled left central venous catheter, at the level of the overlap of the clavicle and first rib. Catheter tip may be within the proximal SVC or azygos vein. Normal heart size. XXXX left perihilar and midlung densities. No pneumothorax or large pleural effusion. IMPRESSION: 1. Left central venous catheter fracture at the level of the overlap of the clavicle and first rib. Distal catheter tip may be within the azygos vein. 2. Similar-appearing left midlung scarring.\nCase CXR2969 (similarity 0.898): FINDINGS: Heart size and mediastinal contours are stable. Atherosclerotic calcifications of the aorta. Moderate severe hyperexpansion of the lungs and decreased peripheral vascular markings, consistent with emphysema. Stable biapical pleural-parenchymal scarring. Scattered granulomas. No abnormal airspace consolidation. No pneumothorax or pleural effusion. IMPRESSION: 1. Stable emphysematous changes. 2. Stable biapical pleural-parenchymal scarring.\nCase CXR1417 (similarity 0.896): FINDINGS: Cardiac and mediastinal contours are unremarkable. Pulmonary vascularity is within normal limits. No focal air space opacities, pleural effusion, or pneumothorax. There are increased lucencies in the bilateral apices along with horizontal oblique scarring in the left upper lobe. This could suggest emphysematous bullae. XXXX are grossly unremarkable. IMPRESSION: 1. No active disease.\nCase CXR3847 (similarity 0.895): FINDINGS: Both lungs remain hyperexpanded. No XXXX focal infiltrates. A small pleural or collection is XXXX present in the right apex. However, it has decreased considerably since the previous examination. Heart size remains normal. IMPRESSION: COPD with almost completely resolved right apical pleural air collection.\nCase CXR1471 (similarity 0.894): FINDINGS: The cardiomediastinal silhouette is within normal limits for appearance. The lungs are hyperexpanded with flattening of the bilateral hemidiaphragms. Mild increased lung markings XXXX due to chronic changes. No focal pulmonary consolidation. No pneumothorax. No pleural effusion. Moderate degenerative changes of the thoracic spine. Calcified left perihilar granuloma redemonstrated. IMPRESSION: 1. Findings consistent with emphysema with interstitial thickening. This could be due to edema superimposed on emphysema or pneumonitis or fibrosis. XXXX chest if warranted clinically given recent onset of dyspnea. .\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\n  \"findings\": [\n    {\n      \"finding\": \"Lung Opacity\",\n      \"status\": \"present\",\n      \"probability\": 0.95,\n      \"cited_case_ids\": [\n        \"CXR549\",\n        \"CXR1203\",\n        \"CXR945\"\n      ],\n      \"rationale\": \"There is a prominent and dense opacity in the left upper lobe, which aligns with findings described in several similar cases.\"\n    },\n    {\n      \"finding\": \"Cardiomegaly\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR549\",\n        \"CXR1160\",\n        \"CXR1203\"\n      ],\n      \"rationale\": \"The heart size is within normal limits, as corroborated by the observations in similar cases showing a stable cardiomediastinal silhouette.\"\n    },\n    {\n      \"finding\": \"Atelectasis\",\n      \"status\": \"present\",\n      \"probability\": 0.9,\n      \"cited_case_ids\": [\n        \"CXR1160\",\n        \"CXR549\",\n        \"CXR945\"\n      ],\n      \"rationale\": \"Significant volume loss and superior retraction of the left hilum indicate left upper lobe collapse or atelectasis, similar to Case CXR1160.\"\n    },\n    {\n      \"finding\": \"Lung Lesion\",\n      \"status\": \"uncertain\",\n      \"probability\": 0.4,\n      \"cited_case_ids\": [\n        \"CXR549\",\n        \"CXR1160\",\n        \"CXR2112\"\n      ],\n      \"rationale\": \"While there is a dense area in the left upper lobe, it is difficult to differentiate a discrete mass from chronic scarring and volume loss without prior imaging for comparison.\"\n    },\n    {\n      \"finding\": \"Pleural Effusion\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR549\",\n        \"CXR3011\",\n        \"CXR1203\"\n      ],\n      \"rationale\": \"The costophrenic angles are clear and there is no evidence of fluid in the pleural space.\"\n    },\n    {\n      \"finding\": \"Fracture\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR549\",\n        \"CXR1417\"\n      ],\n      \"rationale\": \"No acute or old fractures of the ribs or clavicles are visualized in the patient's image.\"\n    }\n  ],\n  \"impression\": \"Dense left upper lobe opacity with associated volume loss and hilar retraction, likely representing chronic collapse and scarring, though recurrence should be monitored given the clinical history.\"\n}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "present",
+    "probability": 0.95,
+    "cited_case_ids": [
+     "CXR549",
+     "CXR1203",
+     "CXR945"
+    ],
+    "rationale": "There is a prominent and dense opacity in the left upper lobe, which aligns with findings described in several similar cases."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR549",
+     "CXR1160",
+     "CXR1203"
+    ],
+    "rationale": "The heart size is within normal limits, as corroborated by the observations in similar cases showing a stable cardiomediastinal silhouette."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.9,
+    "cited_case_ids": [
+     "CXR1160",
+     "CXR549",
+     "CXR945"
+    ],
+    "rationale": "Significant volume loss and superior retraction of the left hilum indicate left upper lobe collapse or atelectasis, similar to Case CXR1160."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "uncertain",
+    "probability": 0.4,
+    "cited_case_ids": [
+     "CXR549",
+     "CXR1160",
+     "CXR2112"
+    ],
+    "rationale": "While there is a dense area in the left upper lobe, it is difficult to differentiate a discrete mass from chronic scarring and volume loss without prior imaging for comparison."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR549",
+     "CXR3011",
+     "CXR1203"
+    ],
+    "rationale": "The costophrenic angles are clear and there is no evidence of fluid in the pleural space."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR549",
+     "CXR1417"
+    ],
+    "rationale": "No acute or old fractures of the ribs or clavicles are visualized in the patient's image."
+   }
+  ],
+  "impression": "Dense left upper lobe opacity with associated volume loss and hilar retraction, likely representing chronic collapse and scarring, though recurrence should be monitored given the clinical history."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2581,
+  "output": 695,
+  "thinking": 1117,
+  "total": 4393
+ },
+ "time": "2026-10-18T14:13:10"
+}

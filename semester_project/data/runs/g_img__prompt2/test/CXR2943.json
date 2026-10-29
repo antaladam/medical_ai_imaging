@@ -1,0 +1,68 @@
+{
+ "arm": "g_img__prompt2",
+ "system": "g_img",
+ "prompt_version": 2,
+ "study": "CXR2943",
+ "image": "CXR2943_IM-1343-4004",
+ "indication": "",
+ "neighbours": [],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically.\n2. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\n  \"findings\": [\n    {\n      \"finding\": \"Lung Opacity\",\n      \"status\": \"present\",\n      \"probability\": 0.98,\n      \"cited_case_ids\": [],\n      \"rationale\": \"There is extensive, dense opacity throughout the left lung, most prominent in the middle and lower zones, obscuring the heart border.\"\n    },\n    {\n      \"finding\": \"Cardiomegaly\",\n      \"status\": \"uncertain\",\n      \"probability\": 0.45,\n      \"cited_case_ids\": [],\n      \"rationale\": \"The left heart border is completely obscured by adjacent lung opacity and pleural fluid, preventing a definitive measurement of heart size.\"\n    },\n    {\n      \"finding\": \"Atelectasis\",\n      \"status\": \"present\",\n      \"probability\": 0.85,\n      \"cited_case_ids\": [],\n      \"rationale\": \"Significant volume loss is evident in the left hemithorax, likely representing compressive or obstructive atelectasis associated with the large effusion.\"\n    },\n    {\n      \"finding\": \"Lung Lesion\",\n      \"status\": \"present\",\n      \"probability\": 0.75,\n      \"cited_case_ids\": [],\n      \"rationale\": \"A large, thick-walled lucency containing an air-fluid level is visible in the left upper lobe, highly suspicious for a cavitary lesion or abscess.\"\n    },\n    {\n      \"finding\": \"Pleural Effusion\",\n      \"status\": \"present\",\n      \"probability\": 0.99,\n      \"cited_case_ids\": [],\n      \"rationale\": \"A large left-sided pleural effusion is present, characterized by a dense basal opacity and a visible lateral meniscus.\"\n    },\n    {\n      \"finding\": \"Fracture\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [],\n      \"rationale\": \"No acute fractures are identified in the ribs, clavicles, or the visible portion of the thoracic spine.\"\n    }\n  ],\n  \"impression\": \"Large left pleural effusion and extensive left lung opacification with a suspicious cavitary lesion in the left upper lobe.\"\n}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "present",
+    "probability": 0.98,
+    "cited_case_ids": [],
+    "rationale": "There is extensive, dense opacity throughout the left lung, most prominent in the middle and lower zones, obscuring the heart border."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "uncertain",
+    "probability": 0.45,
+    "cited_case_ids": [],
+    "rationale": "The left heart border is completely obscured by adjacent lung opacity and pleural fluid, preventing a definitive measurement of heart size."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.85,
+    "cited_case_ids": [],
+    "rationale": "Significant volume loss is evident in the left hemithorax, likely representing compressive or obstructive atelectasis associated with the large effusion."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "present",
+    "probability": 0.75,
+    "cited_case_ids": [],
+    "rationale": "A large, thick-walled lucency containing an air-fluid level is visible in the left upper lobe, highly suspicious for a cavitary lesion or abscess."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "present",
+    "probability": 0.99,
+    "cited_case_ids": [],
+    "rationale": "A large left-sided pleural effusion is present, characterized by a dense basal opacity and a visible lateral meniscus."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [],
+    "rationale": "No acute fractures are identified in the ribs, clavicles, or the visible portion of the thoracic spine."
+   }
+  ],
+  "impression": "Large left pleural effusion and extensive left lung opacification with a suspicious cavitary lesion in the left upper lobe."
+ },
+ "problems": [],
+ "usage": {
+  "input": 1431,
+  "output": 508,
+  "thinking": 1119,
+  "total": 3058
+ },
+ "time": "2026-10-18T14:32:51"
+}

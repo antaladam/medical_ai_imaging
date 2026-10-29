@@ -1,0 +1,125 @@
+{
+ "arm": "g_ind__prompt2",
+ "system": "g_ind",
+ "prompt_version": 2,
+ "study": "CXR1957",
+ "image": "CXR1957_IM-0624-4004",
+ "indication": "",
+ "neighbours": [
+  {
+   "study": "CXR2752",
+   "similarity": 0.9161766767501831
+  },
+  {
+   "study": "CXR1064",
+   "similarity": 0.907002329826355
+  },
+  {
+   "study": "CXR3666",
+   "similarity": 0.9061881303787231
+  },
+  {
+   "study": "CXR715",
+   "similarity": 0.9041920900344849
+  },
+  {
+   "study": "CXR1033",
+   "similarity": 0.904171347618103
+  },
+  {
+   "study": "CXR111",
+   "similarity": 0.9024801850318909
+  },
+  {
+   "study": "CXR1293",
+   "similarity": 0.9005392789840698
+  },
+  {
+   "study": "CXR53",
+   "similarity": 0.9000647664070129
+  },
+  {
+   "study": "CXR3305",
+   "similarity": 0.8947010040283203
+  },
+  {
+   "study": "CXR3853",
+   "similarity": 0.8923014402389526
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nSimilar cases (most similar first):\nCase CXR2752 (similarity 0.916): FINDINGS: The cardiac silhouette is mildly enlarged. Mediastinal contours are within normal limits. The pulmonary vasculaturity is increased. There is large right-sided pleural effusion and probable underlying associated compressive atelectasis. Mild perihilar XXXX opacities, XXXX edema. No pneumothorax is seen. IMPRESSION: 1. Cardiomegaly and central vascular congestion with perihilar opacities, possibly edema. 2. Large right pleural effusion.\nCase CXR1064 (similarity 0.907): FINDINGS: There is stable elevation of the right hemidiaphragm with questionable increased right basilar airspace opacities. The left lung is clear. Heart size normal. XXXX unremarkable. IMPRESSION: Stable elevated right hemidiaphragm with questionable subtle increased right basilar airspace disease/atelectasis. Correlate clinically.\nCase CXR3666 (similarity 0.906): FINDINGS: XXXX onset right basal atelectasis with airspace disease and effusion suggestive of the chest infection. Stable cardiomegaly and features of CABG. Interval XXXX removal of left PICC line, no pneumothorax. IMPRESSION: XXXX onset right basal chest infection\nCase CXR715 (similarity 0.904): FINDINGS: There is chronic asymmetric elevation of the right hemidiaphragm. Compared with the prior study, there is mildly increased streaky airspace disease in the right lung base. Hilar prominence appears stable. There is no pneumothorax or large pleural effusion. Heart size is stable and grossly normal. There no acute bony findings. IMPRESSION: Chronic asymmetric elevation of the right hemidiaphragm with mildly increased right basilar airspace disease, atelectasis versus infiltrate. .\nCase CXR1033 (similarity 0.904): FINDINGS: The cardiomediastinal silhouette and vasculature are within normal limits for size and contour. Lung volumes are low with central bronchovascular crowding and patchy basilar atelectasis.. Degenerative changes of the spine. IMPRESSION: 1. Low volume study without definite acute process.\nCase CXR111 (similarity 0.902): IMPRESSION: Unchanged loculated right pleural fusion. No change chronic interstitial lung disease.\nCase CXR1293 (similarity 0.901): no report text\nCase CXR53 (similarity 0.900): FINDINGS: There extremely low lung volumes. there is right basilar opacity. There is no pneumothorax. There is no large pleural effusion. Cardiac silhouette and mediastinal contours are within normal limits. IMPRESSION: Low lung volumes with right basilar atelectasis. Otherwise, no acute cardiopulmonary disease.\nCase CXR3305 (similarity 0.895): FINDINGS: There is a right PICC with tip overlying the right brachiocephalic vein. The cardiac silhouette is enlarged. No overt pulmonary edema. There are streaky bibasilar opacities. No large pleural effusion. The right hemidiaphragm is elevated. No pneumothorax is identified. There are degenerative changes of the spine. Bilateral surgical clips are noted. IMPRESSION: 1. Streaky bibasilar opacities; the appearance XXXX subsegmental atelectasis. 2. Enlarged cardiac silhouette. 3. Mildly elevated right hemidiaphragm.\nCase CXR3853 (similarity 0.892): IMPRESSION: Mild cardiomegaly. Densely calcified aorta. Prominence of the pulmonary outflow and XXXX most XXXX indicates enlarged pulmonary arteries and raise concern for pulmonary artery hypertension. There is no overt edema. The right diaphragm is elevated, there are small right and XXXX left pleural effusions. No pneumothorax.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\n  \"findings\": [\n    {\n      \"finding\": \"Lung Opacity\",\n      \"status\": \"present\",\n      \"probability\": 0.85,\n      \"cited_case_ids\": [\n        \"CXR2752\",\n        \"CXR3666\"\n      ],\n      \"rationale\": \"There is a large area of opacity in the right lung base which may represent pneumonia or consolidation in addition to fluid.\"\n    },\n    {\n      \"finding\": \"Cardiomegaly\",\n      \"status\": \"present\",\n      \"probability\": 0.95,\n      \"cited_case_ids\": [\n        \"CXR2752\",\n        \"CXR3305\",\n        \"CXR3853\"\n      ],\n      \"rationale\": \"The cardiac silhouette is significantly enlarged, a finding mirrored in several similar cases with large effusions.\"\n    },\n    {\n      \"finding\": \"Atelectasis\",\n      \"status\": \"present\",\n      \"probability\": 0.90,\n      \"cited_case_ids\": [\n        \"CXR2752\",\n        \"CXR1033\",\n        \"CXR53\"\n      ],\n      \"rationale\": \"Compressive atelectasis in the right lower lobe is expected given the volume of the adjacent pleural effusion.\"\n    },\n    {\n      \"finding\": \"Lung Lesion\",\n      \"status\": \"absent\",\n      \"probability\": 0.1,\n      \"cited_case_ids\": [],\n      \"rationale\": \"No discrete pulmonary nodules or masses are clearly visualized within the aerated portions of the lungs.\"\n    },\n    {\n      \"finding\": \"Pleural Effusion\",\n      \"status\": \"present\",\n      \"probability\": 0.98,\n      \"cited_case_ids\": [\n        \"CXR2752\",\n        \"CXR111\"\n      ],\n      \"rationale\": \"A large right-sided pleural effusion is present, characterized by the typical meniscus sign and obscuration of the right hemidiaphragm.\"\n    },\n    {\n      \"finding\": \"Fracture\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR715\"\n      ],\n      \"rationale\": \"The visualized ribs and clavicles show no evidence of acute or healing fractures.\"\n    }\n  ],\n  \"impression\": \"Large right-sided pleural effusion with associated compressive atelectasis and cardiomegaly.\"\n}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "present",
+    "probability": 0.85,
+    "cited_case_ids": [
+     "CXR2752",
+     "CXR3666"
+    ],
+    "rationale": "There is a large area of opacity in the right lung base which may represent pneumonia or consolidation in addition to fluid."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "present",
+    "probability": 0.95,
+    "cited_case_ids": [
+     "CXR2752",
+     "CXR3305",
+     "CXR3853"
+    ],
+    "rationale": "The cardiac silhouette is significantly enlarged, a finding mirrored in several similar cases with large effusions."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.9,
+    "cited_case_ids": [
+     "CXR2752",
+     "CXR1033",
+     "CXR53"
+    ],
+    "rationale": "Compressive atelectasis in the right lower lobe is expected given the volume of the adjacent pleural effusion."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [],
+    "rationale": "No discrete pulmonary nodules or masses are clearly visualized within the aerated portions of the lungs."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "present",
+    "probability": 0.98,
+    "cited_case_ids": [
+     "CXR2752",
+     "CXR111"
+    ],
+    "rationale": "A large right-sided pleural effusion is present, characterized by the typical meniscus sign and obscuration of the right hemidiaphragm."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR715"
+    ],
+    "rationale": "The visualized ribs and clavicles show no evidence of acute or healing fractures."
+   }
+  ],
+  "impression": "Large right-sided pleural effusion with associated compressive atelectasis and cardiomegaly."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2340,
+  "output": 595,
+  "thinking": 1063,
+  "total": 3998
+ },
+ "time": "2026-10-18T12:02:18"
+}

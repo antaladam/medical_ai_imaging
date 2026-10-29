@@ -1,0 +1,130 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR4",
+ "image": "CXR4_IM-2050-1001",
+ "indication": "XXXX-year-old XXXX with XXXX.",
+ "neighbours": [
+  {
+   "study": "CXR1160",
+   "similarity": 0.947195827960968
+  },
+  {
+   "study": "CXR1203",
+   "similarity": 0.9446367025375366
+  },
+  {
+   "study": "CXR2969",
+   "similarity": 0.9346017837524414
+  },
+  {
+   "study": "CXR3011",
+   "similarity": 0.9239597916603088
+  },
+  {
+   "study": "CXR549",
+   "similarity": 0.906184196472168
+  },
+  {
+   "study": "CXR1471",
+   "similarity": 0.9014303088188171
+  },
+  {
+   "study": "CXR945",
+   "similarity": 0.8970270752906799
+  },
+  {
+   "study": "CXR3434",
+   "similarity": 0.8954184055328369
+  },
+  {
+   "study": "CXR2112",
+   "similarity": 0.8943303227424622
+  },
+  {
+   "study": "CXR2453",
+   "similarity": 0.8892701864242554
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: XXXX-year-old XXXX with XXXX.\n\nSimilar cases (most similar first):\nCase CXR1160 (similarity 0.947): FINDINGS: The left hilum is retracted superiorly. In the collapsed left upper lobe are stranding and pneumatoceles. Additionally, pleural thickening is present in the left apex. No infiltrates are present in the left lower lobe or in the right lung. Heart size is normal. These findings are similar to the previous outside examination. IMPRESSION: Stable left upper lobe collapse associated with parenchymal scarring and pleural thickening. Findings consistent with previous active pulmonary tuberculosis pneumonia.\nCase CXR1203 (similarity 0.945): FINDINGS: The heart is normal in size. The mediastinum is unremarkable. There is XXXX patchy opacity in the left upper lobe. Possibility of tuberculosis should be excluded. No pleural effusion is seen. There is no pneumothorax the lungs are hyperinflated. IMPRESSION: XXXX left upper lobe infiltrate.\nCase CXR2969 (similarity 0.935): FINDINGS: Heart size and mediastinal contours are stable. Atherosclerotic calcifications of the aorta. Moderate severe hyperexpansion of the lungs and decreased peripheral vascular markings, consistent with emphysema. Stable biapical pleural-parenchymal scarring. Scattered granulomas. No abnormal airspace consolidation. No pneumothorax or pleural effusion. IMPRESSION: 1. Stable emphysematous changes. 2. Stable biapical pleural-parenchymal scarring.\nCase CXR3011 (similarity 0.924): FINDINGS: Aortic atherosclerotic calcifications. Large hiatal hernia. No pleural effusion or pneumothorax. No focal opacity. Cardiomediastinal silhouette is stable in size and appearance. IMPRESSION: 1. No acute pulmonary process. 2. Large hiatal hernia. .\nCase CXR549 (similarity 0.906): FINDINGS: Stable appearance of the left upper lung lobe with scarring, volume loss, and pleural thickening. Cardiomediastinal silhouette is within normal limits normal appearance, similar to prior. Volume loss in the left lung, stable. Right lung is clear. There is no XXXX focal airspace disease, pleural effusion, or pneumothorax. Mild scarring at the right apex. No acute bony abnormality. IMPRESSION: 1. No acute cardiopulmonary process. 2. Stable appearance of the left upper lobe.\nCase CXR1471 (similarity 0.901): FINDINGS: The cardiomediastinal silhouette is within normal limits for appearance. The lungs are hyperexpanded with flattening of the bilateral hemidiaphragms. Mild increased lung markings XXXX due to chronic changes. No focal pulmonary consolidation. No pneumothorax. No pleural effusion. Moderate degenerative changes of the thoracic spine. Calcified left perihilar granuloma redemonstrated. IMPRESSION: 1. Findings consistent with emphysema with interstitial thickening. This could be due to edema superimposed on emphysema or pneumonitis or fibrosis. XXXX chest if warranted clinically given recent onset of dyspnea. .\nCase CXR945 (similarity 0.897): FINDINGS: In the interval, consolidation has developed in the left upper lobe. Also, anterior segment XXXX opacity is present. Right lung remains clear. Heart size is normal. IMPRESSION: Developing left upper lobe consolidation and focal atelectasis, consistent with pneumonitis.\nCase CXR3434 (similarity 0.895): no report text\nCase CXR2112 (similarity 0.894): FINDINGS: There is 1.9 cm interruption of the tunneled left central venous catheter, at the level of the overlap of the clavicle and first rib. Catheter tip may be within the proximal SVC or azygos vein. Normal heart size. XXXX left perihilar and midlung densities. No pneumothorax or large pleural effusion. IMPRESSION: 1. Left central venous catheter fracture at the level of the overlap of the clavicle and first rib. Distal catheter tip may be within the azygos vein. 2. Similar-appearing left midlung scarring.\nCase CXR2453 (similarity 0.889): FINDINGS: Lungs are clear bilaterally. Cardiac and mediastinal silhouettes are normal. Pulmonary vasculature is normal. No pneumothorax or pleural effusion. No acute bony abnormality. IMPRESSION: No acute cardiopulmonary abnormality.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"present\",\"probability\":0.95,\"cited_case_ids\":[\"CXR1160\",\"CXR1203\",\"CXR945\"],\"rationale\":\"There is a prominent opacity in the left upper lobe, which is consistent with the parenchymal changes and consolidations described in similar cases like CXR1160 and CXR945.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"absent\",\"probability\":0.1,\"cited_case_ids\":[\"CXR1160\",\"CXR549\",\"CXR2453\"],\"rationale\":\"The heart size appears within normal limits, consistent with the normal cardiomediastinal silhouettes reported in similar cases CXR1160 and CXR549.\"},{\"finding\":\"Atelectasis\",\"status\":\"present\",\"probability\":0.9,\"cited_case_ids\":[\"CXR1160\",\"CXR945\",\"CXR549\"],\"rationale\":\"Volume loss in the left upper lobe with superior retraction of the left hilum indicates chronic collapse or atelectasis, similar to the findings in CXR1160.\"},{\"finding\":\"Lung Lesion\",\"status\":\"absent\",\"probability\":0.15,\"cited_case_ids\":[\"CXR1160\"],\"rationale\":\"While there are cystic areas and dense opacities, these appear to be part of the chronic parenchymal scarring and pneumatoceles mentioned in CXR1160 rather than discrete nodules.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR1203\",\"CXR549\",\"CXR2453\"],\"rationale\":\"The costophrenic angles are sharp and clear, with no evidence of fluid accumulation, matching the negative findings in several similar cases.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR549\",\"CXR2453\"],\"rationale\":\"No acute or old fractures are visible in the visualized ribs or clavicles, consistent with the absence of bony abnormalities in CXR549 and CXR2453.\"}],\"impression\":\"Left upper lobe volume loss and significant opacity with hilar retraction, most consistent with chronic sequelae of prior granulomatous disease like tuberculosis, associated with parenchymal scarring.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "present",
+    "probability": 0.95,
+    "cited_case_ids": [
+     "CXR1160",
+     "CXR1203",
+     "CXR945"
+    ],
+    "rationale": "There is a prominent opacity in the left upper lobe, which is consistent with the parenchymal changes and consolidations described in similar cases like CXR1160 and CXR945."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR1160",
+     "CXR549",
+     "CXR2453"
+    ],
+    "rationale": "The heart size appears within normal limits, consistent with the normal cardiomediastinal silhouettes reported in similar cases CXR1160 and CXR549."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.9,
+    "cited_case_ids": [
+     "CXR1160",
+     "CXR945",
+     "CXR549"
+    ],
+    "rationale": "Volume loss in the left upper lobe with superior retraction of the left hilum indicates chronic collapse or atelectasis, similar to the findings in CXR1160."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.15,
+    "cited_case_ids": [
+     "CXR1160"
+    ],
+    "rationale": "While there are cystic areas and dense opacities, these appear to be part of the chronic parenchymal scarring and pneumatoceles mentioned in CXR1160 rather than discrete nodules."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR1203",
+     "CXR549",
+     "CXR2453"
+    ],
+    "rationale": "The costophrenic angles are sharp and clear, with no evidence of fluid accumulation, matching the negative findings in several similar cases."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR549",
+     "CXR2453"
+    ],
+    "rationale": "No acute or old fractures are visible in the visualized ribs or clavicles, consistent with the absence of bony abnormalities in CXR549 and CXR2453."
+   }
+  ],
+  "impression": "Left upper lobe volume loss and significant opacity with hilar retraction, most consistent with chronic sequelae of prior granulomatous disease like tuberculosis, associated with parenchymal scarring."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2484,
+  "output": 520,
+  "thinking": 1562,
+  "total": 4566
+ },
+ "time": "2026-10-18T11:21:17"
+}

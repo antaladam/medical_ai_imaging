@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multimodal CXR Project — Plan &amp; Progress</title>
+<style>
+  :root {
+    --navy: #14213D; --ink: #3E4756; --muted: #5F6878; --paper: #F7F5F0; --paper2: #E9EDF2;
+    --card: #FCFBF8; --line: #DDDAD0; --orange: #A94F1F; --orange-light: #E08A55; --blue: #2B5C8A;
+    --ice: #B8C4D6;
+    --serif: Cambria, "Source Serif 4", Georgia, serif;
+    --sans: "Segoe UI", Calibri, "IBM Plex Sans", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #0B1222; overflow: hidden; }
+  #stage { position: fixed; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: center center; }
+  .slide { position: absolute; inset: 0; display: none; flex-direction: column; gap: 40px;
+           padding: 128px 128px 160px; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+  .slide.active { display: flex; }
+  .slide.alt { background: var(--paper2); }
+  .slide.dark { background: var(--navy); color: var(--paper); padding: 128px; }
+  .eyebrow { font-size: 24px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); }
+  .dark .eyebrow { color: var(--orange-light); font-size: 28px; letter-spacing: 3px; }
+  h1 { font-family: var(--serif); font-size: 96px; font-weight: 600; line-height: 1.08; }
+  h2 { font-family: var(--serif); font-size: 64px; font-weight: 600; line-height: 1.1; color: var(--navy); }
+  .dark h2 { color: var(--paper); }
+  h3 { font-size: 32px; font-weight: 600; color: var(--navy); }
+  .head { display: flex; flex-direction: column; gap: 12px; }
+  p, li, td, th { font-size: 28px; line-height: 1.4; }
+  ul, ol { padding-left: 1.1em; display: flex; flex-direction: column; gap: 10px; }
+  .row { display: flex; gap: 32px; }
+  .row > * { flex: 1; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .card { background: var(--card); border: 2px solid var(--line); border-radius: 16px; padding: 36px;
+          display: flex; flex-direction: column; gap: 16px; }
+  .alt .card { background: var(--paper); border-color: #D3D9E1; }
+  .card .tag { font-size: 24px; font-weight: 600; color: var(--orange); text-transform: uppercase; letter-spacing: 1px; }
+  .statement { font-family: var(--serif); font-size: 36px; line-height: 1.3; color: var(--navy); }
+  .note { font-size: 26px; color: var(--ink); }
+  .big { font-family: var(--serif); font-size: 84px; font-weight: 600; color: var(--navy); line-height: 1; }
+  table { border-collapse: collapse; width: 100%; color: var(--ink); }
+  th { text-align: left; font-weight: 600; color: var(--navy); border-bottom: 3px solid var(--navy); padding: 10px 16px; }
+  td { border-bottom: 1px solid var(--line); padding: 10px 16px; vertical-align: top; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  code { font-family: Consolas, "Courier New", monospace; font-size: 0.92em; color: var(--navy); }
+  .footer { position: absolute; left: 128px; bottom: 64px; width: 1664px; font-size: 24px; color: var(--muted);
+            display: flex; justify-content: space-between; }
+  .dark .footer { display: none; }
+  /* flow diagram */
+  .flow { display: flex; align-items: stretch; gap: 16px; }
+  .flow .box { flex: 1; background: var(--card); border: 2px solid var(--blue); border-radius: 16px; padding: 24px;
+               display: flex; align-items: center; font-size: 28px; line-height: 1.3; color: var(--navy); }
+  .flow .box.out { background: var(--navy); color: var(--paper); border-color: var(--navy); }
+  .arrow { flex: 0 0 48px; align-self: center; font-size: 44px; color: var(--orange); text-align: center; }
+  /* funnel */
+  .stat { display: flex; flex-direction: column; gap: 12px; }
+  .stat p { font-size: 26px; }
+  .stat p.big { font-size: 84px; }
+  .bar { display: flex; height: 88px; border-radius: 12px; overflow: hidden; }
+  .bar div { display: flex; align-items: center; padding: 0 24px; font-size: 26px; font-weight: 600; color: var(--paper); white-space: nowrap; }
+  /* notes + chrome */
+  aside { display: none; }
+  #notes { position: fixed; left: 0; right: 0; bottom: 0; max-height: 30vh; overflow: auto; background: #FCFBF8; color: #14213D;
+           font: 16px/1.5 var(--sans); padding: 14px 24px; border-top: 3px solid var(--orange); display: none; z-index: 5; }
+  #hint { position: fixed; right: 14px; bottom: 10px; color: #8A93A3; font: 13px var(--sans); z-index: 6; }
+  @media print {
+    @page { size: 1920px 1080px; margin: 0; }
+    html, body { overflow: visible; background: none; }
+    #stage { position: static; transform: none !important; width: auto; height: auto; }
+    .slide { display: flex !important; position: relative; width: 1920px; height: 1080px; page-break-after: always; }
+    #notes, #hint { display: none !important; }
+  }
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 -->
+<section class="slide dark" style="justify-content:space-between">
+  <p class="eyebrow">MSc project #4 · Semester progress review</p>
+  <div style="display:flex;flex-direction:column;gap:40px">
+    <h1>Does multimodal retrieval beat a single image model?</h1>
+    <p style="font-size:36px;color:var(--ice)">Chest X-ray decision support on IU X-Ray: the plan, the semester project, progress so far and next steps</p>
+  </div>
+  <div style="display:flex;justify-content:space-between">
+    <p style="color:var(--ice)">Antal Ádám · Supervisor: Dr. Alwahab Dhulfiqar Zoltán</p>
+    <p style="color:var(--ice)">16 October 2026</p>
+  </div>
+  <aside>This review covers what was assigned, the long-term thesis plan, the narrower semester project, and what has been done so far, including the open decisions.</aside>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">The brief</p><h2>Project #4, as assigned</h2></div>
+  <div class="grid2">
+    <div class="card">
+      <h3>Thesis title</h3>
+      <p>A Multimodal, Explainable AI Decision-Support Prototype for Medical Image and Clinical-Text Analysis</p>
+      <h3>Suggested research question</h3>
+      <p><i>Can grounded multimodal retrieval improve the usefulness and verifiability of LLM-generated explanations for medical-image decision support?</i></p>
+    </div>
+    <div class="card">
+      <h3>What it requires</h3>
+      <ul>
+        <li>Decision support only, never an autonomous diagnosis</li>
+        <li>Public or de-identified data only</li>
+        <li>Measure interpretation, grounding, explanation quality, calibration and failures</li>
+        <li>Compare image-only with image-plus-text workflows</li>
+      </ul>
+      <h3>Three starter projects</h3>
+      <p><code>ai_medical_imaging_agent</code> · <code>vision_rag</code> · <code>multimodal_agentic_rag</code></p>
+    </div>
+  </div>
+  <aside>The brief comes from main.txt. Two constraints shape everything: decision support only, and public or de-identified data. The three starters are tutorial apps from awesome-llm-apps, analysed in codebase_analysis.md.</aside>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">The thesis plan (long-term)</p><h2>A comparative test, not a product build</h2></div>
+  <p class="statement">Is a multimodal, retrieval-augmented system more effective than a single specialist image model: more accurate, better calibrated, easier to verify?</p>
+  <div class="row">
+    <div class="card"><p class="tag">H1 · Accuracy</p><p>Clinical text and retrieved cases raise per-finding AUROC over the specialist.</p></div>
+    <div class="card"><p class="tag">H2 · Calibration</p><p>Its confidence is better calibrated (lower ECE and Brier score).</p></div>
+    <div class="card"><p class="tag">H3 · Verifiability</p><p>Evidence-cited explanations are easier to check than saliency maps.</p></div>
+    <div class="card"><p class="tag">H4 · Mechanism</p><p>Gains vanish under random retrieval or corrupted text.</p></div>
+  </div>
+  <p style="color:var(--navy)"><b>A null or negative result is a valid, reportable outcome.</b></p>
+  <aside>The thesis plan (thesis_plan.md, v2) reframes the brief as a hypothesis test with a strong specialist image model as the reference point. H4 asks whether any gain comes from relevant evidence, not from leakage or from copying retrieved labels.</aside>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">The thesis plan (long-term)</p><h2>A ladder of systems: one change per step</h2></div>
+  <table>
+    <tr><th style="width:12%">ID</th><th style="width:56%">System</th><th>What it isolates</th></tr>
+    <tr><td><b>S0</b></td><td>Specialist CNN (TorchXRayVision), no LLM</td><td>The reference point</td></tr>
+    <tr><td><b>S0+T</b></td><td>S0 features + clinical-text embedding, no LLM</td><td>Text without an LLM</td></tr>
+    <tr><td><b>R0</b></td><td>Vote over the nearest training cases, no LLM</td><td>Retrieval without an LLM</td></tr>
+    <tr><td><b>S1</b></td><td>Vision-language model (VLM), image only</td><td>LLM vs. specialist</td></tr>
+    <tr><td><b>S2</b></td><td>VLM + indication text</td><td>Adding text</td></tr>
+    <tr><td><b>S3</b></td><td>VLM + retrieved cases</td><td>Adding retrieval</td></tr>
+    <tr><td><b>S4</b></td><td>VLM + text + retrieval</td><td>Full multimodal RAG</td></tr>
+    <tr><td><b>S5</b></td><td>S4 + S0’s probabilities</td><td>LLM on top of the specialist</td></tr>
+  </table>
+  <aside>Each step adds one thing, so each component’s contribution can be measured. The thesis also plans mechanism probes, calibration, claim-level explanation checks and a MIMIC-CXR replication. Most of that is beyond one semester.</aside>
+</section>
+
+<!-- 5 -->
+<section class="slide alt">
+  <div class="head"><p class="eyebrow">The semester project (~8 weeks)</p><h2>Three questions, one built system</h2></div>
+  <div class="row">
+    <div class="card"><p class="tag">Q1 · Fitness</p><p>How do the three starters work, and how well do they detect chest-X-ray findings with minimal adaptation?</p></div>
+    <div class="card"><p class="tag">Q2 · Strengths</p><p>Which of their parts are worth carrying into a grounded image + text system, and which gaps must be filled?</p></div>
+    <div class="card"><p class="tag">Q3 · Comparison</p><p>How much do the built system’s results differ from the starters, from a specialist image model and from retrieval alone?</p></div>
+  </div>
+  <p><b>Left for the thesis:</b> the full ladder, mechanism probes, calibration analysis, claim-level checks, human rating, MIMIC-CXR and local models.</p>
+  <aside>The semester plan (semester_project/semester_plan.md) is the thesis’s pilot study and first chapter. It is frozen: any change is recorded as a deviation in results.md and the diary.</aside>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">The semester project</p><h2>What each system receives</h2></div>
+  <table>
+    <tr><th style="width:17%">System</th><th style="width:55%">What reaches the model</th><th>Role</th></tr>
+    <tr><td><b>P1-adapted</b></td><td>The patient’s X-ray only</td><td>Starter: image only</td></tr>
+    <tr><td><b>P2-adapted</b></td><td>X-ray + one similar training image (no report)</td><td>Starter: image retrieval</td></tr>
+    <tr><td><b>P3</b></td><td>Retrieved reports’ text only, never an image</td><td>Starter: text retrieval</td></tr>
+    <tr><td><b>S0</b></td><td>X-ray into a specialist CNN (no LLM)</td><td>Specialist reference</td></tr>
+    <tr><td><b>R0</b></td><td>Labels of the nearest training cases (no LLM)</td><td>Retrieval alone</td></tr>
+    <tr><td><b>G</b></td><td>X-ray + indication + retrieved reports, JSON output</td><td>The built system</td></tr>
+    <tr><td><b>G−ind</b></td><td>G without the indication text</td><td>What the text adds</td></tr>
+    <tr><td><b>G+S0</b></td><td>G + S0’s probabilities (optional)</td><td>Hybrid</td></tr>
+  </table>
+  <p class="note">All Gemini systems run on <code>gemini-3-flash-preview</code>; P1’s and P2’s original models are retired.</p>
+  <aside>The three starters are not redundant Gemini wrappers: they feed the model different information. S0 and R0 anchor the comparison: one is a single image model, the other is retrieval with no LLM.</aside>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">The semester project</p><h2>The built system, G</h2></div>
+  <div class="flow">
+    <div class="box">Patient’s frontal X-ray</div><div class="arrow">→</div>
+    <div class="box">BiomedCLIP image embedding</div><div class="arrow">→</div>
+    <div class="box">Top-k similar training cases + reports</div><div class="arrow">→</div>
+    <div class="box">Gemini, with the indication text</div><div class="arrow">→</div>
+    <div class="box out">JSON: finding, present, confidence, cited cases</div>
+  </div>
+  <h3>Borrowed from the starters</h3>
+  <div class="row">
+    <div class="card"><p class="tag">From P1</p><p>Prompt structure and the Gemini call pattern</p></div>
+    <div class="card"><p class="tag">From P2</p><p>Embed, retrieve, generate: upgraded to top-k and a medical embedder</p></div>
+    <div class="card"><p class="tag">From P3</p><p>Structured citations with similarity scores; hedging on weak evidence</p></div>
+  </div>
+  <aside>G fills gaps none of the starters do: clinical-text input, a score per finding, the patient’s image and the retrieved evidence reaching the model together, and citations that can be checked.</aside>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">The semester project</p><h2>How the comparison is scored</h2></div>
+  <div class="grid2" style="gap:48px">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <h3>Two scoring paths</h3>
+      <div class="card"><p class="tag">Against the starters</p><p>Every system’s free text goes through the same CheXbert labeller (for G, its impression). Labeller accuracy is checked per system.</p></div>
+      <div class="card"><p class="tag">Against S0 and R0</p><p>G’s JSON scores are used directly, alongside their continuous scores.</p></div>
+    </div>
+    <table style="align-self:start">
+      <tr><th style="width:55%">Metric</th><th>Systems</th></tr>
+      <tr><td>F1, sensitivity, specificity</td><td>All</td></tr>
+      <tr><td>AUROC</td><td>S0, R0, G</td></tr>
+      <tr><td>Retrieval precision@k</td><td>P2, P3, R0, G</td></tr>
+      <tr><td>Copying rate</td><td>G vs. R0</td></tr>
+      <tr><td>Citation agreement</td><td>G</td></tr>
+      <tr><td>Effect of clinical text</td><td>G vs. G−ind</td></tr>
+    </table>
+  </div>
+  <p style="color:var(--navy)">Paired bootstrap confidence intervals. The comparison shows <b>how much</b> results differ, not which change caused it.</p>
+  <aside>Attribution of differences to single design choices is the thesis ladder’s job. The copying rate checks whether G merely repeats its neighbours’ labels.</aside>
+</section>
+
+<!-- 9 -->
+<section class="slide alt">
+  <div class="head"><p class="eyebrow">Done so far · week 1</p><h2>From 3,955 reports to a clean study set</h2></div>
+  <div class="flow" style="gap:24px">
+    <div class="card stat"><p class="big">3,955</p><p>reports in IU X-Ray</p></div><div class="arrow">→</div>
+    <div class="card stat"><p class="big">3,851</p><p>have images</p></div><div class="arrow">→</div>
+    <div class="card stat"><p class="big">3,690</p><p>have a usable frontal image</p></div><div class="arrow">→</div>
+    <div class="card stat"><p class="big">3,604</p><p>have manual codes (ground truth)</p></div>
+  </div>
+  <div class="bar">
+    <div style="flex:2804;background:var(--navy)">Train 2,804 · retrieval index only</div>
+    <div style="flex:400;background:var(--blue)">Val 400</div>
+    <div style="flex:400;background:var(--orange)">Test 400</div>
+  </div>
+  <p class="note">Test set enriched for positives (38–84 per finding). Validation at natural prevalence, with the 50-study pilot inside it.</p>
+  <aside>104 reports have no images; 161 studies have only a lateral view and are excluded; 86 studies were never coded (“No Indexing”) and are excluded from the ground truth.</aside>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Done so far · week 1</p><h2>What the data checks found</h2></div>
+  <div class="grid2">
+    <div class="card"><h3>No patient IDs, yet no leakage risk</h3><p class="note">The release has only study IDs, but the dataset paper states: “In no case did we take more than one study per patient.” A study split is a patient split.</p></div>
+    <div class="card"><h3>No frontal/lateral labels</h3><p class="note">Views classified zero-shot with BiomedCLIP, checked by eye: 60/60 random correct; all 11 low-score picks frontal; 40/40 exclusions lateral.</p></div>
+    <div class="card"><h3>Clean images</h3><p class="note">4 unusable images dropped (3 blank, 1 noise). No duplicates by embedding or pixel checks.</p></div>
+    <div class="card"><h3>S0 weights checked</h3><p class="note">TorchXRayVision’s combined weights were trained on IU X-Ray (Open-i), so they are ruled out; weights without it remain.</p></div>
+  </div>
+  <aside>Source for the one-study-per-patient fact: Demner-Fushman et al., JAMIA 2016;23(2):304–310. The paper’s public-subset counts (3,955 reports, 7,470 images) match the downloaded files exactly.</aside>
+</section>
+
+<!-- 11 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Done so far · week 1</p><h2>Ground truth: a labeller error, and a fix</h2></div>
+  <div class="grid2" style="gap:56px">
+    <div style="display:flex;flex-direction:column;gap:32px">
+      <p style="font-size:30px">CheXbert labelled <b>55 of 62</b> reports reading “…Heart and mediastinum normal.” as Cardiomegaly: <b>13%</b> of all its Cardiomegaly positives. Removing the de-identification masks did not help.</p>
+      <div class="card"><p class="tag">Decision</p><p>Ground truth = the dataset’s manual MeSH codes. CheXbert stays as the labeller for system outputs, so its error is measured directly.</p></div>
+    </div>
+    <table style="align-self:start">
+      <tr><th style="width:50%">Finding</th><th class="num">Positives</th><th class="num">CheXbert κ</th></tr>
+      <tr><td>Lung Opacity</td><td class="num">519</td><td class="num">0.73</td></tr>
+      <tr><td>Cardiomegaly</td><td class="num">295</td><td class="num">0.87</td></tr>
+      <tr><td>Atelectasis</td><td class="num">296</td><td class="num">0.78</td></tr>
+      <tr><td>Lung Lesion</td><td class="num">104</td><td class="num">0.66</td></tr>
+      <tr><td>Pleural Effusion</td><td class="num">138</td><td class="num">0.90</td></tr>
+      <tr><td>Fracture</td><td class="num">83</td><td class="num">0.76</td></tr>
+    </table>
+  </div>
+  <aside>The six findings were chosen by count and because S0 can score all of them (Support Devices dropped). Positives are among the 3,604 ground-truth studies. κ is CheXbert’s agreement with the manual codes.</aside>
+</section>
+
+<!-- 12 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Done so far · week 1</p><h2>Splits and thresholds</h2></div>
+  <table>
+    <tr><th style="width:13%">Split</th><th class="num" style="width:9%">n</th><th class="num">Lung Opacity</th><th class="num">Cardiomegaly</th><th class="num">Atelectasis</th><th class="num">Lung Lesion</th><th class="num">Pleural Effusion</th><th class="num">Fracture</th></tr>
+    <tr><td><b>Train</b></td><td class="num">2,804</td><td class="num">396</td><td class="num">206</td><td class="num">221</td><td class="num">49</td><td class="num">83</td><td class="num">43</td></tr>
+    <tr><td><b>Validation</b></td><td class="num">400</td><td class="num">39</td><td class="num">23</td><td class="num">26</td><td class="num">11</td><td class="num">12</td><td class="num">2</td></tr>
+    <tr><td><b>Test</b></td><td class="num">400</td><td class="num">84</td><td class="num">66</td><td class="num">49</td><td class="num">44</td><td class="num">43</td><td class="num">38</td></tr>
+  </table>
+  <div class="row">
+    <div class="card"><p class="tag">S0</p><p>Per-finding thresholds tuned on train (S0 never saw IU data)</p></div>
+    <div class="card"><p class="tag">R0</p><p>k and thresholds by leave-one-out on train</p></div>
+    <div class="card"><p class="tag">G, G−ind</p><p>One threshold pooled across findings, on validation</p></div>
+  </div>
+  <aside>Why not tune everything on validation, as planned: validation has only 2 Fracture and 11 Lung Lesion positives.</aside>
+</section>
+
+<!-- 13 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Done so far · runners</p><h2>Starter models, the API and the runners</h2></div>
+  <div class="row">
+    <div class="card"><p class="tag">Models retired</p><ul class="note">
+      <li><code>gemini-2.5-pro</code> (P1) and <code>gemini-2.5-flash</code> (P2): no longer available to new users</li>
+      <li>Both now run on <code>gemini-3-flash-preview</code>, as P1-adapted and P2-adapted</li>
+      <li>P2 embeds with Gemini Embedding 2 instead of Cohere</li></ul></div>
+    <div class="card"><p class="tag">Free tier too small</p><p class="big">20</p><p class="note">requests per day per model: about 190 days for the ~3,850 requests planned, so paid quota is needed</p></div>
+    <div class="card"><p class="tag">Runners built</p><ul class="note">
+      <li>P2-adapted: smoke test OK (normal case answered correctly)</li>
+      <li>P1-adapted: two bugs fixed (hidden API errors; no request timeout)</li>
+      <li>Quota-aware stopping and a request budget; 9/9 offline tests pass</li></ul></div>
+  </div>
+  <aside>The free-tier limit was measured from the API’s own error (GenerateRequestsPerDayPerProjectPerModel-FreeTier, limit 20). The 503 errors seen earlier were Google-side overload, not the quota.</aside>
+</section>
+
+<!-- 14 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Done so far</p><h2>Deviations from the frozen plan</h2></div>
+  <table>
+    <tr><th style="width:36%">Plan said</th><th>What happened</th></tr>
+    <tr><td>Split by patient</td><td>No patient IDs; one study per patient, so the study split is a patient split</td></tr>
+    <tr><td>Frontal image for every system</td><td>No view labels; BiomedCLIP view classifier added and checked by eye</td></tr>
+    <tr><td>Ground truth from CheXbert</td><td>Manual MeSH codes; CheXbert kept for outputs</td></tr>
+    <tr><td>Findings with enough positives</td><td>Six findings, chosen by count and S0 coverage</td></tr>
+    <tr><td>Thresholds tuned on validation</td><td>S0 and R0 on train; G one pooled threshold on validation</td></tr>
+    <tr><td>P2 with Cohere embed-v4.0</td><td>P2-adapted with Gemini Embedding 2 (no Cohere account)</td></tr>
+    <tr><td>Starters keep their models</td><td>2.5-pro and 2.5-flash retired; both now on gemini-3-flash-preview</td></tr>
+    <tr><td>Repeat-patient screen and check</td><td>Not needed (one study per patient); near-duplicate check only</td></tr>
+  </table>
+  <p class="note">Each is recorded with its reason and effect in <code>results.md</code>; the plan file is not edited.</p>
+  <aside>Smaller recorded items: 4 unusable images dropped; TorchXRayVision’s combined weights ruled out because they include IU X-Ray.</aside>
+</section>
+
+<!-- 15 -->
+<section class="slide alt">
+  <div class="head"><p class="eyebrow">Next steps</p><h2>Waiting on decisions</h2></div>
+  <div class="row">
+    <div class="card"><p class="tag">API quota</p><p class="big">$15–35</p><p class="note">Enable billing on the Gemini key (≈$30–35 standard, ≈$15–18 with the Batch API), or supervisor credits.</p></div>
+    <div class="card"><p class="tag">G-img arm</p><p class="big">≈$5</p><p class="note">G’s model and prompt on the image alone: a clean image-only Gemini reference. Not yet decided.</p></div>
+    <div class="card"><p class="tag">Supervisor sign-off</p><p class="big">4</p><p class="note">open questions: scope, deviations, credits, modality (last slide).</p></div>
+  </div>
+  <aside>Cost estimates use real token counts from the P2-adapted smoke test (about 2,270 input and 1,400–2,800 output tokens per study, including thinking). A spending check stops after the pilot and reports the projected total.</aside>
+</section>
+
+<!-- 16 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Next steps</p><h2>Roadmap</h2></div>
+  <div class="row">
+    <div class="card"><p class="tag">Now, no API needed</p><ul class="note">
+      <li>S0: choose weights by train AUROC</li>
+      <li>R0: leave-one-out on BiomedCLIP vectors</li>
+      <li>CheXbert labelling of system outputs</li>
+      <li>P3 runner (code)</li>
+      <li>Search package for P1’s web-search run</li></ul></div>
+    <div class="card"><p class="tag">Once quota is available</p><ul class="note">
+      <li>P1-adapted 2-study test</li>
+      <li>P2-adapted full index (2,804 images, ≈$0.34)</li>
+      <li>50-study pilots, capped by request budgets</li>
+      <li>Cost projection before the full runs</li></ul></div>
+    <div class="card"><p class="tag">Weeks 3–8</p><ul class="note">
+      <li>Wk 3: Q1 write-up; Q2 → design of G</li>
+      <li>Wk 4–5: build G, tune on validation</li>
+      <li>Wk 6: test-set runs, once</li>
+      <li>Wk 7: Q3 analysis</li>
+      <li>Wk 8: report and presentation</li></ul></div>
+  </div>
+  <aside>The full to-do list is the last diary entry, “Next steps (end of day)”, in semester_project/diary.md.</aside>
+</section>
+
+<!-- 17 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Next steps</p><h2>Known limitations so far</h2></div>
+  <table>
+    <tr><th style="width:22%">Limitation</th><th>Why it matters</th></tr>
+    <tr><td><b>Contamination</b></td><td>Gemini has likely seen IU X-Ray; memorised text could favour G over image-only arms and S0</td></tr>
+    <tr><td><b>Thin index</b></td><td>Train keeps only 49 Lung Lesion and 43 Fracture positives for the retrieval systems</td></tr>
+    <tr><td><b>Selection</b></td><td>161 lateral-only studies excluded; they are somewhat sicker (4% of studies with images)</td></tr>
+    <tr><td><b>Labeller error</b></td><td>CheXbert on outputs is weakest for Atelectasis (sensitivity 0.69) and Lung Lesion (κ 0.66)</td></tr>
+    <tr><td><b>Fidelity</b></td><td>P1 and P2 run on a newer model, and P2 on a different embedder, than shipped</td></tr>
+  </table>
+  <aside>These are reported in results.md under threats to validity, next to the numbers they affect.</aside>
+</section>
+
+<!-- 18 -->
+<section class="slide dark" style="gap:56px">
+  <div class="head"><p class="eyebrow">For the supervisor</p><h2>Questions</h2></div>
+  <ol style="gap:28px">
+    <li style="font-size:36px">Is the semester scope right, with the full study left for the thesis?</li>
+    <li style="font-size:36px">Is there an API budget, or can the department apply for credits (Gemini for Research, education credits)?</li>
+    <li style="font-size:36px">Are the recorded deviations acceptable (MeSH ground truth, adapted starters)?</li>
+    <li style="font-size:36px">Is chest X-ray the right modality for the thesis?</li>
+  </ol>
+  <aside>Thank you. Files: semester_project/semester_plan.md (frozen plan), results.md (report in progress), diary.md (log of every change).</aside>
+</section>
+
+</div>
+<div id="notes"></div>
+<div id="hint">← → to navigate · N notes · F fullscreen · Ctrl+P to save as PDF</div>
+<script>
+  const slides = [...document.querySelectorAll('.slide')];
+  const stage = document.getElementById('stage');
+  const notes = document.getElementById('notes');
+  slides.forEach((s, i) => {
+    if (s.classList.contains('dark')) return;
+    const f = document.createElement('div');
+    f.className = 'footer';
+    f.innerHTML = '<span>Multimodal chest X-ray decision support · Progress review</span><span>' + (i + 1) + ' / ' + slides.length + '</span>';
+    s.appendChild(f);
+  });
+  let cur = Math.min(Math.max(parseInt(location.hash.slice(1)) || 1, 1), slides.length) - 1;
+  function fit() {
+    const k = Math.min(innerWidth / 1920, innerHeight / 1080);
+    stage.style.transform = 'translate(-50%, -50%) scale(' + k + ')';
+  }
+  function show(i) {
+    cur = Math.min(Math.max(i, 0), slides.length - 1);
+    slides.forEach((s, j) => s.classList.toggle('active', j === cur));
+    const a = slides[cur].querySelector('aside');
+    notes.textContent = a ? a.textContent : '';
+    history.replaceState(null, '', '#' + (cur + 1));
+  }
+  addEventListener('keydown', e => {
+    if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(e.key)) show(cur + 1);
+    else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(e.key)) show(cur - 1);
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'n' || e.key === 'N') notes.style.display = notes.style.display === 'block' ? 'none' : 'block';
+    else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
+  });
+  addEventListener('click', e => { if (!notes.contains(e.target)) show(e.clientX > innerWidth / 3 ? cur + 1 : cur - 1); });
+  addEventListener('resize', fit);
+  fit(); show(cur);
+</script>
+</body>
+</html>

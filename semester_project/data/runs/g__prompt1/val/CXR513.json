@@ -1,0 +1,147 @@
+{
+ "arm": "g__prompt1",
+ "system": "g",
+ "prompt_version": 1,
+ "study": "CXR513",
+ "image": "CXR513_IM-2128-1001",
+ "indication": "XXXX-year-old male presents for preoperative evaluation.",
+ "neighbours": [
+  {
+   "study": "CXR3225",
+   "similarity": 0.9327435493469238
+  },
+  {
+   "study": "CXR2208",
+   "similarity": 0.9283037185668945
+  },
+  {
+   "study": "CXR1864",
+   "similarity": 0.9251513481140137
+  },
+  {
+   "study": "CXR2753",
+   "similarity": 0.9214235544204712
+  },
+  {
+   "study": "CXR1795",
+   "similarity": 0.9197458624839783
+  },
+  {
+   "study": "CXR3348",
+   "similarity": 0.9176347255706787
+  },
+  {
+   "study": "CXR3749",
+   "similarity": 0.916097104549408
+  },
+  {
+   "study": "CXR1908",
+   "similarity": 0.9126327633857727
+  },
+  {
+   "study": "CXR2032",
+   "similarity": 0.9124767184257507
+  },
+  {
+   "study": "CXR2066",
+   "similarity": 0.9121646881103516
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are.\n\nClinical indication: XXXX-year-old male presents for preoperative evaluation.\n\nSimilar cases (most similar first):\n[1] CXR3225 (similarity 0.933): IMPRESSION: No active disease.\n[2] CXR2208 (similarity 0.928): FINDINGS: Persistent cardiomegaly. No abnormal airspace consolidation. Resolved interstitial edema. No pneumothorax or pleural effusion. IMPRESSION: Stable cardiomegaly without acute abnormality.\n[3] CXR1864 (similarity 0.925): FINDINGS: Heart size borderline enlarged. No focal alveolar consolidation, no definite pleural effusion seen. No typical findings of pulmonary edema. Dense nodule in the right lower lobe suggests a previous granulomatous process. IMPRESSION: Borderline heart size, no acute pulmonary findings\n[4] CXR2753 (similarity 0.921): FINDINGS: Stable calcified superior mediastinal lymph XXXX. Lungs are clear bilaterally. There is no focal consolidation, pleural effusion, or pneumothoraces. Cardiomediastinal silhouette is within normal limits. XXXX are unremarkable. IMPRESSION: No acute cardiopulmonary abnormality.\n[5] CXR1795 (similarity 0.920): FINDINGS: There is moderate cardiomegaly. No interstitial edema or pleural effusion. No focal airspace consolidation. No pneumothorax. There is mild degenerative disc disease of the thoracic spine. IMPRESSION: 1. Cardiomegaly without radiographic evidence of heart failure. 2. No acute cardiopulmonary abnormality.\n[6] CXR3348 (similarity 0.918): FINDINGS: Stable cardiomegaly. The lungs are clear. Stable left lung base calcifications. No focal consolidations. No pneumothorax or pleural effusions. The XXXX are intact. IMPRESSION: No acute cardiopulmonary abnormalities. Stable cardiomegaly.\n[7] CXR3749 (similarity 0.916): FINDINGS: Lungs are clear bilaterally. Cardiac and mediastinal silhouettes are normal. Pulmonary vasculature is normal. No pneumothorax or pleural effusion. No acute bony abnormality. IMPRESSION: No acute cardiopulmonary abnormality.\n[8] CXR1908 (similarity 0.913): FINDINGS: Cardiac silhouette and mediastinal contours are within normal limits. Nodular opacity overlying the upper lungs bilaterally may represent overlying telemetry XXXX XXXX, correlate clinically. Otherwise, lungs are clear. No large pleural effusion no pneumothorax. IMPRESSION: No acute cardiopulmonary disease.\n[9] CXR2032 (similarity 0.912): FINDINGS: The lungs are clear. No focal air space consolidation. No pleural effusion or pneumothorax. Normal cardiomediastinal silhouette. IMPRESSION: Clear lungs.\n[10] CXR2066 (similarity 0.912): FINDINGS: There is mild cardiomegaly. The aorta is tortuous. There is XXXX opacities noted in the right lower lobe, XXXX subsegmental atelectasis. There is no pneumothorax or effusion. No displaced rib fractures. If there is high clinical concern, consider dedicated rib views for further evaluation. IMPRESSION: Mild cardiomegaly, with subsegmental atelectasis in the right lower lobe.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\n  \"findings\": [\n    {\n      \"finding\": \"Lung Opacity\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR3225\",\n        \"CXR2208\",\n        \"CXR2753\",\n        \"CXR1795\",\n        \"CXR3348\",\n        \"CXR3749\",\n        \"CXR2032\"\n      ],\n      \"rationale\": \"The lungs are clear bilaterally with no evidence of consolidation or airspace disease.\"\n    },\n    {\n      \"finding\": \"Cardiomegaly\",\n      \"status\": \"present\",\n      \"probability\": 0.7,\n      \"cited_case_ids\": [\n        \"CXR2208\",\n        \"CXR1864\",\n        \"CXR1795\",\n        \"CXR3348\",\n        \"CXR2066\"\n      ],\n      \"rationale\": \"The cardiac silhouette appears mildly enlarged, a finding supported by several similar cases.\"\n    },\n    {\n      \"finding\": \"Atelectasis\",\n      \"status\": \"absent\",\n      \"probability\": 0.1,\n      \"cited_case_ids\": [\n        \"CXR3225\",\n        \"CXR2208\",\n        \"CXR2753\",\n        \"CXR3749\",\n        \"CXR2032\"\n      ],\n      \"rationale\": \"There is no evidence of linear or plate-like opacities to suggest pulmonary atelectasis.\"\n    },\n    {\n      \"finding\": \"Lung Lesion\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR3225\",\n        \"CXR2753\",\n        \"CXR3749\",\n        \"CXR2032\"\n      ],\n      \"rationale\": \"No pulmonary nodules or masses are visible in the lung fields.\"\n    },\n    {\n      \"finding\": \"Pleural Effusion\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR2208\",\n        \"CXR1864\",\n        \"CXR2753\",\n        \"CXR1795\",\n        \"CXR3348\",\n        \"CXR3749\",\n        \"CXR1908\",\n        \"CXR2032\",\n        \"CXR2066\"\n      ],\n      \"rationale\": \"Costophrenic angles are sharp and well-defined bilaterally, indicating no pleural fluid.\"\n    },\n    {\n      \"finding\": \"Fracture\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR3749\",\n        \"CXR2066\"\n      ],\n      \"rationale\": \"The visible ribs, clavicles, and spine show no signs of acute or old fractures.\"\n    }\n  ],\n  \"impression\": \"Mild cardiomegaly with no evidence of acute cardiopulmonary disease.\"\n}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR3225",
+     "CXR2208",
+     "CXR2753",
+     "CXR1795",
+     "CXR3348",
+     "CXR3749",
+     "CXR2032"
+    ],
+    "rationale": "The lungs are clear bilaterally with no evidence of consolidation or airspace disease."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "present",
+    "probability": 0.7,
+    "cited_case_ids": [
+     "CXR2208",
+     "CXR1864",
+     "CXR1795",
+     "CXR3348",
+     "CXR2066"
+    ],
+    "rationale": "The cardiac silhouette appears mildly enlarged, a finding supported by several similar cases."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR3225",
+     "CXR2208",
+     "CXR2753",
+     "CXR3749",
+     "CXR2032"
+    ],
+    "rationale": "There is no evidence of linear or plate-like opacities to suggest pulmonary atelectasis."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR3225",
+     "CXR2753",
+     "CXR3749",
+     "CXR2032"
+    ],
+    "rationale": "No pulmonary nodules or masses are visible in the lung fields."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2208",
+     "CXR1864",
+     "CXR2753",
+     "CXR1795",
+     "CXR3348",
+     "CXR3749",
+     "CXR1908",
+     "CXR2032",
+     "CXR2066"
+    ],
+    "rationale": "Costophrenic angles are sharp and well-defined bilaterally, indicating no pleural fluid."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR3749",
+     "CXR2066"
+    ],
+    "rationale": "The visible ribs, clavicles, and spine show no signs of acute or old fractures."
+   }
+  ],
+  "impression": "Mild cardiomegaly with no evidence of acute cardiopulmonary disease."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2193,
+  "output": 785,
+  "thinking": 1150,
+  "total": 4128
+ },
+ "time": "2026-10-18T01:40:01"
+}

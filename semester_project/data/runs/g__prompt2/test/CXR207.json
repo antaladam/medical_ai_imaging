@@ -1,0 +1,143 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR207",
+ "image": "CXR207_IM-0703-1001",
+ "indication": "XXXX, right sided rib pain after falling on the XXXX.",
+ "neighbours": [
+  {
+   "study": "CXR1755",
+   "similarity": 0.9777491092681885
+  },
+  {
+   "study": "CXR1672",
+   "similarity": 0.975239634513855
+  },
+  {
+   "study": "CXR1165",
+   "similarity": 0.9747657775878906
+  },
+  {
+   "study": "CXR2272",
+   "similarity": 0.9732102155685425
+  },
+  {
+   "study": "CXR2714",
+   "similarity": 0.9730216264724731
+  },
+  {
+   "study": "CXR299",
+   "similarity": 0.9728144407272339
+  },
+  {
+   "study": "CXR3528",
+   "similarity": 0.9717578887939453
+  },
+  {
+   "study": "CXR138",
+   "similarity": 0.9716485142707825
+  },
+  {
+   "study": "CXR1734",
+   "similarity": 0.9713541269302368
+  },
+  {
+   "study": "CXR241",
+   "similarity": 0.9711654186248779
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: XXXX, right sided rib pain after falling on the XXXX.\n\nSimilar cases (most similar first):\nCase CXR1755 (similarity 0.978): IMPRESSION: Heart size within normal limits. Mild right hemidiaphragm elevation with crowded markings in the right lung base. Otherwise, no focal alveolar consolidation. No definite pleural effusion seen. Mediastinal calcifications and dense nodule in the left suprahilar lung suggest a previous granulomatous process. No typical findings of pulmonary edema.\nCase CXR1672 (similarity 0.975): IMPRESSION: Clear lungs. No airspace disease or other parenchymal infiltrates. No XXXX of pleural effusions. No pulmonary edema. Normal heart size, mediastinal contours and normal pulmonary vasculature. No XXXX of active cardiopulmonary disease. Unchanged.\nCase CXR1165 (similarity 0.975): FINDINGS: Frontal and lateral views of the chest show normal size and configuration of the cardiac silhouette. Normal mediastinal contour, pulmonary XXXX and vasculature, central airways and lung volumes. No pleural effusion. IMPRESSION: No acute or active cardiac, pulmonary or pleural disease.\nCase CXR2272 (similarity 0.973): IMPRESSION: The cardiac silhouette is at the upper limits of normal for size and configuration. This is essentially unchanged. The mediastinum and perihilar structures appear to be XXXX unremarkable. A few calcified granulomata are noted. No focal infiltrates are seen. No obvious mediastinal lymphadenopathy is appreciated. Osseous structures appear to be XXXX unremarkable.\nCase CXR2714 (similarity 0.973): IMPRESSION: Comparison XXXX, XXXX. Well-expanded and clear lungs. Mediastinal contour within normal limits. No acute cardiopulmonary abnormality identified.\nCase CXR299 (similarity 0.973): FINDINGS: Cardiac and mediastinal contours are within normal limits. The lungs are clear. Bony structures are intact. Small hiatal hernia. IMPRESSION: No acute findings. Small hiatal hernia.\nCase CXR3528 (similarity 0.972): FINDINGS: The heart is normal in size. The mediastinum is unremarkable. The lungs are clear. IMPRESSION: No acute disease.\nCase CXR138 (similarity 0.972): FINDINGS: Cardiac and mediastinal contours are within normal limits. The lungs are clear. Bony structures are intact. IMPRESSION: No acute preoperative findings.\nCase CXR1734 (similarity 0.971): FINDINGS: Heart size and mediastinal contour are normal. Pulmonary vascularity is normal. Lungs are clear. No pleural effusions or pneumothoraces. IMPRESSION: No acute cardiopulmonary process.\nCase CXR241 (similarity 0.971): FINDINGS: The trachea is midline. Cardiomediastinal silhouette is normal in size and contour. The lungs are clear without evidence of acute infiltrate or effusion. There is no pneumothorax. The visualized bony structures reveal no acute abnormalities. IMPRESSION: No acute cardiopulmonary abnormalities.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\n  \"findings\": [\n    {\n      \"finding\": \"Lung Opacity\",\n      \"status\": \"absent\",\n      \"probability\": 0.02,\n      \"cited_case_ids\": [\n        \"CXR1672\",\n        \"CXR1165\",\n        \"CXR2714\",\n        \"CXR299\",\n        \"CXR3528\",\n        \"CXR138\",\n        \"CXR1734\",\n        \"CXR241\"\n      ],\n      \"rationale\": \"The lung parenchyma is clear bilaterally without evidence of focal consolidation or infiltrate.\"\n    },\n    {\n      \"finding\": \"Cardiomegaly\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR1755\",\n        \"CXR1672\",\n        \"CXR1165\",\n        \"CXR3528\",\n        \"CXR138\",\n        \"CXR1734\",\n        \"CXR241\"\n      ],\n      \"rationale\": \"The heart size and mediastinal contours are within normal limits.\"\n    },\n    {\n      \"finding\": \"Atelectasis\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR1672\",\n        \"CXR1165\",\n        \"CXR2714\"\n      ],\n      \"rationale\": \"There are no linear or band-like opacities to suggest discoid or subsegmental atelectasis.\"\n    },\n    {\n      \"finding\": \"Lung Lesion\",\n      \"status\": \"absent\",\n      \"probability\": 0.02,\n      \"cited_case_ids\": [\n        \"CXR1672\",\n        \"CXR1165\",\n        \"CXR2714\"\n      ],\n      \"rationale\": \"No pulmonary nodules or masses are identified in either lung.\"\n    },\n    {\n      \"finding\": \"Pleural Effusion\",\n      \"status\": \"absent\",\n      \"probability\": 0.02,\n      \"cited_case_ids\": [\n        \"CXR1755\",\n        \"CXR1165\",\n        \"CXR1734\",\n        \"CXR241\"\n      ],\n      \"rationale\": \"Costophrenic angles are sharp and there is no evidence of pleural fluid.\"\n    },\n    {\n      \"finding\": \"Fracture\",\n      \"status\": \"uncertain\",\n      \"probability\": 0.15,\n      \"cited_case_ids\": [\n        \"CXR299\",\n        \"CXR138\",\n        \"CXR241\"\n      ],\n      \"rationale\": \"Despite the clinical history of right-sided rib pain, no acute rib fracture is definitively visualized on this single frontal projection.\"\n    }\n  ],\n  \"impression\": \"No acute cardiopulmonary disease. No definitive rib fracture identified; consider dedicated rib views if clinically warranted.\"\n}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.02,
+    "cited_case_ids": [
+     "CXR1672",
+     "CXR1165",
+     "CXR2714",
+     "CXR299",
+     "CXR3528",
+     "CXR138",
+     "CXR1734",
+     "CXR241"
+    ],
+    "rationale": "The lung parenchyma is clear bilaterally without evidence of focal consolidation or infiltrate."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR1755",
+     "CXR1672",
+     "CXR1165",
+     "CXR3528",
+     "CXR138",
+     "CXR1734",
+     "CXR241"
+    ],
+    "rationale": "The heart size and mediastinal contours are within normal limits."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR1672",
+     "CXR1165",
+     "CXR2714"
+    ],
+    "rationale": "There are no linear or band-like opacities to suggest discoid or subsegmental atelectasis."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.02,
+    "cited_case_ids": [
+     "CXR1672",
+     "CXR1165",
+     "CXR2714"
+    ],
+    "rationale": "No pulmonary nodules or masses are identified in either lung."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.02,
+    "cited_case_ids": [
+     "CXR1755",
+     "CXR1165",
+     "CXR1734",
+     "CXR241"
+    ],
+    "rationale": "Costophrenic angles are sharp and there is no evidence of pleural fluid."
+   },
+   {
+    "finding": "Fracture",
+    "status": "uncertain",
+    "probability": 0.15,
+    "cited_case_ids": [
+     "CXR299",
+     "CXR138",
+     "CXR241"
+    ],
+    "rationale": "Despite the clinical history of right-sided rib pain, no acute rib fracture is definitively visualized on this single frontal projection."
+   }
+  ],
+  "impression": "No acute cardiopulmonary disease. No definitive rib fracture identified; consider dedicated rib views if clinically warranted."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2204,
+  "output": 747,
+  "thinking": 1274,
+  "total": 4225
+ },
+ "time": "2026-10-18T13:48:36"
+}

@@ -1,0 +1,125 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR2114",
+ "image": "CXR2114_IM-0743-4004",
+ "indication": "XXXX-year-old male, chest pain",
+ "neighbours": [
+  {
+   "study": "CXR2537",
+   "similarity": 0.9618197679519653
+  },
+  {
+   "study": "CXR31",
+   "similarity": 0.9540311098098755
+  },
+  {
+   "study": "CXR2945",
+   "similarity": 0.9521711468696594
+  },
+  {
+   "study": "CXR954",
+   "similarity": 0.9406192302703857
+  },
+  {
+   "study": "CXR1988",
+   "similarity": 0.9396117329597473
+  },
+  {
+   "study": "CXR2017",
+   "similarity": 0.9379228353500366
+  },
+  {
+   "study": "CXR3229",
+   "similarity": 0.9376267790794373
+  },
+  {
+   "study": "CXR202",
+   "similarity": 0.9369232654571533
+  },
+  {
+   "study": "CXR1075",
+   "similarity": 0.9354445338249207
+  },
+  {
+   "study": "CXR139",
+   "similarity": 0.9350857138633728
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: XXXX-year-old male, chest pain\n\nSimilar cases (most similar first):\nCase CXR2537 (similarity 0.962): FINDINGS: Frontal and lateral views of the chest show an unchanged cardiomediastinal silhouette. Right-sided aortic XXXX. Normal mediastinal contour, pulmonary XXXX and vasculature, central airways and aeration of the lungs. There is right basal XXXX patchy opacity and bibasal atelectasis or scarring. There is no pleural effusion or pneumothorax. Right apical calcified granuloma noted. IMPRESSION: 1. Right basal acute airspace disease. Please correlate clinically for pneumonia. 2. Chronic interstitial pattern, may reflect COPD.\nCase CXR31 (similarity 0.954): IMPRESSION: Suggestion of slightly more prominent interstitial markings, which may represent some bronchitic/bronchiolitis changes. No suspicious nodules, pneumonia, effusions, or CHF. Stable mediastinal contour.\nCase CXR2945 (similarity 0.952): FINDINGS: Diffuse bilateral coarse interstitial markings are unchanged. No focal consolidation, pleural effusion, pneumothoraces. Cardiomediastinal silhouette is within normal limits. Degenerative changes of the shoulder. Soft tissues are unremarkable.. IMPRESSION: No acute cardiopulmonary abnormality. .\nCase CXR954 (similarity 0.941): IMPRESSION: Hyperinflated appearing lungs as before with some stable slightly prominent appearing interstitial markings most XXXX representing mild chronic inflammatory change. Stable biapical chronic inflammatory change with pleural thickening. No acute airspace disease, effusions, or CHF. Stable mediastinal contour. No XXXX acute abnormalities since the previous chest radiograph.\nCase CXR1988 (similarity 0.940): IMPRESSION: Stable appearing chest with low lung volumes. Reticulonodular changes in left lung base and periphery of left lung most XXXX representing chronic inflammatory change. Also some peripheral XXXX fibrotic appearing opacity in the periphery the right upper lobe, grossly stable. No XXXX acute airspace consolidation. Stable mediastinal contour.\nCase CXR2017 (similarity 0.938): FINDINGS: The heart is normal in size. The mediastinum is unremarkable. The lungs are clear. IMPRESSION: No acute disease.\nCase CXR3229 (similarity 0.938): FINDINGS: Heart size within normal limits. Trachea is midline. The lung volumes are is somewhat low. Both lungs are otherwise clear bilaterally. No pleural effusion. No pulmonary nodules visualized. IMPRESSION: No pulmonary nodules. Negative chest.\nCase CXR202 (similarity 0.937): FINDINGS: AP and lateral view of the chest. IMPRESSION: 1. Cardiomegaly with central vascular congestion and increased interstitial opacities suggesting mild interstitial pulmonary edema. 2. Small bilateral pleural effusions. 3. No visible pneumothorax.\nCase CXR1075 (similarity 0.935): FINDINGS: Lungs are hyperinflated with interstitial changes of severe emphysema. There is an ill-defined pleural parenchymal opacity in the left upper lobe. This may represent scarring but is incompletely evaluated on the outside study, without coronal and sagittal reformats. There is mild XXXX scarring and/or atelectasis in the lung bases. Lungs otherwise grossly clear. There is no pneumothorax or pleural effusion. Heart size is normal. There are mild degenerative endplate changes in the thoracic spine. There is generalized osteopenia. IMPRESSION: 1. Severe emphysema. 2. Irregular, pleural-parenchymal opacity in left upper lobe. This may irregular pleural-parenchymal scarring, however, recommend comparison with more remote outside imaging, if available to determine long-term stability. If none are available, recommend short-term XXXX in 3 to 4 months. Evaluation of coronal and sagittal reformatted images from the outside study would also be helpful. These were not XXXX available at the outside institution. Malignancy cannot be confidently excluded on the available images.\nCase CXR139 (similarity 0.935): FINDINGS: The cardiac silhouette is mildly enlarged. A lobulated opacity is identified superior to the heart, in the anterior mediastinum on the lateral view, possibly consistent with a tortuous/ectatic thoracic aorta versus an anterior mediastinal mass. The thoracic aorta is tortuous and calcified. No focal areas of pulmonary consolidation. The lungs are hyperexpanded with flattening of the bilateral hemidiaphragms. No pneumothorax or pleural effusion. Severe degenerative changes of the thoracic spine. IMPRESSION: 1. Lobulated anterior mediastinal opacity on the lateral view, possibly consistent with a tortuous/ectatic thoracic aorta versus an anterior mediastinal mass. Contrast-enhanced XXXX examination would XXXX to further evaluate if clinically indicated. 2. Mild cardiomegaly with findings of chronic obstructive pulmonary disease.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"present\",\"probability\":0.65,\"cited_case_ids\":[\"CXR2537\",\"CXR2945\"],\"rationale\":\"Increased interstitial markings and patchy opacities are visible at the lung bases, which may represent chronic changes or early consolidation.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"absent\",\"probability\":0.2,\"cited_case_ids\":[\"CXR2537\",\"CXR2017\",\"CXR3229\"],\"rationale\":\"The heart size is within normal limits, consistent with the majority of similar cases.\"},{\"finding\":\"Atelectasis\",\"status\":\"present\",\"probability\":0.75,\"cited_case_ids\":[\"CXR2537\",\"CXR1075\"],\"rationale\":\"Linear opacities at the bases are consistent with subsegmental atelectasis or chronic scarring as noted in similar high-ranking cases.\"},{\"finding\":\"Lung Lesion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR3229\"],\"rationale\":\"No suspicious nodules or masses are seen; the circular density in the right lung field is an external monitor lead.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"absent\",\"probability\":0.25,\"cited_case_ids\":[\"CXR2537\",\"CXR2945\",\"CXR954\"],\"rationale\":\"The costophrenic angles appear clear without significant fluid accumulation.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.02,\"cited_case_ids\":[],\"rationale\":\"No acute fractures are identified in the ribs or visible bones. Surgical sternotomy wires are present.\"}],\"impression\":\"Chronic interstitial markings and bibasal atelectasis are present without evidence of acute pneumonia or heart failure. Sternotomy wires are noted from prior surgery.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "present",
+    "probability": 0.65,
+    "cited_case_ids": [
+     "CXR2537",
+     "CXR2945"
+    ],
+    "rationale": "Increased interstitial markings and patchy opacities are visible at the lung bases, which may represent chronic changes or early consolidation."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.2,
+    "cited_case_ids": [
+     "CXR2537",
+     "CXR2017",
+     "CXR3229"
+    ],
+    "rationale": "The heart size is within normal limits, consistent with the majority of similar cases."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.75,
+    "cited_case_ids": [
+     "CXR2537",
+     "CXR1075"
+    ],
+    "rationale": "Linear opacities at the bases are consistent with subsegmental atelectasis or chronic scarring as noted in similar high-ranking cases."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR3229"
+    ],
+    "rationale": "No suspicious nodules or masses are seen; the circular density in the right lung field is an external monitor lead."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.25,
+    "cited_case_ids": [
+     "CXR2537",
+     "CXR2945",
+     "CXR954"
+    ],
+    "rationale": "The costophrenic angles appear clear without significant fluid accumulation."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.02,
+    "cited_case_ids": [],
+    "rationale": "No acute fractures are identified in the ribs or visible bones. Surgical sternotomy wires are present."
+   }
+  ],
+  "impression": "Chronic interstitial markings and bibasal atelectasis are present without evidence of acute pneumonia or heart failure. Sternotomy wires are noted from prior surgery."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2571,
+  "output": 402,
+  "thinking": 2323,
+  "total": 5296
+ },
+ "time": "2026-10-18T14:25:31"
+}

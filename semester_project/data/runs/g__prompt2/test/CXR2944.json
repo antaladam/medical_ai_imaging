@@ -1,0 +1,120 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR2944",
+ "image": "CXR2944_IM-1344-1001",
+ "indication": "XXXX",
+ "neighbours": [
+  {
+   "study": "CXR638",
+   "similarity": 0.9597895741462708
+  },
+  {
+   "study": "CXR249",
+   "similarity": 0.9495301246643066
+  },
+  {
+   "study": "CXR835",
+   "similarity": 0.9424919486045837
+  },
+  {
+   "study": "CXR195",
+   "similarity": 0.9372339844703674
+  },
+  {
+   "study": "CXR3436",
+   "similarity": 0.93720543384552
+  },
+  {
+   "study": "CXR1292",
+   "similarity": 0.9360179901123047
+  },
+  {
+   "study": "CXR3585",
+   "similarity": 0.9353678226470947
+  },
+  {
+   "study": "CXR3474",
+   "similarity": 0.9348998069763184
+  },
+  {
+   "study": "CXR713",
+   "similarity": 0.9341047406196594
+  },
+  {
+   "study": "CXR160",
+   "similarity": 0.9317344427108765
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: XXXX\n\nSimilar cases (most similar first):\nCase CXR638 (similarity 0.960): IMPRESSION: Anterior segment right lower lobe pneumonia. No effusion. Heart size is normal. Lungs otherwise clear.\nCase CXR249 (similarity 0.950): FINDINGS: Lobulated right middle lobe mass measuring 4.5 x 6.8 cm, increased in size compared to prior study, most compatible with neoplasm. Otherwise, the lungs are clear without focal consolidation. No pneumothorax or pleural effusion. Cardiomediastinal silhouette within normal limits. IMPRESSION: 1. Interval enlargement of right middle lobe mass, highly suspicious for malignancy. Recommend CT of the chest/abdomen with intravenous contrast for further evaluation. 2. Otherwise clear lungs. Dr. XXXX XXXX notified of the critical results at XXXX on XXXX, XXXX by telephone and acknowledged receipt of these results.\nCase CXR835 (similarity 0.942): FINDINGS: The heart size is normal. The mediastinal contour is within normal limits. The lungs are free of any focal infiltrates. There are no nodules or masses. There is no pneumothorax. There is no pleural effusion. There is redemonstration of right rib deformities XXXX from old XXXX. XXXX of mild dextroscoliosis of the thoracic spine. There is no free intraperitoneal air under the diaphragm. IMPRESSION: No acute radiographic cardiopulmonary process.\nCase CXR195 (similarity 0.937): FINDINGS: Clear lungs bilaterally. No pneumothorax or pleural effusion. Normal cardiac contours IMPRESSION: 1. No acute cardiopulmonary abnormalities\nCase CXR3436 (similarity 0.937): FINDINGS: The lungs appear hyperexpanded suggesting emphysema. The heart size and pulmonary vascularity appear within normal limits. The lungs are free of focal airspace disease. Calcified granuloma is identified. No pneumothorax or pleural effusion is seen. IMPRESSION: 1. Hyperexpanded lungs. The pattern suggests emphysema. 2. No evidence of acute disease.\nCase CXR1292 (similarity 0.936): FINDINGS: Borderline enlarged heart. Torturous/ectatic thoracic aorta. No focal pulmonary opacity, pleural effusion or pneumothorax. There are degenerative changes of the spine. There is fracture of distal right clavicle, better seen on the right shoulder radiographs dated XXXX. Small round lucency in the distal left clavicle, appears benign. Degenerative changes of both XXXX joints. IMPRESSION: 1. Borderline enlarged heart. 2. Tortuous/ectatic thoracic aorta. 3. Fracture of the distal right clavicle, better seen on today's radiograph of the shoulder.\nCase CXR3585 (similarity 0.935): IMPRESSION: No active cardiopulmonary disease.\nCase CXR3474 (similarity 0.935): FINDINGS: Crowded bronchovascular markings in the hilar and perihilar region, right lower lung zones. Low lung volumes. No noncalcified pulmonary nodules seen. No pleural effusion or pneumothorax. No small heart size. There is a right diaphragmatic hump. The soft tissues seen in the left cardiophrenic XXXX, could represent an ectatic descending aorta or hiatal hernia. Visualized XXXX of the chest XXXX are within normal limits. Degenerative changes demonstrated within the visualized thoracic spine. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR713 (similarity 0.934): FINDINGS: Central venous catheter tip in the right atrium. Heart size and shape are normal. Trachea and XXXX bronchi appear normal. The lungs are reasonably well expanded. There XXXX and patchy nodular densities in both lower lung XXXX more marked on the right than the left. There is scattered areas of bronchial wall thickening, well-seen in the left upper lobe. There is loss of definition of part of the left heart XXXX. No effusions no pneumothorax. IMPRESSION: Findings consistent with widespread changes from cystic fibrosis. It is difficult to differentiate acute from chronic change.\nCase CXR160 (similarity 0.932): FINDINGS: The heart is normal in size. The mediastinum is unremarkable. There is patchy infiltrate within normal right lower lobe. Mild XXXX opacities in the retrocardiac region. No large effusions or pneumothorax. IMPRESSION: Patchy right lower lobe infiltrate as well as probable left basilar infiltrate versus atelectasis.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\n  \"findings\": [\n    {\n      \"finding\": \"Lung Opacity\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR249\"\n      ],\n      \"rationale\": \"The visible density in the right lung is a discrete mass rather than airspace disease, and the rest of the lungs are clear.\"\n    },\n    {\n      \"finding\": \"Cardiomegaly\",\n      \"status\": \"absent\",\n      \"probability\": 0.1,\n      \"cited_case_ids\": [\n        \"CXR249\",\n        \"CXR638\",\n        \"CXR835\"\n      ],\n      \"rationale\": \"The heart size is within normal limits, as seen in several similar cases.\"\n    },\n    {\n      \"finding\": \"Atelectasis\",\n      \"status\": \"absent\",\n      \"probability\": 0.1,\n      \"cited_case_ids\": [],\n      \"rationale\": \"No linear or plate-like opacities suggestive of lung collapse are identified.\"\n    },\n    {\n      \"finding\": \"Lung Lesion\",\n      \"status\": \"present\",\n      \"probability\": 0.98,\n      \"cited_case_ids\": [\n        \"CXR249\"\n      ],\n      \"rationale\": \"There is a large, well-circumscribed, lobulated mass in the right lower lung field, highly suspicious for malignancy as in case CXR249.\"\n    },\n    {\n      \"finding\": \"Pleural Effusion\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR249\",\n        \"CXR638\"\n      ],\n      \"rationale\": \"Costophrenic angles are sharp and clear bilaterally.\"\n    },\n    {\n      \"finding\": \"Fracture\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [],\n      \"rationale\": \"No fractures are visible in the ribs, clavicles, or visualized spine.\"\n    }\n  ],\n  \"impression\": \"Large, lobulated right lower lung mass, highly suspicious for malignancy; clinical correlation and CT evaluation are recommended.\"\n}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR249"
+    ],
+    "rationale": "The visible density in the right lung is a discrete mass rather than airspace disease, and the rest of the lungs are clear."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR249",
+     "CXR638",
+     "CXR835"
+    ],
+    "rationale": "The heart size is within normal limits, as seen in several similar cases."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [],
+    "rationale": "No linear or plate-like opacities suggestive of lung collapse are identified."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "present",
+    "probability": 0.98,
+    "cited_case_ids": [
+     "CXR249"
+    ],
+    "rationale": "There is a large, well-circumscribed, lobulated mass in the right lower lung field, highly suspicious for malignancy as in case CXR249."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR249",
+     "CXR638"
+    ],
+    "rationale": "Costophrenic angles are sharp and clear bilaterally."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [],
+    "rationale": "No fractures are visible in the ribs, clavicles, or visualized spine."
+   }
+  ],
+  "impression": "Large, lobulated right lower lung mass, highly suspicious for malignancy; clinical correlation and CT evaluation are recommended."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2498,
+  "output": 548,
+  "thinking": 1276,
+  "total": 4322
+ },
+ "time": "2026-10-18T14:45:41"
+}

@@ -1,0 +1,137 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR2420",
+ "image": "CXR2420_IM-0964-0001-0001",
+ "indication": "EVALUATE FOR METASTATIC DISEASE;",
+ "neighbours": [
+  {
+   "study": "CXR1536",
+   "similarity": 0.9555743336677551
+  },
+  {
+   "study": "CXR1220",
+   "similarity": 0.9327874183654785
+  },
+  {
+   "study": "CXR3551",
+   "similarity": 0.9308197498321533
+  },
+  {
+   "study": "CXR1767",
+   "similarity": 0.9305288791656494
+  },
+  {
+   "study": "CXR356",
+   "similarity": 0.930188775062561
+  },
+  {
+   "study": "CXR122",
+   "similarity": 0.9298906326293945
+  },
+  {
+   "study": "CXR1686",
+   "similarity": 0.9281411170959473
+  },
+  {
+   "study": "CXR3779",
+   "similarity": 0.927640974521637
+  },
+  {
+   "study": "CXR992",
+   "similarity": 0.9271302223205566
+  },
+  {
+   "study": "CXR1555",
+   "similarity": 0.9263855218887329
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: EVALUATE FOR METASTATIC DISEASE;\n\nSimilar cases (most similar first):\nCase CXR1536 (similarity 0.956): no report text\nCase CXR1220 (similarity 0.933): FINDINGS: There is hyperexpansion, hyperlucency of both lungs, as well as flattening of the diaphragm consistent with chronic emphysematous lung disease. No focal consolidation, pneumothorax, or large pleural effusion identified (blunting of costophrenic recesses bilaterally may represent small effusions or pleural thickening/scar. Stable calcified mediastinal and hilar lymph XXXX and a left basilar calcified granuloma. Acute osseous abnormality. The mediastinal silhouette stable. IMPRESSION: Changes of chronic emphysematous lung disease without acute cardiopulmonary abnormality identified.\nCase CXR3551 (similarity 0.931): FINDINGS: Heart size near top normal limits for technique. No focal alveolar consolidation, no definite pleural effusion seen. No typical findings of pulmonary edema. Dense left lower lobe nodule suggests a previous granulomatous process. IMPRESSION: No acute findings\nCase CXR1767 (similarity 0.931): FINDINGS: The cardiomediastinal silhouette is within normal limits. Calcified right lower lobe granuloma. No focal airspace consolidation.. No visualized pneumothorax or large pleural effusion. No acute bony abnormalities. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR356 (similarity 0.930): FINDINGS: The cardiomediastinal silhouette is within normal limits for size and contour. The lungs are normally inflated without evidence of focal airspace disease, pleural effusion, or pneumothorax. Osseous structures are within normal limits for patient age.. IMPRESSION: 1. No acute radiographic cardiopulmonary process.\nCase CXR122 (similarity 0.930): IMPRESSION: No comparison chest x-XXXX. Minimal lingular scarring. Overall, Well-expanded and clear lungs. Mediastinal contour within normal limits. No acute cardiopulmonary abnormality identified.\nCase CXR1686 (similarity 0.928): FINDINGS: The heart and lungs have XXXX XXXX in the interval. Both lungs are clear and expanded. Heart and mediastinum normal. No change calcified aorticopulmonary XXXX node. IMPRESSION: No active disease.\nCase CXR3779 (similarity 0.928): FINDINGS: The heart is normal in size and contour. There is no mediastinal widening. The lungs are clear bilaterally. No large pleural effusion or pneumothorax. The XXXX are intact. IMPRESSION: No acute cardiopulmonary abnormalities.\nCase CXR992 (similarity 0.927): FINDINGS: There are bilateral pulmonary nodules whose appearances suggest metastatic disease to lungs. In the right lung, there is a 1.9 x 2.1 cm nodule overlying the posterior right 6th rib. There is a 1.0 x 1.2 cm nodule XXXX above this in the interspace between the posterior 5th and 6th ribs on the right. There is a 1.0 x 1.1 cm nodule projecting through the left 9th and 10th interspaces on the PA view. If not already performed, contrast-enhanced XXXX would be XXXX suited to evaluate these findings. There are no focal airspace opacities to suggest pneumonia. To the stomach contours appear grossly clear. Heart size and pulmonary XXXX appear normal. There are left-sided axillary clips. There is a right internal jugular central catheter, the distal tip in right atrium. IMPRESSION: 1. Bilateral pulmonary nodules suggesting pulmonary metastases 2. Right internal jugular central catheter, the distal tip in the right atrium.\nCase CXR1555 (similarity 0.926): FINDINGS: XXXX XXXX and lateral chest examination was obtained. The heart silhouette and mediastinal contours are not enlarged. There is elevated right hemidiaphragm and evidence of right upper lobectomy. Lungs demonstrate no acute findings. There is no effusion or pneumothorax. IMPRESSION: 1. No acute cardiopulmonary disease.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"absent\",\"probability\":0.1,\"cited_case_ids\":[\"CXR3551\",\"CXR1767\",\"CXR356\",\"CXR3779\",\"CXR992\"],\"rationale\":\"There are no focal areas of consolidation or confluent airspace disease; the visible parenchymal abnormalities are discrete and nodular.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"absent\",\"probability\":0.1,\"cited_case_ids\":[\"CXR1767\",\"CXR356\",\"CXR1686\",\"CXR3779\",\"CXR992\",\"CXR1555\"],\"rationale\":\"The heart size is within normal limits, as supported by similar cases showing normal cardiomediastinal silhouettes.\"},{\"finding\":\"Atelectasis\",\"status\":\"absent\",\"probability\":0.1,\"cited_case_ids\":[\"CXR122\"],\"rationale\":\"No evidence of discoid or plate-like opacities or other signs of volume loss are identified.\"},{\"finding\":\"Lung Lesion\",\"status\":\"present\",\"probability\":0.95,\"cited_case_ids\":[\"CXR992\"],\"rationale\":\"Multiple well-defined, bilateral pulmonary nodules of various sizes are visible, strongly suggesting metastatic disease as noted in case CXR992.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR1220\",\"CXR3551\",\"CXR1767\",\"CXR356\",\"CXR3779\"],\"rationale\":\"The costophrenic angles are sharp and clear, with no evidence of blunting to suggest pleural fluid.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR1220\",\"CXR1767\",\"CXR356\",\"CXR3779\"],\"rationale\":\"The visualized osseous structures, including the ribs and clavicles, show no evidence of acute or chronic fractures.\"}],\"impression\":\"Multiple bilateral pulmonary nodules are present, highly suspicious for metastatic disease in this clinical context. A right-sided chest wall port-a-cath is in place.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR3551",
+     "CXR1767",
+     "CXR356",
+     "CXR3779",
+     "CXR992"
+    ],
+    "rationale": "There are no focal areas of consolidation or confluent airspace disease; the visible parenchymal abnormalities are discrete and nodular."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR1767",
+     "CXR356",
+     "CXR1686",
+     "CXR3779",
+     "CXR992",
+     "CXR1555"
+    ],
+    "rationale": "The heart size is within normal limits, as supported by similar cases showing normal cardiomediastinal silhouettes."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR122"
+    ],
+    "rationale": "No evidence of discoid or plate-like opacities or other signs of volume loss are identified."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "present",
+    "probability": 0.95,
+    "cited_case_ids": [
+     "CXR992"
+    ],
+    "rationale": "Multiple well-defined, bilateral pulmonary nodules of various sizes are visible, strongly suggesting metastatic disease as noted in case CXR992."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR1220",
+     "CXR3551",
+     "CXR1767",
+     "CXR356",
+     "CXR3779"
+    ],
+    "rationale": "The costophrenic angles are sharp and clear, with no evidence of blunting to suggest pleural fluid."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR1220",
+     "CXR1767",
+     "CXR356",
+     "CXR3779"
+    ],
+    "rationale": "The visualized osseous structures, including the ribs and clavicles, show no evidence of acute or chronic fractures."
+   }
+  ],
+  "impression": "Multiple bilateral pulmonary nodules are present, highly suspicious for metastatic disease in this clinical context. A right-sided chest wall port-a-cath is in place."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2422,
+  "output": 490,
+  "thinking": 1120,
+  "total": 4032
+ },
+ "time": "2026-10-18T12:04:40"
+}

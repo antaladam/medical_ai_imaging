@@ -1,0 +1,136 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR3113",
+ "image": "CXR3113_IM-1462-1001",
+ "indication": "Possible XXXX tumor left arm pain and weakness for 3 weeks.",
+ "neighbours": [
+  {
+   "study": "CXR535",
+   "similarity": 0.9773305654525757
+  },
+  {
+   "study": "CXR2105",
+   "similarity": 0.9763677716255188
+  },
+  {
+   "study": "CXR2468",
+   "similarity": 0.974871039390564
+  },
+  {
+   "study": "CXR853",
+   "similarity": 0.9724460244178772
+  },
+  {
+   "study": "CXR1266",
+   "similarity": 0.970973014831543
+  },
+  {
+   "study": "CXR34",
+   "similarity": 0.9691405892372131
+  },
+  {
+   "study": "CXR168",
+   "similarity": 0.968632698059082
+  },
+  {
+   "study": "CXR3992",
+   "similarity": 0.9685553312301636
+  },
+  {
+   "study": "CXR2451",
+   "similarity": 0.9684566855430603
+  },
+  {
+   "study": "CXR403",
+   "similarity": 0.9682707190513611
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: Possible XXXX tumor left arm pain and weakness for 3 weeks.\n\nSimilar cases (most similar first):\nCase CXR535 (similarity 0.977): FINDINGS: There is S-shaped thoracolumbar scoliosis. There are T-spine osteophytes. XXXX opacity in the left lower lobe XXXX represents atelectasis or scarring. There is no pneumothorax. There is no large pleural effusion. The cardiomediastinal silhouette is within normal limits. There is no lobar pneumonia. There are calcified hilar lymph XXXX. IMPRESSION: XXXX opacity in left lung base XXXX represents atelectasis or scarring.\nCase CXR2105 (similarity 0.976): IMPRESSION: Heart size is normal. Lungs are clear. Calcified 5 mm granuloma in the left midlung. Status post resection of left upper lobe. No adenopathy, nodules, or masses. No effusion.\nCase CXR2468 (similarity 0.975): IMPRESSION: Stable normal heart size. Calcified aorta. Eventration right diaphragm. Scarring in the pulmonary apices. No acute findings. Thoracic spondylosis.\nCase CXR853 (similarity 0.972): IMPRESSION: The heart size and cardiomediastinal silhouette are within normal limits. Pulmonary vasculature appears normal. There is no focal air space consolidation. No pleural effusion or pneumothorax.\nCase CXR1266 (similarity 0.971): FINDINGS: The lungs are clear. There are calcified granulomas. Heart size is normal. No pneumothorax. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR34 (similarity 0.969): FINDINGS: The heart is normal in size and contour. The lungs are clear, without evidence of infiltrate. There is no pneumothorax or effusion. IMPRESSION: No acute cardiopulmonary disease.\nCase CXR168 (similarity 0.969): FINDINGS: The lungs are clear bilaterally. Specifically, no evidence of focal consolidation, pneumothorax, or pleural effusion.. Cardio mediastinal silhouette is unremarkable. Visualized osseous structures of the thorax demonstrates stable mild multilevel degenerative disc disease of the thoracolumbar spine as well as chronic left-sided rib fractures without acute abnormality. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR3992 (similarity 0.969): IMPRESSION: Prior sternotomy. Midline sternotomy XXXX. Normal heart size. Vascular congestion. No overt edema or lobar pneumonia. No pleural effusion.\nCase CXR2451 (similarity 0.968): FINDINGS: Chest. Heart size within normal limits. No focal airspace disease. No pneumothorax or effusions. Mild degenerative changes throughout the thoracic spine. Right knee. There has been prior ligamentous repair. There is tricompartmental joint space narrowing and marginal osteophyte formation which is severe in the medial compartment. No knee joint effusion. No fractures or dislocations. IMPRESSION: 1. Chest. No acute cardiopulmonary findings. 2. Right knee. Stable advanced degenerative changes, most severe in the medial compartment.\nCase CXR403 (similarity 0.968): FINDINGS: Heart size within normal limits. No focal airspace disease. No pneumothorax. No effusions. Multiple old right-sided rib fractures again noted. IMPRESSION: No acute cardiopulmonary findings.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\n  \"findings\": [\n    {\n      \"finding\": \"Lung Opacity\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR853\",\n        \"CXR1266\",\n        \"CXR34\"\n      ],\n      \"rationale\": \"The lung fields are clear of focal consolidation, infiltrates, or airspace disease.\"\n    },\n    {\n      \"finding\": \"Cardiomegaly\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR535\",\n        \"CXR2105\",\n        \"CXR2468\",\n        \"CXR853\",\n        \"CXR1266\",\n        \"CXR34\",\n        \"CXR168\",\n        \"CXR3992\",\n        \"CXR2451\",\n        \"CXR403\"\n      ],\n      \"rationale\": \"The cardiomediastinal silhouette is within normal limits for size and contour.\"\n    },\n    {\n      \"finding\": \"Atelectasis\",\n      \"status\": \"absent\",\n      \"probability\": 0.1,\n      \"cited_case_ids\": [\n        \"CXR853\",\n        \"CXR1266\"\n      ],\n      \"rationale\": \"There is no evidence of volume loss or plate-like opacities indicative of atelectasis.\"\n    },\n    {\n      \"finding\": \"Lung Lesion\",\n      \"status\": \"uncertain\",\n      \"probability\": 0.35,\n      \"cited_case_ids\": [\n        \"CXR2468\"\n      ],\n      \"rationale\": \"There is subtle asymmetric thickening at the left pulmonary apex; while this may be apical capping, it requires clinical correlation for a possible Pancoast tumor given the patient's symptoms.\"\n    },\n    {\n      \"finding\": \"Pleural Effusion\",\n      \"status\": \"absent\",\n      \"probability\": 0.02,\n      \"cited_case_ids\": [\n        \"CXR853\",\n        \"CXR34\",\n        \"CXR168\",\n        \"CXR403\"\n      ],\n      \"rationale\": \"The costophrenic angles are sharp, and no pleural fluid collections are seen.\"\n    },\n    {\n      \"finding\": \"Fracture\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR2451\"\n      ],\n      \"rationale\": \"The visible ribs, clavicles, and thoracic spine show no signs of acute or chronic fractures.\"\n    }\n  ],\n  \"impression\": \"No acute cardiopulmonary disease. Subtle left apical pleural thickening is noted, which should be correlated clinically or with further imaging (e.g., MRI) to rule out a Pancoast tumor in the setting of left arm pain and weakness.\"\n}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR853",
+     "CXR1266",
+     "CXR34"
+    ],
+    "rationale": "The lung fields are clear of focal consolidation, infiltrates, or airspace disease."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR535",
+     "CXR2105",
+     "CXR2468",
+     "CXR853",
+     "CXR1266",
+     "CXR34",
+     "CXR168",
+     "CXR3992",
+     "CXR2451",
+     "CXR403"
+    ],
+    "rationale": "The cardiomediastinal silhouette is within normal limits for size and contour."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR853",
+     "CXR1266"
+    ],
+    "rationale": "There is no evidence of volume loss or plate-like opacities indicative of atelectasis."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "uncertain",
+    "probability": 0.35,
+    "cited_case_ids": [
+     "CXR2468"
+    ],
+    "rationale": "There is subtle asymmetric thickening at the left pulmonary apex; while this may be apical capping, it requires clinical correlation for a possible Pancoast tumor given the patient's symptoms."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.02,
+    "cited_case_ids": [
+     "CXR853",
+     "CXR34",
+     "CXR168",
+     "CXR403"
+    ],
+    "rationale": "The costophrenic angles are sharp, and no pleural fluid collections are seen."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2451"
+    ],
+    "rationale": "The visible ribs, clavicles, and thoracic spine show no signs of acute or chronic fractures."
+   }
+  ],
+  "impression": "No acute cardiopulmonary disease. Subtle left apical pleural thickening is noted, which should be correlated clinically or with further imaging (e.g., MRI) to rule out a Pancoast tumor in the setting of left arm pain and weakness."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2270,
+  "output": 721,
+  "thinking": 2003,
+  "total": 4994
+ },
+ "time": "2026-10-18T12:15:45"
+}

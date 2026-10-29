@@ -1,0 +1,137 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR3568",
+ "image": "CXR3568_IM-1753-1001",
+ "indication": "XXXX-year-old female with right-sided chest tenderness.",
+ "neighbours": [
+  {
+   "study": "CXR603",
+   "similarity": 0.9498270750045776
+  },
+  {
+   "study": "CXR2249",
+   "similarity": 0.9487707614898682
+  },
+  {
+   "study": "CXR1333",
+   "similarity": 0.9473258256912231
+  },
+  {
+   "study": "CXR1094",
+   "similarity": 0.9418536424636841
+  },
+  {
+   "study": "CXR2617",
+   "similarity": 0.9394135475158691
+  },
+  {
+   "study": "CXR3394",
+   "similarity": 0.9364370107650757
+  },
+  {
+   "study": "CXR2985",
+   "similarity": 0.9360393285751343
+  },
+  {
+   "study": "CXR2810",
+   "similarity": 0.9342650175094604
+  },
+  {
+   "study": "CXR2022",
+   "similarity": 0.934137225151062
+  },
+  {
+   "study": "CXR237",
+   "similarity": 0.9331002831459045
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: XXXX-year-old female with right-sided chest tenderness.\n\nSimilar cases (most similar first):\nCase CXR603 (similarity 0.950): IMPRESSION: Heart size normal. Right hilar calcifications are suggestive of prior granulomatous disease. Otherwise the mediastinal silhouette and pulmonary vascularity are within normal limits. There is no focal airspace consolidation, pleural effusion or pneumothorax.\nCase CXR2249 (similarity 0.949): IMPRESSION: PA and lateral views of the chest show enlarging right hilar adenopathy. The lungs appear grossly clear. Heart size and pulmonary XXXX are normal. There is no pneumothorax. Pleural spaces are clear. There is mild thoracic spine degenerative change. FINDINGS COULD REPRESENT RESOLVING HISTOPLASMOSIS INFECTION, SARCOIDOSIS, OR MALIGNANCY XXXX AS LYMPHOMA OR PRIMARY LUNG CANCER. RECOMMEND CONTRAST-ENHANCED CHEST CT FOR FURTHER EVALUATION.\nCase CXR1333 (similarity 0.947): FINDINGS: Cardiomediastinal silhouette is within normal limits of size and appearance. Pulmonary vascularity is unremarkable. Morgagni hernia, stable. Lungs are expanded and clear of air space disease or consolidation. Negative for pneumothorax or pleural effusion. Limited evaluation reveals diffuse demineralization with stable anterior wedging at the lower thoracic levels. IMPRESSION: 1. No acute cardiopulmonary abnormality.\nCase CXR1094 (similarity 0.942): FINDINGS: No acute osseous abnormality. The soft tissues are within normal limits. Normal appearing cardiomediastinal silhouette and hilar contours. Left lower lobe XXXX density XXXX representing atelectasis. No focal area of consolidation, pleural effusion, pneumothorax. IMPRESSION: No focal lung consolidation.\nCase CXR2617 (similarity 0.939): FINDINGS: The heart is normal in size and contour. There is no mediastinal widening. The lungs are hyperexpanded. No focal airspace disease. No large pleural effusion or pneumothorax. Exaggerated kyphosis. IMPRESSION: No acute cardiopulmonary abnormalities.\nCase CXR3394 (similarity 0.936): FINDINGS: The cardiac contours are normal. XXXX scarring left base. The lungs are clear. Thoracic spondylosis. IMPRESSION: No acute preoperative process.\nCase CXR2985 (similarity 0.936): FINDINGS: The lungs are clear bilaterally. Specifically, no evidence of focal consolidation, pneumothorax, or pleural effusion.. Cardio mediastinal silhouette is unremarkable. Visualized osseous structures of the thorax demonstrate stable, mild multilevel thoracolumbar degenerative disc disease without acute abnormality. Upper abdominal midline surgical sutures are likewise stable. IMPRESSION: No acute cardiopulmonary abnormality..\nCase CXR2810 (similarity 0.934): FINDINGS: Heart size and cardiomediastinal contours are normal. Aorta is mildly tortuous. Lungs are clear without focal airspace opacity, pleural effusion, or pneumothorax. Mild degenerative changes in the spine. IMPRESSION: Negative for acute cardiopulmonary findings.\nCase CXR2022 (similarity 0.934): FINDINGS: The heart and lungs have XXXX XXXX in the interval. Both lungs are free of acute infiltrates and expanded. Strandy scarring in the left lower lobe is unchanged. Heart and mediastinum normal. IMPRESSION: No active disease.\nCase CXR237 (similarity 0.933): FINDINGS: The heart size and cardiomediastinal silhouette are normal. The lungs are clear without focal airspace opacity, pleural effusion, or pneumothorax. There are numerous calcified granuloma in the right perihilar region. There are multilevel degenerative changes in the thoracic spine. IMPRESSION: No acute cardiopulmonary finding.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR603\",\"CXR1333\",\"CXR2617\",\"CXR2985\",\"CXR2810\"],\"rationale\":\"The lungs are clear bilaterally with no evidence of consolidation or airspace disease, consistent with several similar cases.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR603\",\"CXR1333\",\"CXR2617\",\"CXR2810\",\"CXR237\"],\"rationale\":\"The cardiomediastinal silhouette is within normal limits of size and contour.\"},{\"finding\":\"Atelectasis\",\"status\":\"absent\",\"probability\":0.1,\"cited_case_ids\":[\"CXR603\",\"CXR1333\",\"CXR2617\"],\"rationale\":\"No discoid or plate-like opacities are seen to suggest volume loss or pulmonary collapse.\"},{\"finding\":\"Lung Lesion\",\"status\":\"uncertain\",\"probability\":0.4,\"cited_case_ids\":[\"CXR2249\",\"CXR603\",\"CXR237\"],\"rationale\":\"There is some prominence in the right hilar region; while this may represent prior granulomatous disease as in CXR603 and CXR237, hilar adenopathy as in CXR2249 is difficult to exclude.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR603\",\"CXR1333\",\"CXR2617\",\"CXR2985\"],\"rationale\":\"The costophrenic angles remain sharp and clear, indicating no significant pleural fluid collection.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.15,\"cited_case_ids\":[\"CXR1094\",\"CXR2985\"],\"rationale\":\"Despite the history of right-sided chest tenderness, no acute rib or osseous fractures are identified on the current study.\"}],\"impression\":\"No acute cardiopulmonary process. The heart size is normal and the lungs are clear. A slightly prominent right hilum may reflect prior granulomatous infection; correlation with clinical history or prior studies is recommended.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR603",
+     "CXR1333",
+     "CXR2617",
+     "CXR2985",
+     "CXR2810"
+    ],
+    "rationale": "The lungs are clear bilaterally with no evidence of consolidation or airspace disease, consistent with several similar cases."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR603",
+     "CXR1333",
+     "CXR2617",
+     "CXR2810",
+     "CXR237"
+    ],
+    "rationale": "The cardiomediastinal silhouette is within normal limits of size and contour."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR603",
+     "CXR1333",
+     "CXR2617"
+    ],
+    "rationale": "No discoid or plate-like opacities are seen to suggest volume loss or pulmonary collapse."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "uncertain",
+    "probability": 0.4,
+    "cited_case_ids": [
+     "CXR2249",
+     "CXR603",
+     "CXR237"
+    ],
+    "rationale": "There is some prominence in the right hilar region; while this may represent prior granulomatous disease as in CXR603 and CXR237, hilar adenopathy as in CXR2249 is difficult to exclude."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR603",
+     "CXR1333",
+     "CXR2617",
+     "CXR2985"
+    ],
+    "rationale": "The costophrenic angles remain sharp and clear, indicating no significant pleural fluid collection."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.15,
+    "cited_case_ids": [
+     "CXR1094",
+     "CXR2985"
+    ],
+    "rationale": "Despite the history of right-sided chest tenderness, no acute rib or osseous fractures are identified on the current study."
+   }
+  ],
+  "impression": "No acute cardiopulmonary process. The heart size is normal and the lungs are clear. A slightly prominent right hilum may reflect prior granulomatous infection; correlation with clinical history or prior studies is recommended."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2349,
+  "output": 508,
+  "thinking": 1492,
+  "total": 4349
+ },
+ "time": "2026-10-18T12:24:31"
+}

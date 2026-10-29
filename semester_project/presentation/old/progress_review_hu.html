@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multimodális döntéstámogatás mellkasröntgenhez — terv és előrehaladás</title>
+<style>
+  :root {
+    --navy: #14213D; --ink: #3E4756; --muted: #5F6878; --paper: #F7F5F0; --paper2: #E9EDF2;
+    --card: #FCFBF8; --line: #DDDAD0; --orange: #A94F1F; --orange-light: #E08A55; --blue: #2B5C8A;
+    --ice: #B8C4D6;
+    --serif: Cambria, "Source Serif 4", Georgia, serif;
+    --sans: "Segoe UI", Calibri, "IBM Plex Sans", Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #0B1222; overflow: hidden; }
+  #stage { position: fixed; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: center center; }
+  .slide { position: absolute; inset: 0; display: none; flex-direction: column; gap: 40px;
+           padding: 128px 128px 160px; background: var(--paper); color: var(--ink); font-family: var(--sans); }
+  .slide.active { display: flex; }
+  .slide.alt { background: var(--paper2); }
+  .slide.dark { background: var(--navy); color: var(--paper); padding: 128px; }
+  .eyebrow { font-size: 24px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); }
+  .dark .eyebrow { color: var(--orange-light); font-size: 28px; letter-spacing: 3px; }
+  h1 { font-family: var(--serif); font-size: 96px; font-weight: 600; line-height: 1.08; }
+  h2 { font-family: var(--serif); font-size: 64px; font-weight: 600; line-height: 1.1; color: var(--navy); }
+  .dark h2 { color: var(--paper); }
+  h3 { font-size: 32px; font-weight: 600; color: var(--navy); }
+  .head { display: flex; flex-direction: column; gap: 12px; }
+  p, li, td, th { font-size: 28px; line-height: 1.4; }
+  ul, ol { padding-left: 1.1em; display: flex; flex-direction: column; gap: 10px; }
+  .row { display: flex; gap: 32px; }
+  .row > * { flex: 1; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .card { background: var(--card); border: 2px solid var(--line); border-radius: 16px; padding: 36px;
+          display: flex; flex-direction: column; gap: 16px; }
+  .alt .card { background: var(--paper); border-color: #D3D9E1; }
+  .card .tag { font-size: 24px; font-weight: 600; color: var(--orange); text-transform: uppercase; letter-spacing: 1px; }
+  .statement { font-family: var(--serif); font-size: 36px; line-height: 1.3; color: var(--navy); }
+  .note { font-size: 26px; color: var(--ink); }
+  .big { font-family: var(--serif); font-size: 84px; font-weight: 600; color: var(--navy); line-height: 1; }
+  .nw { white-space: nowrap; }
+  table { border-collapse: collapse; width: 100%; color: var(--ink); }
+  th { text-align: left; font-weight: 600; color: var(--navy); border-bottom: 3px solid var(--navy); padding: 10px 16px; }
+  td { border-bottom: 1px solid var(--line); padding: 10px 16px; vertical-align: top; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  table.small td, table.small th { font-size: 26px; padding: 8px 16px; }
+  code { font-family: Consolas, "Courier New", monospace; font-size: 0.92em; color: var(--navy); }
+  .footer { position: absolute; left: 128px; bottom: 64px; width: 1664px; font-size: 24px; color: var(--muted);
+            display: flex; justify-content: space-between; }
+  .dark .footer { display: none; }
+  .flow { display: flex; align-items: stretch; gap: 16px; }
+  .flow .box { flex: 1; background: var(--card); border: 2px solid var(--blue); border-radius: 16px; padding: 24px;
+               display: flex; align-items: center; font-size: 28px; line-height: 1.3; color: var(--navy); }
+  .flow .box.out { background: var(--navy); color: var(--paper); border-color: var(--navy); }
+  .arrow { flex: 0 0 48px; align-self: center; font-size: 44px; color: var(--orange); text-align: center; }
+  .stat { display: flex; flex-direction: column; gap: 12px; }
+  .stat p { font-size: 26px; }
+  .stat p.big { font-size: 84px; }
+  .bar { display: flex; height: 88px; border-radius: 12px; overflow: hidden; }
+  .bar div { display: flex; align-items: center; padding: 0 24px; font-size: 26px; font-weight: 600; color: var(--paper); white-space: nowrap; }
+  aside { display: none; }
+  #notes { position: fixed; left: 0; right: 0; bottom: 0; max-height: 30vh; overflow: auto; background: #FCFBF8; color: #14213D;
+           font: 16px/1.5 var(--sans); padding: 14px 24px; border-top: 3px solid var(--orange); display: none; z-index: 5; }
+  #hint { position: fixed; right: 14px; bottom: 10px; color: #8A93A3; font: 13px var(--sans); z-index: 6; }
+  @media print {
+    @page { size: 1920px 1080px; margin: 0; }
+    html, body { overflow: visible; background: none; }
+    #stage { position: static; transform: none !important; width: auto; height: auto; }
+    .slide { display: flex !important; position: relative; width: 1920px; height: 1080px; page-break-after: always; }
+    #notes, #hint { display: none !important; }
+  }
+</style>
+</head>
+<body>
+<div id="stage">
+
+<!-- 1 -->
+<section class="slide dark" style="justify-content:space-between">
+  <p class="eyebrow">MSc-projekt #4 · Félévi beszámoló</p>
+  <div style="display:flex;flex-direction:column;gap:40px">
+    <h1>Felülmúlja-e a multimodális visszakeresés az önálló képmodellt?</h1>
+    <p style="font-size:36px;color:var(--ice)">Döntéstámogatás mellkasröntgenhez az IU X-Ray adatbázison: a terv, a félévi projekt, az eddigi munka és a következő lépések</p>
+  </div>
+  <div style="display:flex;justify-content:space-between">
+    <p style="color:var(--ice)">Antal Ádám · Supervisor: Dr. Alwahab Dhulfiqar Zoltán</p>
+    <p style="color:var(--ice)">2026. október 16.</p>
+  </div>
+  <aside>A beszámoló négy részből áll: a kiírt feladat, a hosszú távú szakdolgozati terv, a szűkebb félévi projekt, végül az eddigi munka és a nyitott kérdések.</aside>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Kiírás</p><h2>A kiírt feladat: 4. projekt</h2></div>
+  <div class="grid2">
+    <div class="card">
+      <h3>Szakdolgozati cím</h3>
+      <p>A Multimodal, Explainable AI Decision-Support Prototype for Medical Image and Clinical-Text Analysis</p>
+      <h3>Javasolt kutatási kérdés</h3>
+      <p><i>Javíthatja-e a bizonyítékokra épülő multimodális visszakeresés az LLM által írt magyarázatok hasznosságát és ellenőrizhetőségét az orvosi képeken alapuló döntéstámogatásban?</i></p>
+    </div>
+    <div class="card">
+      <h3>Feltételek</h3>
+      <ul>
+        <li>Csak döntéstámogatás, önálló diagnózis nem</li>
+        <li>Kizárólag nyilvános vagy anonimizált adatok</li>
+        <li>Mérendő: képértelmezés, megalapozottság, a magyarázatok minősége, kalibráció, hibák</li>
+        <li>A csak képes és a kép + szöveges megközelítés összevetése</li>
+      </ul>
+      <h3>Három kiinduló projekt</h3>
+      <p><code>ai_medical_imaging_agent</code> · <code>vision_rag</code> · <code>multimodal_agentic_rag</code></p>
+    </div>
+  </div>
+  <aside>A kiírás a main.txt fájlban található. Két feltétel határoz meg mindent: a rendszer csak döntéstámogató lehet, és csak nyilvános vagy anonimizált adattal dolgozhat. A három kiinduló projekt az awesome-llm-apps gyűjtemény oktatási példája; az elemzésük a codebase_analysis.md fájlban van.</aside>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Hosszú távú szakdolgozati terv</p><h2>Összehasonlító vizsgálat, nem termékfejlesztés</h2></div>
+  <p class="statement">Hatékonyabb-e egy multimodális, visszakereséssel bővített rendszer egy specializált képmodellnél: pontosabb, jobban kalibrált és könnyebben ellenőrizhető-e?</p>
+  <div class="row">
+    <div class="card"><p class="tag">H1 · Pontosság</p><p>A klinikai szöveg és a visszakeresett esetek elváltozásonként javítják az AUROC-t.</p></div>
+    <div class="card"><p class="tag">H2 · Kalibráció</p><p>A rendszer bizonyossága jobban kalibrált (kisebb ECE és Brier-pontszám).</p></div>
+    <div class="card"><p class="tag">H3 · Ellenőrizhetőség</p><p>A bizonyítékra hivatkozó magyarázat könnyebben ellenőrizhető, mint a hőtérkép.</p></div>
+    <div class="card"><p class="tag">H4 · Mechanizmus</p><p>A javulás eltűnik, ha a visszakeresés véletlenszerű vagy a szöveg hibás.</p></div>
+  </div>
+  <p style="color:var(--navy)"><b>Ha nincs javulás, az is érvényes, közölhető eredmény.</b></p>
+  <aside>A szakdolgozati terv (thesis_plan.md, 2. változat) hipotézisvizsgálatként értelmezi a kiírást, és egy erős specialista képmodellt használ viszonyítási alapként. A H4 azt vizsgálja, hogy a javulás valóban releváns bizonyítékból fakad-e, nem pedig adatszivárgásból vagy a visszakeresett címkék átmásolásából.</aside>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Hosszú távú szakdolgozati terv</p><h2>Lépcsőzetes felépítés: egyszerre egy változás</h2></div>
+  <table>
+    <tr><th style="width:12%">Jel</th><th style="width:56%">Rendszer</th><th>Mit mér</th></tr>
+    <tr><td><b>S0</b></td><td>Specialista CNN (TorchXRayVision), LLM nélkül</td><td>Viszonyítási alap</td></tr>
+    <tr><td><b>S0+T</b></td><td>S0 jellemzői + a klinikai szöveg beágyazása, LLM nélkül</td><td>A szöveg hatása LLM nélkül</td></tr>
+    <tr><td><b>R0</b></td><td>A leghasonlóbb tanítóesetek címkéinek többségi szavazása</td><td>A visszakeresés hatása LLM nélkül</td></tr>
+    <tr><td><b>S1</b></td><td>Kép–nyelv modell (VLM), csak képpel</td><td>LLM a specialista ellen</td></tr>
+    <tr><td><b>S2</b></td><td>VLM + indikáció</td><td>A szöveg hatása</td></tr>
+    <tr><td><b>S3</b></td><td>VLM + visszakeresett esetek</td><td>A visszakeresés hatása</td></tr>
+    <tr><td><b>S4</b></td><td>VLM + szöveg + visszakeresés</td><td>Teljes multimodális RAG</td></tr>
+    <tr><td><b>S5</b></td><td>S4 + az S0 valószínűségei</td><td>LLM a specialistára építve</td></tr>
+  </table>
+  <aside>Minden lépés egyetlen elemmel bővít, így az egyes összetevők hatása külön mérhető. A szakdolgozat ezen túl mechanizmusvizsgálatokat, kalibrációs elemzést, állításszintű magyarázat-ellenőrzést és MIMIC-CXR-en végzett megismétlést is tervez; ennek nagy része túlmutat egy félév keretein.</aside>
+</section>
+
+<!-- 5 -->
+<section class="slide alt">
+  <div class="head"><p class="eyebrow">A félévi projekt (~8 hét)</p><h2>Három kérdés, egy saját rendszer</h2></div>
+  <div class="row">
+    <div class="card"><p class="tag">Q1 · Alkalmasság</p><p>Hogyan működik a három kiinduló projekt, és mennyire ismerik fel a mellkasröntgen-elváltozásokat minimális átalakítással?</p></div>
+    <div class="card"><p class="tag">Q2 · Erősségek</p><p>Mely elemeiket érdemes beépíteni egy képet és szöveget együtt kezelő rendszerbe, és mi hiányzik belőlük?</p></div>
+    <div class="card"><p class="tag">Q3 · Összevetés</p><p>Mennyiben térnek el a saját rendszer eredményei a kiinduló projektekétől, egy specialista képmodelltől és a puszta visszakereséstől?</p></div>
+  </div>
+  <p><b>A szakdolgozatra marad:</b> a teljes lépcsőzetes felépítés, a mechanizmusvizsgálatok, a kalibráció elemzése, az állításszintű ellenőrzés, az orvosi értékelés, a MIMIC-CXR és a helyben futó modellek.</p>
+  <aside>A félévi terv (semester_project/semester_plan.md) a szakdolgozat előtanulmánya és első fejezete. A terv rögzített: minden változtatás eltérésként kerül a results.md és a napló (diary.md) fájlba, magát a tervet nem írjuk át.</aside>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">A félévi projekt</p><h2>Rendszerek és bemeneteik</h2></div>
+  <table>
+    <tr><th style="width:17%">Rendszer</th><th style="width:55%">Mit kap a modell</th><th>Szerep</th></tr>
+    <tr><td><b>P1-adapted</b></td><td>Csak a beteg röntgenképét</td><td>Kiinduló: csak kép</td></tr>
+    <tr><td><b>P2-adapted</b></td><td>A röntgenképet + egy hasonló tanítóképet (lelet nélkül)</td><td>Kiinduló: képes visszakeresés</td></tr>
+    <tr><td><b>P3</b></td><td>Csak a visszakeresett leletek szövegét, képet nem</td><td>Kiinduló: szöveges visszakeresés</td></tr>
+    <tr><td><b>S0</b></td><td>A röntgenképet, specialista CNN-ként (LLM nélkül)</td><td>Specialista viszonyítási alap</td></tr>
+    <tr><td><b>R0</b></td><td>A leghasonlóbb tanítóesetek címkéit (LLM nélkül)</td><td>Csak visszakeresés</td></tr>
+    <tr><td><b>G</b></td><td>Röntgenkép + indikáció + visszakeresett leletek; JSON-válasz</td><td>A saját rendszer</td></tr>
+    <tr><td><b>G−ind</b></td><td>Mint G, de indikáció nélkül</td><td>A klinikai szöveg hatása</td></tr>
+    <tr><td><b>G+S0</b></td><td>G + az S0 valószínűségei (opcionális)</td><td>Hibrid</td></tr>
+  </table>
+  <p class="note">Minden Gemini-alapú rendszer a <code>gemini-3-flash-preview</code> modellt használja; a P1 és a P2 eredeti modelljei már nem érhetők el.</p>
+  <aside>A három kiinduló projekt nem ugyanannak a Gemini-hívásnak három változata: mindegyik más információt ad a modellnek. Az S0 és az R0 adja az összevetés két viszonyítási pontját: az egyik önálló képmodell, a másik LLM nélküli visszakeresés.</aside>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">A félévi projekt</p><h2>A saját rendszer: G</h2></div>
+  <div class="flow">
+    <div class="box">A beteg frontális röntgenképe</div><div class="arrow">→</div>
+    <div class="box">BiomedCLIP képbeágyazás</div><div class="arrow">→</div>
+    <div class="box">A k leghasonlóbb tanítóeset és leletük</div><div class="arrow">→</div>
+    <div class="box">Gemini, az indikációval kiegészítve</div><div class="arrow">→</div>
+    <div class="box out">JSON: elváltozás, jelen van-e, bizonyosság, hivatkozások</div>
+  </div>
+  <h3>Amit a kiinduló projektekből átveszünk</h3>
+  <div class="row">
+    <div class="card"><p class="tag">A P1-ből</p><p>A prompt szerkezete és a Gemini-hívás módja</p></div>
+    <div class="card"><p class="tag">A P2-ből</p><p>Beágyazás, visszakeresés, válaszgenerálás – top-k-val és orvosi beágyazómodellel</p></div>
+    <div class="card"><p class="tag">A P3-ból</p><p>Strukturált hivatkozások hasonlósági pontszámmal; óvatosabb válasz gyenge bizonyítéknál</p></div>
+  </div>
+  <aside>G azokat a hiányokat pótolja, amelyeket egyik kiinduló projekt sem kezel: klinikai szöveg a bemenetben, elváltozásonkénti pontszám, a beteg képe és a visszakeresett bizonyíték együtt jut el a modellhez, a hivatkozások pedig ellenőrizhetők.</aside>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">A félévi projekt</p><h2>Az értékelés módja</h2></div>
+  <div class="grid2" style="gap:48px">
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <h3>Kétféle összevetés</h3>
+      <div class="card"><p class="tag">A kiinduló projektekkel</p><p>Minden rendszer szöveges válaszát ugyanaz a CheXbert-címkéző dolgozza fel (G-nél az összefoglaló szöveget). A címkéző pontosságát rendszerenként ellenőrizzük.</p></div>
+      <div class="card"><p class="tag">Az S0-val és az R0-val</p><p>G JSON-ban adott pontszámait közvetlenül vetjük össze az ő folytonos pontszámaikkal.</p></div>
+    </div>
+    <table style="align-self:start">
+      <tr><th style="width:55%">Mérőszám</th><th>Rendszerek</th></tr>
+      <tr><td>F1, szenzitivitás, specificitás</td><td>Mind</td></tr>
+      <tr><td>AUROC</td><td>S0, R0, G</td></tr>
+      <tr><td>Visszakeresési precision@k</td><td>P2, P3, R0, G</td></tr>
+      <tr><td>Másolási arány</td><td>G és R0</td></tr>
+      <tr><td>Hivatkozások helyessége</td><td>G</td></tr>
+      <tr><td>A klinikai szöveg hatása</td><td>G és G−ind</td></tr>
+    </table>
+  </div>
+  <p style="color:var(--navy)">Páros bootstrap konfidenciaintervallumokkal. Az összevetés azt mutatja meg, <b>mekkora</b> a különbség – azt nem, hogy melyik változtatás okozza.</p>
+  <aside>A különbségek egyes tervezési döntésekhez rendelése a szakdolgozat lépcsőzetes felépítésének feladata. A másolási arány azt méri, hogy G csupán megismétli-e a hasonló esetek címkéit.</aside>
+</section>
+
+<!-- 9 -->
+<section class="slide alt">
+  <div class="head"><p class="eyebrow">Eddigi munka · 1. hét</p><h2>3&nbsp;955 leletből tiszta adathalmaz</h2></div>
+  <div class="flow" style="gap:24px">
+    <div class="card stat"><p class="big">3&nbsp;955</p><p>lelet az adatbázisban</p></div><div class="arrow">→</div>
+    <div class="card stat"><p class="big">3&nbsp;851</p><p>esethez tartozik kép</p></div><div class="arrow">→</div>
+    <div class="card stat"><p class="big">3&nbsp;690</p><p>esetnek van használható frontális képe</p></div><div class="arrow">→</div>
+    <div class="card stat"><p class="big">3&nbsp;604</p><p>eset kézzel kódolt (referenciacímkék)</p></div>
+  </div>
+  <div class="bar">
+    <div style="flex:2804;background:var(--navy)">Tanító: 2&nbsp;804 · csak a visszakereséshez</div>
+    <div style="flex:400;background:var(--blue)">Val.: 400</div>
+    <div style="flex:400;background:var(--orange)">Teszt: 400</div>
+  </div>
+  <p class="note">A teszthalmazt pozitív esetekkel dúsítottuk (elváltozásonként 38–84). A validációs halmazban a természetes arányok maradnak; az 50 esetes előteszt innen származik.</p>
+  <aside>104 lelethez nem tartozik kép; 161 esetnek csak oldalirányú felvétele van, ezek kimaradnak; 86 esetet sosem kódoltak („No Indexing”), ezek nem kapnak referenciacímkét.</aside>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Eddigi munka · 1. hét</p><h2>Az adatellenőrzés eredményei</h2></div>
+  <div class="grid2">
+    <div class="card"><h3>Nincs betegazonosító, mégsincs szivárgás</h3><p class="note">Az adatok csak vizsgálatazonosítót tartalmaznak, de az adatbázist leíró cikk szerint betegenként legfeljebb egy vizsgálat került be („In no case did we take more than one study per patient.”). A vizsgálatonkénti felosztás így egyben betegenkénti is.</p></div>
+    <div class="card"><h3>Nincs nézetcímke</h3><p class="note">A frontális és oldalirányú nézetet BiomedCLIP zero-shot osztályozással állapítottuk meg, majd szemrevételezéssel ellenőriztük: 60 véletlen mintából 60 helyes, a 11 alacsony pontszámú kiválasztott kép mind frontális, a 40 kizárt mind oldalirányú.</p></div>
+    <div class="card"><h3>Tiszta képanyag</h3><p class="note">4 használhatatlan képet kiszűrtünk (3 üres, 1 zajos). Sem a beágyazások, sem a pixelek összevetése nem mutatott duplikátumot.</p></div>
+    <div class="card"><h3>Ellenőrzött S0-súlyok</h3><p class="note">A TorchXRayVision kombinált súlyait az IU X-Ray-en (Open-i) is tanították, ezért ezek kiesnek; a többi súlykészlet használható.</p></div>
+  </div>
+  <aside>A betegenként egy vizsgálat forrása: Demner-Fushman és mtsai., JAMIA 2016;23(2):304–310. A cikkben közölt nyilvános adatmennyiség (3 955 lelet, 7 470 kép) pontosan egyezik a letöltött fájlokkal.</aside>
+</section>
+
+<!-- 11 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Eddigi munka · 1. hét</p><h2>Referenciacímkék: egy hiba és a megoldása</h2></div>
+  <div class="grid2" style="gap:56px">
+    <div style="display:flex;flex-direction:column;gap:32px">
+      <p style="font-size:30px">A CheXbert <b>62 leletből 55-öt</b> kardiomegáliának címkézett, pedig ezekben ez áll: <span class="nw">„…Heart and</span> mediastinum normal.” Ez a kardiomegáliás esetek <b>13%-a</b>. Az anonimizálási jelölések eltávolítása nem segített.</p>
+      <div class="card"><p class="tag">Döntés</p><p>A referenciacímkék az adatbázis kézi MeSH-kódjaiból származnak. A CheXbert a rendszerek válaszainak címkézésére marad, így a hibája közvetlenül mérhető.</p></div>
+    </div>
+    <table style="align-self:start">
+      <tr><th style="width:50%">Elváltozás</th><th class="num">Pozitív eset</th><th class="num">CheXbert κ</th></tr>
+      <tr><td>Tüdőárnyék</td><td class="num">519</td><td class="num">0,73</td></tr>
+      <tr><td>Kardiomegália</td><td class="num">295</td><td class="num">0,87</td></tr>
+      <tr><td>Atelektázia</td><td class="num">296</td><td class="num">0,78</td></tr>
+      <tr><td>Tüdőlézió</td><td class="num">104</td><td class="num">0,66</td></tr>
+      <tr><td>Pleurális folyadék</td><td class="num">138</td><td class="num">0,90</td></tr>
+      <tr><td>Csonttörés</td><td class="num">83</td><td class="num">0,76</td></tr>
+    </table>
+  </div>
+  <aside>A hat elváltozást az esetszám alapján választottuk, és mert az S0 mindegyiket képes pontozni (a Support Devices kimaradt). Az esetszámok a 3 604 referenciacímkés esetre vonatkoznak; a κ a CheXbert egyezése a kézi kódokkal. Angol megfelelők: Lung Opacity, Cardiomegaly, Atelectasis, Lung Lesion, Pleural Effusion, Fracture.</aside>
+</section>
+
+<!-- 12 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Eddigi munka · 1. hét</p><h2>Adatfelosztás és döntési küszöbök</h2></div>
+  <table>
+    <tr><th style="width:13%">Halmaz</th><th class="num" style="width:9%">n</th><th class="num">Tüdőárnyék</th><th class="num">Kardiomegália</th><th class="num">Atelektázia</th><th class="num">Tüdőlézió</th><th class="num">Pleurális folyadék</th><th class="num">Csonttörés</th></tr>
+    <tr><td><b>Tanító</b></td><td class="num">2&nbsp;804</td><td class="num">396</td><td class="num">206</td><td class="num">221</td><td class="num">49</td><td class="num">83</td><td class="num">43</td></tr>
+    <tr><td><b>Validációs</b></td><td class="num">400</td><td class="num">39</td><td class="num">23</td><td class="num">26</td><td class="num">11</td><td class="num">12</td><td class="num">2</td></tr>
+    <tr><td><b>Teszt</b></td><td class="num">400</td><td class="num">84</td><td class="num">66</td><td class="num">49</td><td class="num">44</td><td class="num">43</td><td class="num">38</td></tr>
+  </table>
+  <div class="row">
+    <div class="card"><p class="tag">S0</p><p>Elváltozásonkénti küszöb a tanítóhalmazon (az S0 nem látott IU-adatot)</p></div>
+    <div class="card"><p class="tag">R0</p><p>A k és a küszöbök leave-one-out módszerrel, a tanítóhalmazon</p></div>
+    <div class="card"><p class="tag">G, G−ind</p><p>Egyetlen közös küszöb minden elváltozásra, a validációs halmazon</p></div>
+  </div>
+  <aside>Azért nem a validációs halmazon hangolunk mindent, ahogy a terv eredetileg szólt, mert abban csak 2 csonttörés és 11 tüdőlézió van. Ez a projektgazda döntése volt, eltérésként rögzítve.</aside>
+</section>
+
+<!-- 13 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Eddigi munka · szkriptek</p><h2>Modellek, API-keret és futtatószkriptek</h2></div>
+  <div class="row">
+    <div class="card"><p class="tag">Megszűnt modellek</p><ul class="note">
+      <li><code>gemini-2.5-pro</code> (P1) és <code>gemini-2.5-flash</code> (P2): új felhasználók már nem érhetik el</li>
+      <li>Helyettük mindkettő a <code>gemini-3-flash-preview</code> modellt használja (P1-adapted, P2-adapted)</li>
+      <li>A P2 a Cohere helyett Gemini Embedding 2-t használ</li></ul></div>
+    <div class="card"><p class="tag">Szűkös ingyenes keret</p><p class="big">20</p><p class="note">kérés naponta, modellenként: a tervezett kb. 3&nbsp;850 kérés kb. 190 napig tartana, ezért fizetős keret kell</p></div>
+    <div class="card"><p class="tag">Elkészült szkriptek</p><ul class="note">
+      <li>P2-adapted: sikeres próbafuttatás (a normál esetet helyesen ítélte meg)</li>
+      <li>P1-adapted: két hiba javítva (elrejtett API-hibák, hiányzó időkorlát)</li>
+      <li>Kvótafigyelés és kéréskorlát; 9/9 offline teszt sikeres</li></ul></div>
+  </div>
+  <aside>Az ingyenes keret korlátját az API saját hibaüzenete adta meg (GenerateRequestsPerDayPerProjectPerModel-FreeTier, korlát: 20). A korábbi 503-as hibákat a Google szervereinek túlterhelése okozta, nem a kvóta.</aside>
+</section>
+
+<!-- 14 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Eddigi munka</p><h2>Eltérések a rögzített tervtől</h2></div>
+  <table class="small">
+    <tr><th style="width:34%">A terv szerint</th><th>A tényleges megoldás</th></tr>
+    <tr><td>Betegenkénti felosztás</td><td>Nincs betegazonosító, de betegenként egy vizsgálat van, így a vizsgálatonkénti felosztás megfelel</td></tr>
+    <tr><td>Minden rendszer frontális képet kap</td><td>Nincs nézetcímke; BiomedCLIP-alapú nézetosztályozás, szemrevételezéssel ellenőrizve</td></tr>
+    <tr><td>Referenciacímkék a CheXberttől</td><td>Kézi MeSH-kódok (projektgazdai döntés); a CheXbert a válaszok címkézésére marad</td></tr>
+    <tr><td>Elég pozitív esettel bíró elváltozások</td><td>Hat elváltozás, esetszám és S0-lefedettség alapján</td></tr>
+    <tr><td>Küszöbök a validációs halmazon</td><td>S0 és R0: tanítóhalmaz; G: egy közös küszöb a validációs halmazon</td></tr>
+    <tr><td>P2 a Cohere embed-v4.0-val</td><td>P2-adapted Gemini Embedding 2-vel (Cohere-fiók nélkül)</td></tr>
+    <tr><td>A kiinduló modellek változatlanok</td><td>A 2.5-pro és a 2.5-flash megszűnt; helyettük gemini-3-flash-preview</td></tr>
+    <tr><td>Ismétlődő betegek szűrése</td><td>Szükségtelen (betegenként egy vizsgálat); csak duplikátumszűrés</td></tr>
+  </table>
+  <p class="note">Minden eltérés indoklással és hatással szerepel a <code>results.md</code> fájlban; magát a tervet nem módosítjuk.</p>
+  <aside>Kisebb rögzített tételek: 4 használhatatlan kép kiszűrve; a TorchXRayVision kombinált súlyai kiesnek, mert az IU X-Ray-en is tanultak.</aside>
+</section>
+
+<!-- 15 -->
+<section class="slide alt">
+  <div class="head"><p class="eyebrow">Következő lépések</p><h2>Nyitott döntések</h2></div>
+  <div class="row">
+    <div class="card"><p class="tag">API-keret</p><p class="big">15–35&nbsp;$</p><p class="note">Számlázás bekapcsolása a Gemini-kulcson (normál áron <span class="nw">≈30–35&nbsp;$</span>, Batch API-val <span class="nw">≈15–18&nbsp;$</span>), vagy témavezetői keret.</p></div>
+    <div class="card"><p class="tag">G-img változat</p><p class="big">≈5&nbsp;$</p><p class="note">G modellje és promptja, de csak a képpel: tiszta, kizárólag képalapú Gemini-összevetés. Még nincs döntés.</p></div>
+    <div class="card"><p class="tag">Témavezetői jóváhagyás</p><p class="big">4</p><p class="note">nyitott kérdés: terjedelem, eltérések, keret, modalitás (lásd az utolsó diát).</p></div>
+  </div>
+  <aside>A költségbecslés a P2-adapted próbafuttatás valós tokenszámain alapul (esetenként kb. 2 270 bemeneti és 1 400–2 800 kimeneti token, a gondolkodással együtt). Az előteszt után a futtatás leáll, és a várható teljes költség jóváhagyásra vár.</aside>
+</section>
+
+<!-- 16 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Következő lépések</p><h2>Ütemterv</h2></div>
+  <div class="row">
+    <div class="card"><p class="tag">Most (API nélkül)</p><ul class="note">
+      <li>S0: súlykészlet kiválasztása a tanítóhalmazon mért AUROC alapján</li>
+      <li>R0: leave-one-out a BiomedCLIP-vektorokon</li>
+      <li>A rendszerválaszok CheXbert-címkézése</li>
+      <li>A P3 futtatószkriptje</li>
+      <li>Keresőcsomag a P1 webes kereséses változatához</li></ul></div>
+    <div class="card"><p class="tag">API-keret birtokában</p><ul class="note">
+      <li>P1-adapted próbafuttatás 2 esettel</li>
+      <li>P2-adapted teljes index (2&nbsp;804 kép, ≈0,34&nbsp;$)</li>
+      <li>50 esetes előtesztek kéréskorláttal</li>
+      <li>Költségbecslés a teljes futtatás előtt</li></ul></div>
+    <div class="card"><p class="tag">3–8. hét</p><ul class="note">
+      <li>3. hét: Q1 megírása; G megtervezése Q2 alapján</li>
+      <li>4–5. hét: G elkészítése, hangolás a validációs halmazon</li>
+      <li>6. hét: egyszeri futtatás a teszthalmazon</li>
+      <li>7. hét: Q3 elemzése</li>
+      <li>8. hét: beszámoló és előadás</li></ul></div>
+  </div>
+  <aside>A teljes feladatlista a napló utolsó bejegyzésében („Next steps (end of day)”) található: semester_project/diary.md.</aside>
+</section>
+
+<!-- 17 -->
+<section class="slide">
+  <div class="head"><p class="eyebrow">Következő lépések</p><h2>Ismert korlátok</h2></div>
+  <table>
+    <tr><th style="width:22%">Korlát</th><th>Miért fontos</th></tr>
+    <tr><td><b>Adatszennyezés</b></td><td>A Gemini a tanítása során valószínűleg látta az IU X-Ray-t; a megjegyzett szöveg G-nek kedvezhet a csak képes változatokkal és az S0-val szemben</td></tr>
+    <tr><td><b>Szűk index</b></td><td>A tanítóhalmazban csak 49 tüdőléziós és 43 csonttöréses eset marad a visszakereső rendszereknek</td></tr>
+    <tr><td><b>Szelekció</b></td><td>A 161 csak oldalirányú felvétellel rendelkező eset kimaradt; ezek valamivel súlyosabbak (a képes esetek 4%-a)</td></tr>
+    <tr><td><b>Címkézési hiba</b></td><td>A CheXbert a válaszok címkézésében az atelektáziánál (szenzitivitás 0,69) és a tüdőléziónál (κ 0,66) a leggyengébb</td></tr>
+    <tr><td><b>Eltérés az eredetitől</b></td><td>A P1 és a P2 újabb modellel, a P2 ráadásul más beágyazómodellel fut, mint az eredeti változat</td></tr>
+  </table>
+  <aside>Ezek a results.md érvényességi kockázatokról szóló részében szerepelnek, az érintett eredmények mellett.</aside>
+</section>
+
+<!-- 18 -->
+<section class="slide dark" style="gap:56px">
+  <div class="head"><p class="eyebrow">Megbeszélendő</p><h2>Kérdések a témavezetőhöz</h2></div>
+  <ol style="gap:28px">
+    <li style="font-size:36px">Megfelelő-e a félévi terjedelem, ha a teljes vizsgálat a szakdolgozatra marad?</li>
+    <li style="font-size:36px">Van-e API-keret, vagy pályázhat-e a tanszék kreditre (Gemini for Research, oktatási kredit)?</li>
+    <li style="font-size:36px">Elfogadhatók-e a rögzített eltérések (MeSH-alapú referenciacímkék, átalakított kiinduló projektek)?</li>
+    <li style="font-size:36px">Megfelelő-e a mellkasröntgen mint vizsgálati modalitás a szakdolgozathoz?</li>
+  </ol>
+  <aside>Köszönöm a figyelmet. Fájlok: semester_project/semester_plan.md (rögzített terv), results.md (készülő beszámoló), diary.md (minden változtatás naplója).</aside>
+</section>
+
+</div>
+<div id="notes"></div>
+<div id="hint">← → lapozás · N jegyzetek · F teljes képernyő · Ctrl+P mentés PDF-be</div>
+<script>
+  const slides = [...document.querySelectorAll('.slide')];
+  const stage = document.getElementById('stage');
+  const notes = document.getElementById('notes');
+  slides.forEach((s, i) => {
+    if (s.classList.contains('dark')) return;
+    const f = document.createElement('div');
+    f.className = 'footer';
+    f.innerHTML = '<span>Multimodális döntéstámogatás mellkasröntgenhez · Félévi beszámoló</span><span>' + (i + 1) + ' / ' + slides.length + '</span>';
+    s.appendChild(f);
+  });
+  let cur = Math.min(Math.max(parseInt(location.hash.slice(1)) || 1, 1), slides.length) - 1;
+  function fit() {
+    const k = Math.min(innerWidth / 1920, innerHeight / 1080);
+    stage.style.transform = 'translate(-50%, -50%) scale(' + k + ')';
+  }
+  function show(i) {
+    cur = Math.min(Math.max(i, 0), slides.length - 1);
+    slides.forEach((s, j) => s.classList.toggle('active', j === cur));
+    const a = slides[cur].querySelector('aside');
+    notes.textContent = a ? a.textContent : '';
+    history.replaceState(null, '', '#' + (cur + 1));
+  }
+  addEventListener('keydown', e => {
+    if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(e.key)) show(cur + 1);
+    else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(e.key)) show(cur - 1);
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'n' || e.key === 'N') notes.style.display = notes.style.display === 'block' ? 'none' : 'block';
+    else if (e.key === 'f' || e.key === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); }
+  });
+  addEventListener('click', e => { if (!notes.contains(e.target)) show(e.clientX > innerWidth / 3 ? cur + 1 : cur - 1); });
+  addEventListener('resize', fit);
+  fit(); show(cur);
+</script>
+</body>
+</html>

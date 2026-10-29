@@ -1,0 +1,128 @@
+{
+ "arm": "g__prompt1",
+ "system": "g",
+ "prompt_version": 1,
+ "study": "CXR2568",
+ "image": "CXR2568_IM-1070-1001",
+ "indication": "XXXX-year-old female with history of aortic stenosis, pulmonic stenosis. ICD 9 codes 746.3, 746.02.",
+ "neighbours": [
+  {
+   "study": "CXR1773",
+   "similarity": 0.9638534784317017
+  },
+  {
+   "study": "CXR48",
+   "similarity": 0.960948646068573
+  },
+  {
+   "study": "CXR2016",
+   "similarity": 0.9609059691429138
+  },
+  {
+   "study": "CXR103",
+   "similarity": 0.9589308500289917
+  },
+  {
+   "study": "CXR2820",
+   "similarity": 0.9541045427322388
+  },
+  {
+   "study": "CXR3529",
+   "similarity": 0.9539994597434998
+  },
+  {
+   "study": "CXR93",
+   "similarity": 0.953133225440979
+  },
+  {
+   "study": "CXR90",
+   "similarity": 0.952771008014679
+  },
+  {
+   "study": "CXR416",
+   "similarity": 0.9527111053466797
+  },
+  {
+   "study": "CXR3690",
+   "similarity": 0.9523646235466003
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are.\n\nClinical indication: XXXX-year-old female with history of aortic stenosis, pulmonic stenosis. ICD 9 codes 746.3, 746.02.\n\nSimilar cases (most similar first):\n[1] CXR1773 (similarity 0.964): IMPRESSION: Presumed closure device at the level of the ligamentum arteriosum. Normal cardiac silhouette and clear lungs, with no evidence of left-to-right shunt.\n[2] CXR48 (similarity 0.961): FINDINGS: The cardiac and mediastinal contours are within normal limits. The lungs are well-inflated and clear. There is an 8mm nodule in the left lower lobe, XXXX calcified granuloma. There is no pneumothorax or effusion. Bony structures of the thorax are intact with minimal early degenerative change. IMPRESSION: 1. No evidence of acute cardiopulmonary process. 2. 8mm nodule in the left lung base, XXXX calcified granuloma.\n[3] CXR2016 (similarity 0.961): FINDINGS: The lungs are clear without evidence of focal airspace disease. There is no evidence of pneumothorax or large pleural effusion. The cardiac and mediastinal contours are within normal limits. The XXXX are unremarkable. IMPRESSION: No radiographic evidence of acute cardiopulmonary disease.\n[4] CXR103 (similarity 0.959): FINDINGS: The lungs are clear without evidence of focal airspace disease. There is no evidence of pneumothorax or large pleural effusion. The cardiac contour is within normal limits. Compared to prior exam, there is XXXX prominence of the mediastinal contour near the right hilum. This may represent the ascending aorta or mediastinal lymphadenopathy. CT chest with contrast may be helpful for further evaluation. There are mild degenerative changes of the thoracic spine. IMPRESSION: XXXX prominence of the mediastinal contour near the right hilum possibly representing the ascending aorta or mediastinal lymphadenopathy. CT chest with contrast may be helpful for further evaluation.\n[5] CXR2820 (similarity 0.954): FINDINGS: PA and lateral views of the chest were obtained. The heart is normal in size. Mediastinal contours are within normal limits. The lungs are clear. There is no pleural effusion or pneumothorax. IMPRESSION: No acute disease.\n[6] CXR3529 (similarity 0.954): FINDINGS: Status post midline sternotomy with intact XXXX XXXX. Stable mild cardiomegaly. Normal lung vascularity. The lungs are clear. IMPRESSION: Stable postop changes with stable mild cardiomegaly and normal lung vascularity.\n[7] CXR93 (similarity 0.953): FINDINGS: Lungs are clear without focal consolidation, effusion, or pneumothorax. Normal heart size. Negative for pneumoperitoneum. Mild degenerative changes of the thoracic spine. IMPRESSION: Negative for acute cardiopulmonary abnormality.\n[8] CXR90 (similarity 0.953): FINDINGS: The lungs are clear. There is no focal airspace consolidation. No pleural effusion or pneumothorax. Heart size and mediastinal contour are within normal limits. There are degenerative changes of the spine. IMPRESSION: No evidence of active disease.\n[9] CXR416 (similarity 0.953): FINDINGS: Heart size within normal limits, stable mediastinal and hilar contours. No focal alveolar consolidation, no definite pleural effusion seen. No typical findings of pulmonary edema. IMPRESSION: No acute findings\n[10] CXR3690 (similarity 0.952): FINDINGS: The heart is again enlarged. Aorta is tortuous. The lungs are hypoinflated but clear. No pleural effusion or pneumothorax is seen. IMPRESSION: 1. Stable cardiomegaly without acute disease.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR1773\",\"CXR2016\",\"CXR2820\"],\"rationale\":\"The lungs are clear without focal airspace disease or consolidation.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"present\",\"probability\":0.9,\"cited_case_ids\":[\"CXR3529\",\"CXR3690\"],\"rationale\":\"The cardiac silhouette is enlarged, which is consistent with the patient's history of aortic and pulmonic stenosis.\"},{\"finding\":\"Atelectasis\",\"status\":\"absent\",\"probability\":0.1,\"cited_case_ids\":[\"CXR2016\",\"CXR3690\"],\"rationale\":\"There is no evidence of volume loss or linear opacities suggesting atelectasis.\"},{\"finding\":\"Lung Lesion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR48\"],\"rationale\":\"No nodules or masses are identified in the lung fields.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR2016\",\"CXR2820\",\"CXR93\"],\"rationale\":\"The costophrenic angles are sharp and well-defined, with no evidence of fluid.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR48\",\"CXR3529\"],\"rationale\":\"No acute or old fractures are visualized; midline sternotomy wires are stable and intact.\"}],\"impression\":\"Mild cardiomegaly and status post midline sternotomy with no evidence of acute cardiopulmonary disease.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR1773",
+     "CXR2016",
+     "CXR2820"
+    ],
+    "rationale": "The lungs are clear without focal airspace disease or consolidation."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "present",
+    "probability": 0.9,
+    "cited_case_ids": [
+     "CXR3529",
+     "CXR3690"
+    ],
+    "rationale": "The cardiac silhouette is enlarged, which is consistent with the patient's history of aortic and pulmonic stenosis."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR2016",
+     "CXR3690"
+    ],
+    "rationale": "There is no evidence of volume loss or linear opacities suggesting atelectasis."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR48"
+    ],
+    "rationale": "No nodules or masses are identified in the lung fields."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2016",
+     "CXR2820",
+     "CXR93"
+    ],
+    "rationale": "The costophrenic angles are sharp and well-defined, with no evidence of fluid."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR48",
+     "CXR3529"
+    ],
+    "rationale": "No acute or old fractures are visualized; midline sternotomy wires are stable and intact."
+   }
+  ],
+  "impression": "Mild cardiomegaly and status post midline sternotomy with no evidence of acute cardiopulmonary disease."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2318,
+  "output": 375,
+  "thinking": 1527,
+  "total": 4220
+ },
+ "time": "2026-10-18T01:44:45"
+}

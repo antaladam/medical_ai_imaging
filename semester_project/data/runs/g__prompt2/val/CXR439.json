@@ -1,0 +1,127 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR439",
+ "image": "CXR439_IM-2078-1001",
+ "indication": "Sarcoid Hx sarcoidosis; Occasional XXXX/SOB; No cp/previous injury/surgery; Non-XXXX.",
+ "neighbours": [
+  {
+   "study": "CXR2066",
+   "similarity": 0.97769695520401
+  },
+  {
+   "study": "CXR1319",
+   "similarity": 0.9769176840782166
+  },
+  {
+   "study": "CXR2258",
+   "similarity": 0.976388692855835
+  },
+  {
+   "study": "CXR663",
+   "similarity": 0.9753255844116211
+  },
+  {
+   "study": "CXR3231",
+   "similarity": 0.9741892218589783
+  },
+  {
+   "study": "CXR1442",
+   "similarity": 0.970122218132019
+  },
+  {
+   "study": "CXR2045",
+   "similarity": 0.9690287709236145
+  },
+  {
+   "study": "CXR3529",
+   "similarity": 0.9684948325157166
+  },
+  {
+   "study": "CXR1485",
+   "similarity": 0.9683469533920288
+  },
+  {
+   "study": "CXR1908",
+   "similarity": 0.9674170017242432
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: Sarcoid Hx sarcoidosis; Occasional XXXX/SOB; No cp/previous injury/surgery; Non-XXXX.\n\nSimilar cases (most similar first):\nCase CXR2066 (similarity 0.978): FINDINGS: There is mild cardiomegaly. The aorta is tortuous. There is XXXX opacities noted in the right lower lobe, XXXX subsegmental atelectasis. There is no pneumothorax or effusion. No displaced rib fractures. If there is high clinical concern, consider dedicated rib views for further evaluation. IMPRESSION: Mild cardiomegaly, with subsegmental atelectasis in the right lower lobe.\nCase CXR1319 (similarity 0.977): FINDINGS: The heart size and pulmonary vascularity appear within normal limits. The lungs are free of focal airspace disease. No pleural effusion or pneumothorax is seen. IMPRESSION: No evidence of active disease.\nCase CXR2258 (similarity 0.976): FINDINGS: Mild hypoventilation with bronchovascular crowding and prominent central and basilar interstitial markings. No focal alveolar consolidation, no pleural effusion demonstrated. Considering technical factors heart size XXXX within normal limits. IMPRESSION: Prominent interstitial markings in the central lungs and bases which may be secondary to low lung volumes with bronchovascular crowding, differential considerations include interstitial infiltrates of inflammatory or infectious etiology and mild pulmonary edema. Clinical correlation is recommended.\nCase CXR663 (similarity 0.975): FINDINGS: Lungs are clear bilaterally with no focal infiltrate, pleural effusion, or pneumothoraces. Cardiomediastinal silhouette is within normal limits. No acute bony or soft tissue abnormality. IMPRESSION: No acute cardiopulmonary abnormality. .\nCase CXR3231 (similarity 0.974): FINDINGS: The lungs and pleural spaces show no acute abnormality. Heart size within normal limits. There is tortuosity of the descending thoracic aorta, unchanged. There is right paratracheal thickening and bilateral hilar enlargement corresponding to lymphadenopathy and XXXX pulmonary arterial enlargement visualized on XXXX chest in XXXX. Radiographically, the findings are grossly stable. IMPRESSION: 1. No acute pulmonary abnormality. 2. Abnormal appearance of the mediastinum as discussed below.\nCase CXR1442 (similarity 0.970): FINDINGS: The cardiac contours are normal. The lungs are clear. Thoracic spondylosis. IMPRESSION: No acute process.\nCase CXR2045 (similarity 0.969): FINDINGS: The heart is upper limits of normal in size. Mild tortuosity of the thoracic aorta. The lungs are clear without infiltrate. There is no effusion or pneumothorax. IMPRESSION: 1. No acute cardiopulmonary disease.\nCase CXR3529 (similarity 0.968): FINDINGS: Status post midline sternotomy with intact XXXX XXXX. Stable mild cardiomegaly. Normal lung vascularity. The lungs are clear. IMPRESSION: Stable postop changes with stable mild cardiomegaly and normal lung vascularity.\nCase CXR1485 (similarity 0.968): FINDINGS: Again seen are platelike horizontal opacities in both lung bases through this is consistent with scarring or subsegmental atelectasis. There are T-spine osteophytes. The cardiomediastinal silhouette and pulmonary vasculature are within normal limits. There is no pneumothorax or pleural effusion. There there is no lobar pneumonia. There are calcified right hilar granuloma. There are degenerative changes of the XXXX. There is a curvilinear density within and along the right costophrenic sulcus which most XXXX represents a skinfold. There is a unchanged fracture with callus at the left 9th lateral rib. IMPRESSION: Unchanged platelike bibasilar opacities most XXXX representing scarring or subsegmental atelectasis. No acute cardiopulmonary abnormality.\nCase CXR1908 (similarity 0.967): FINDINGS: Cardiac silhouette and mediastinal contours are within normal limits. Nodular opacity overlying the upper lungs bilaterally may represent overlying telemetry XXXX XXXX, correlate clinically. Otherwise, lungs are clear. No large pleural effusion no pneumothorax. IMPRESSION: No acute cardiopulmonary disease.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR1319\",\"CXR663\"],\"rationale\":\"The lungs are clear without any focal airspace consolidation or infiltrates.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"absent\",\"probability\":0.1,\"cited_case_ids\":[\"CXR1319\",\"CXR1442\"],\"rationale\":\"The cardiac silhouette and heart size appear within normal limits.\"},{\"finding\":\"Atelectasis\",\"status\":\"absent\",\"probability\":0.1,\"cited_case_ids\":[\"CXR1319\",\"CXR2045\"],\"rationale\":\"No linear opacities or signs of lung volume loss are identified.\"},{\"finding\":\"Lung Lesion\",\"status\":\"absent\",\"probability\":0.15,\"cited_case_ids\":[\"CXR1319\",\"CXR3231\"],\"rationale\":\"No focal nodules or masses are definitively seen, despite the clinical history of sarcoidosis.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"absent\",\"probability\":0.02,\"cited_case_ids\":[\"CXR1319\",\"CXR663\"],\"rationale\":\"The costophrenic angles are sharp with no evidence of pleural fluid.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR663\",\"CXR2066\"],\"rationale\":\"The visualized bones of the chest wall are intact without evidence of fracture.\"}],\"impression\":\"No acute cardiopulmonary process. Stable bilateral hilar prominence, likely related to known sarcoidosis.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR1319",
+     "CXR663"
+    ],
+    "rationale": "The lungs are clear without any focal airspace consolidation or infiltrates."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR1319",
+     "CXR1442"
+    ],
+    "rationale": "The cardiac silhouette and heart size appear within normal limits."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR1319",
+     "CXR2045"
+    ],
+    "rationale": "No linear opacities or signs of lung volume loss are identified."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.15,
+    "cited_case_ids": [
+     "CXR1319",
+     "CXR3231"
+    ],
+    "rationale": "No focal nodules or masses are definitively seen, despite the clinical history of sarcoidosis."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.02,
+    "cited_case_ids": [
+     "CXR1319",
+     "CXR663"
+    ],
+    "rationale": "The costophrenic angles are sharp with no evidence of pleural fluid."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR663",
+     "CXR2066"
+    ],
+    "rationale": "The visualized bones of the chest wall are intact without evidence of fracture."
+   }
+  ],
+  "impression": "No acute cardiopulmonary process. Stable bilateral hilar prominence, likely related to known sarcoidosis."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2452,
+  "output": 360,
+  "thinking": 2749,
+  "total": 5561
+ },
+ "time": "2026-10-18T11:31:23"
+}

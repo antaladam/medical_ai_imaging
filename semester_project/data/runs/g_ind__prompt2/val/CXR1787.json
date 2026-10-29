@@ -1,0 +1,144 @@
+{
+ "arm": "g_ind__prompt2",
+ "system": "g_ind",
+ "prompt_version": 2,
+ "study": "CXR1787",
+ "image": "CXR1787_IM-0513-1001",
+ "indication": "",
+ "neighbours": [
+  {
+   "study": "CXR107",
+   "similarity": 0.9803311228752136
+  },
+  {
+   "study": "CXR1599",
+   "similarity": 0.9730978608131409
+  },
+  {
+   "study": "CXR609",
+   "similarity": 0.9684709310531616
+  },
+  {
+   "study": "CXR493",
+   "similarity": 0.9643264412879944
+  },
+  {
+   "study": "CXR2270",
+   "similarity": 0.9590400457382202
+  },
+  {
+   "study": "CXR210",
+   "similarity": 0.9565991163253784
+  },
+  {
+   "study": "CXR255",
+   "similarity": 0.9545043706893921
+  },
+  {
+   "study": "CXR2941",
+   "similarity": 0.9539848566055298
+  },
+  {
+   "study": "CXR1918",
+   "similarity": 0.9534708857536316
+  },
+  {
+   "study": "CXR3024",
+   "similarity": 0.9532179832458496
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nSimilar cases (most similar first):\nCase CXR107 (similarity 0.980): FINDINGS: The lungs are clear bilaterally. Specifically, no evidence of focal consolidation, pneumothorax, or pleural effusion.. Cardio mediastinal silhouette is unremarkable. Visualized osseous structures of the thorax are without acute abnormality. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR1599 (similarity 0.973): FINDINGS: Normal heart size, mediastinal and aortic contours. Normal pulmonary vascularity. Atherosclerotic calcifications identified within the aortic XXXX. The lungs are clear. No focal consolidation, visible pneumothorax or large pleural effusion. Flowing thoracic spine osteophytes noted. IMPRESSION: 1. No evidence of active cardiopulmonary disease.\nCase CXR609 (similarity 0.968): FINDINGS: Stable cardiomediastinal silhouette. Pulmonary vascularity is within normal limits. Lungs are expanded and clear of airspace disease. Negative for pneumothorax or pleural effusion. XXXX XXXX are grossly intact. IMPRESSION: 1. No acute cardiopulmonary abnormality.\nCase CXR493 (similarity 0.964): FINDINGS: Stable appearing bilateral calcified lymph XXXX. The cardiac silhouette and mediastinal contours are within normal limits. No focal opacity. No large pleural effusion. There is no pneumothorax. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR2270 (similarity 0.959): FINDINGS: Cardiomediastinal silhouette is within normal limits in overall size and appearance. Aortic XXXX, cardiac apex, and stomach are left-sided. Central vascular markings are symmetric and within normal limits. The lungs are normally inflated with no focal airspace disease, pleural effusion, or pneumothorax. Dextro-convex scoliotic curvature of the thoracic spine. No acute bony abnormality. IMPRESSION: No acute cardiopulmonary process.\nCase CXR210 (similarity 0.957): FINDINGS: There are numerous surgical clips at the thoracic inlet. Small areas of XXXX scarring are seen in the left base. The lungs are otherwise clear. There is no pleural effusion or pneumothorax. The heart and mediastinum are normal. The skeletal structures are normal. IMPRESSION: No acute pulmonary disease.\nCase CXR255 (similarity 0.955): FINDINGS: Lungs are clear. No focal consolidation, effusion, or pneumothorax. Heart and mediastinal contours are normal. Osseous structures intact. IMPRESSION: No acute cardiopulmonary disease.\nCase CXR2941 (similarity 0.954): FINDINGS: Cardiac and mediastinal contours are unremarkable. Pulmonary vascularity is within normal limits. No focal air space opacities, pleural effusion, or pneumothorax. XXXX are grossly unremarkable. IMPRESSION: 1. Clear lungs.\nCase CXR1918 (similarity 0.953): FINDINGS: There is a 1.5 cm nodular opacity projecting over left hilum. The cardiac silhouette is within normal limits. There is no pulmonary edema. There is no focal consolidation. There are no XXXX of pleural effusion. There is no evidence of pneumothorax. XXXX opacities XXXX representing surgical clips, in the midline at the level of the thoracic inlet. IMPRESSION: 1. Prominence of left hilum which could be due to nodule/lymph node or superimposing blood XXXX. In the absence of prior studies for comparison, XXXX chest for further evaluation. Result notification XXXX Primordial.\nCase CXR3024 (similarity 0.953): FINDINGS: Cardiomediastinal silhouette is within normal limits in overall size and appearance. Central vascular markings are symmetric and within normal limits. The lungs are normally inflated with no focal airspace disease, pleural effusion, or pneumothorax. No acute bone abnormality. IMPRESSION: 1. No acute cardiopulmonary process.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR107\",\"CXR609\",\"CXR2270\",\"CXR2941\",\"CXR3024\"],\"rationale\":\"The lungs are clear without evidence of focal consolidation or airspace disease.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR107\",\"CXR1599\",\"CXR609\",\"CXR493\",\"CXR2270\",\"CXR255\",\"CXR3024\"],\"rationale\":\"The cardiomediastinal silhouette is of normal size and contour.\"},{\"finding\":\"Atelectasis\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR210\",\"CXR2270\",\"CXR3024\"],\"rationale\":\"No linear or plate-like opacities suggestive of pulmonary collapse are identified.\"},{\"finding\":\"Lung Lesion\",\"status\":\"present\",\"probability\":0.85,\"cited_case_ids\":[\"CXR1918\"],\"rationale\":\"A discrete nodular opacity is visible in the left mid-lung zone, which corresponds to the finding in similar case CXR1918.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR107\",\"CXR1599\",\"CXR609\",\"CXR493\",\"CXR2270\",\"CXR210\",\"CXR255\",\"CXR2941\",\"CXR3024\"],\"rationale\":\"Costophrenic angles are sharp with no evidence of fluid in the pleural space.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR107\",\"CXR2270\",\"CXR255\",\"CXR3024\"],\"rationale\":\"The visible skeletal structures are intact, though there is a dextro-convex curvature of the thoracic spine.\"}],\"impression\":\"Nodular opacity in the left mid-lung zone that requires further evaluation; otherwise, no acute cardiopulmonary findings. Thoracic scoliosis is noted.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR107",
+     "CXR609",
+     "CXR2270",
+     "CXR2941",
+     "CXR3024"
+    ],
+    "rationale": "The lungs are clear without evidence of focal consolidation or airspace disease."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR107",
+     "CXR1599",
+     "CXR609",
+     "CXR493",
+     "CXR2270",
+     "CXR255",
+     "CXR3024"
+    ],
+    "rationale": "The cardiomediastinal silhouette is of normal size and contour."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR210",
+     "CXR2270",
+     "CXR3024"
+    ],
+    "rationale": "No linear or plate-like opacities suggestive of pulmonary collapse are identified."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "present",
+    "probability": 0.85,
+    "cited_case_ids": [
+     "CXR1918"
+    ],
+    "rationale": "A discrete nodular opacity is visible in the left mid-lung zone, which corresponds to the finding in similar case CXR1918."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR107",
+     "CXR1599",
+     "CXR609",
+     "CXR493",
+     "CXR2270",
+     "CXR210",
+     "CXR255",
+     "CXR2941",
+     "CXR3024"
+    ],
+    "rationale": "Costophrenic angles are sharp with no evidence of fluid in the pleural space."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR107",
+     "CXR2270",
+     "CXR255",
+     "CXR3024"
+    ],
+    "rationale": "The visible skeletal structures are intact, though there is a dextro-convex curvature of the thoracic spine."
+   }
+  ],
+  "impression": "Nodular opacity in the left mid-lung zone that requires further evaluation; otherwise, no acute cardiopulmonary findings. Thoracic scoliosis is noted."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2357,
+  "output": 508,
+  "thinking": 2109,
+  "total": 4974
+ },
+ "time": "2026-10-18T12:00:13"
+}

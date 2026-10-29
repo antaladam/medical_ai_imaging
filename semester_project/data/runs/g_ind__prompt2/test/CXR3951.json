@@ -1,0 +1,127 @@
+{
+ "arm": "g_ind__prompt2",
+ "system": "g_ind",
+ "prompt_version": 2,
+ "study": "CXR3951",
+ "image": "CXR3951_IM-2019-1001",
+ "indication": "",
+ "neighbours": [
+  {
+   "study": "CXR3190",
+   "similarity": 0.9344935417175293
+  },
+  {
+   "study": "CXR1422",
+   "similarity": 0.9234482049942017
+  },
+  {
+   "study": "CXR498",
+   "similarity": 0.9228764772415161
+  },
+  {
+   "study": "CXR3069",
+   "similarity": 0.9060322642326355
+  },
+  {
+   "study": "CXR1000",
+   "similarity": 0.8874912261962891
+  },
+  {
+   "study": "CXR3697",
+   "similarity": 0.887253999710083
+  },
+  {
+   "study": "CXR1894",
+   "similarity": 0.8815258741378784
+  },
+  {
+   "study": "CXR559",
+   "similarity": 0.8803929090499878
+  },
+  {
+   "study": "CXR2262",
+   "similarity": 0.8791083097457886
+  },
+  {
+   "study": "CXR1817",
+   "similarity": 0.8715347647666931
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nSimilar cases (most similar first):\nCase CXR3190 (similarity 0.934): FINDINGS: The XXXX examination consists of frontal and lateral radiographs of the chest. The cardiomediastinal contours are within normal limits. Pulmonary vascularity is within normal limits. There is a vague right suprahilar density with elevation of the XXXX fissure most XXXX mild subsegmental atelectasis though superimposed infection cannot be entirely excluded. The remaining lungs are clear. The visualized osseous structures and upper abdomen are unremarkable. IMPRESSION: Right upper lobe subsegmental atelectasis. No evidence of heart failure.\nCase CXR1422 (similarity 0.923): FINDINGS: The heart is normal in size. The pulmonary vascularity is within normal limits in appearance. No pneumothorax or pleural effusion. A wedge-shaped opacity has developed in the right upper lobe. There is also XXXX patchy opacification identified in the left upper lobe. No acute bony abnormality. IMPRESSION: Interval development of bilateral upper lobe consolidation, right greater than left, XXXX representing pneumonia.. Followup imaging to document resolution is recommended.\nCase CXR498 (similarity 0.923): FINDINGS: Large medial right upper lobe mass lesion, measuring approximately 5.8 cm x 6.0 cm in diameter. No pneumothorax. No pleural effusions. Lungs clear. Heart size within normal limits. Degenerative changes thoracic spine. IMPRESSION: Large medial right upper lobe mass highly concerning for primary lung cancer. XXXX chest with intravenous contrast for further evaluation. XXXX XXXX XXXX. XXXX's XXXX was notified of this result at XXXXPM XXXX/XXXX and accepted receipt. Results were faxed. .\nCase CXR3069 (similarity 0.906): FINDINGS: Right upper lobe airspace disease consistent with pneumonia given patient's history. The lungs are otherwise clear. No pleural effusions or pneumothoraces. Heart and mediastinum of normal size and contour. IMPRESSION: Right upper lobe pneumonia.\nCase CXR1000 (similarity 0.887): FINDINGS: There is XXXX increased opacity within the right upper lobe with possible mass and associated area of atelectasis or focal consolidation. The cardiac silhouette is within normal limits. XXXX opacity in the left midlung overlying the posterior left 5th rib may represent focal airspace disease. No pleural effusion or pneumothorax. No acute bone abnormality. IMPRESSION: 1. Increased opacity in the right upper lobe with XXXX associated atelectasis may represent focal consolidation or mass lesion with atelectasis. Recommend chest CT for further evaluation. 2. XXXX opacity overlying the left 5th rib may represent focal airspace disease.\nCase CXR3697 (similarity 0.887): FINDINGS: The cardiomediastinal silhouette is stable in appearance. There are extensive fibrotic changes in the right lung with rightward shift of the trachea, similar to the previous exam. The left lung is well-aerated without focal airspace consolidation, pleural effusions or pneumothorax. There is left apical pleural-parenchymal scarring. No acute bony findings. IMPRESSION: 1. No acute cardiopulmonary findings. 2. Extensive fibrotic changes of the right lung, similar to the previous exam.\nCase CXR1894 (similarity 0.882): FINDINGS: The heart is normal in size. The mediastinum is unremarkable. Subtle increased opacity of right mid hemithorax XXXX related to superimposed soft tissues. The lungs are otherwise clear. There is no pleural effusion or pneumothorax. IMPRESSION: No acute disease.\nCase CXR559 (similarity 0.880): IMPRESSION: Heart size normal. Mediastinal silhouette and pulmonary vascularity are within normal limits. There is no focal airspace consolidation, pleural effusion or pneumothorax.\nCase CXR2262 (similarity 0.879): FINDINGS: XXXX right basal airspace opacity. The heart size and mediastinal silhouette are within normal limits for contour. No pneumothorax or pleural effusions. The XXXX are intact. IMPRESSION: XXXX right basilar airspace opacity.\nCase CXR1817 (similarity 0.872): FINDINGS: The XXXX examination consists of frontal and lateral radiographs of the chest. Upper thorax is poorly visualized due to patient's overlying head and chin. The cardiomediastinal contours are within normal limits. Background of mild coarse interstitial opacities seen throughout the lungs XXXX related to background of emphysema. Calcified granuloma is seen in the left medial lung base. There is no consolidation, pleural effusion or pneumothorax. Deformity of the right 6th rib laterally has appearance of acute or subacute fracture. Degenerative changes of the thoracic spine are again seen. IMPRESSION: Age indeterminant but XXXX acute to subacute right 6th rib fracture.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\n  \"findings\": [\n    {\n      \"finding\": \"Lung Opacity\",\n      \"status\": \"present\",\n      \"probability\": 0.92,\n      \"cited_case_ids\": [\n        \"CXR1422\",\n        \"CXR3069\",\n        \"CXR1000\"\n      ],\n      \"rationale\": \"A dense, ill-defined opacity is clearly visible in the right upper lobe, consistent with focal consolidation.\"\n    },\n    {\n      \"finding\": \"Cardiomegaly\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR3190\",\n        \"CXR498\",\n        \"CXR559\"\n      ],\n      \"rationale\": \"The cardiac silhouette is within normal limits for size and contour, similar to several of the referenced cases.\"\n    },\n    {\n      \"finding\": \"Atelectasis\",\n      \"status\": \"uncertain\",\n      \"probability\": 0.35,\n      \"cited_case_ids\": [\n        \"CXR3190\",\n        \"CXR1000\"\n      ],\n      \"rationale\": \"While the right upper lobe opacity is prominent, there may be an associated component of volume loss or subsegmental atelectasis.\"\n    },\n    {\n      \"finding\": \"Lung Lesion\",\n      \"status\": \"present\",\n      \"probability\": 0.88,\n      \"cited_case_ids\": [\n        \"CXR498\",\n        \"CXR1000\"\n      ],\n      \"rationale\": \"The bulky, mass-like configuration of the right upper lobe opacity is highly suspicious for a primary pulmonary neoplasm.\"\n    },\n    {\n      \"finding\": \"Pleural Effusion\",\n      \"status\": \"absent\",\n      \"probability\": 0.02,\n      \"cited_case_ids\": [\n        \"CXR498\",\n        \"CXR3069\",\n        \"CXR559\"\n      ],\n      \"rationale\": \"The costophrenic angles are well-defined and sharp, indicating no evidence of pleural fluid accumulation.\"\n    },\n    {\n      \"finding\": \"Fracture\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [],\n      \"rationale\": \"The visualized osseous structures, including the ribs and clavicles, show no evidence of acute or chronic fractures.\"\n    }\n  ],\n  \"impression\": \"Large, bulky right upper lobe opacity concerning for a mass lesion or primary lung malignancy. No acute cardiopulmonary disease otherwise noted.\"\n}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "present",
+    "probability": 0.92,
+    "cited_case_ids": [
+     "CXR1422",
+     "CXR3069",
+     "CXR1000"
+    ],
+    "rationale": "A dense, ill-defined opacity is clearly visible in the right upper lobe, consistent with focal consolidation."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR3190",
+     "CXR498",
+     "CXR559"
+    ],
+    "rationale": "The cardiac silhouette is within normal limits for size and contour, similar to several of the referenced cases."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "uncertain",
+    "probability": 0.35,
+    "cited_case_ids": [
+     "CXR3190",
+     "CXR1000"
+    ],
+    "rationale": "While the right upper lobe opacity is prominent, there may be an associated component of volume loss or subsegmental atelectasis."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "present",
+    "probability": 0.88,
+    "cited_case_ids": [
+     "CXR498",
+     "CXR1000"
+    ],
+    "rationale": "The bulky, mass-like configuration of the right upper lobe opacity is highly suspicious for a primary pulmonary neoplasm."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.02,
+    "cited_case_ids": [
+     "CXR498",
+     "CXR3069",
+     "CXR559"
+    ],
+    "rationale": "The costophrenic angles are well-defined and sharp, indicating no evidence of pleural fluid accumulation."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [],
+    "rationale": "The visualized osseous structures, including the ribs and clavicles, show no evidence of acute or chronic fractures."
+   }
+  ],
+  "impression": "Large, bulky right upper lobe opacity concerning for a mass lesion or primary lung malignancy. No acute cardiopulmonary disease otherwise noted."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2567,
+  "output": 633,
+  "thinking": 2259,
+  "total": 5459
+ },
+ "time": "2026-10-18T15:08:23"
+}

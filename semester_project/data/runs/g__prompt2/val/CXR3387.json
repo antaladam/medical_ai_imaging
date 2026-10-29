@@ -1,0 +1,131 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR3387",
+ "image": "CXR3387_IM-1633-1001",
+ "indication": "XXXX-year-old woman, 8-1/2 months pregnant, with dyspnea and chest pain.",
+ "neighbours": [
+  {
+   "study": "CXR1795",
+   "similarity": 0.963681697845459
+  },
+  {
+   "study": "CXR2805",
+   "similarity": 0.9630664587020874
+  },
+  {
+   "study": "CXR3749",
+   "similarity": 0.9604218602180481
+  },
+  {
+   "study": "CXR1723",
+   "similarity": 0.9565154314041138
+  },
+  {
+   "study": "CXR1908",
+   "similarity": 0.9551801681518555
+  },
+  {
+   "study": "CXR2086",
+   "similarity": 0.9547324776649475
+  },
+  {
+   "study": "CXR2230",
+   "similarity": 0.9544332027435303
+  },
+  {
+   "study": "CXR1481",
+   "similarity": 0.9544163942337036
+  },
+  {
+   "study": "CXR1713",
+   "similarity": 0.9541029334068298
+  },
+  {
+   "study": "CXR2540",
+   "similarity": 0.9534224271774292
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: XXXX-year-old woman, 8-1/2 months pregnant, with dyspnea and chest pain.\n\nSimilar cases (most similar first):\nCase CXR1795 (similarity 0.964): FINDINGS: There is moderate cardiomegaly. No interstitial edema or pleural effusion. No focal airspace consolidation. No pneumothorax. There is mild degenerative disc disease of the thoracic spine. IMPRESSION: 1. Cardiomegaly without radiographic evidence of heart failure. 2. No acute cardiopulmonary abnormality.\nCase CXR2805 (similarity 0.963): FINDINGS: The lungs are clear bilaterally. Specifically, no evidence of focal consolidation, pneumothorax, or pleural effusion. Cardiomediastinal silhouette is unremarkable. Visualized osseous structures of the thorax are without acute abnormality. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR3749 (similarity 0.960): FINDINGS: Lungs are clear bilaterally. Cardiac and mediastinal silhouettes are normal. Pulmonary vasculature is normal. No pneumothorax or pleural effusion. No acute bony abnormality. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR1723 (similarity 0.957): FINDINGS: Heart size is normal. There are densely calcified mediastinal and right hilar lymph XXXX which suggest prior histoplasmosis exposure. No consolidating airspace disease is seen within the lungs. No pleural effusion or pneumothorax. No convincing acute bony findings. IMPRESSION: No acute abnormality identified.\nCase CXR1908 (similarity 0.955): FINDINGS: Cardiac silhouette and mediastinal contours are within normal limits. Nodular opacity overlying the upper lungs bilaterally may represent overlying telemetry XXXX XXXX, correlate clinically. Otherwise, lungs are clear. No large pleural effusion no pneumothorax. IMPRESSION: No acute cardiopulmonary disease.\nCase CXR2086 (similarity 0.955): FINDINGS: The cardiomediastinal silhouette is within normal limits. Lungs are clear without focal consolidation. No visualized pneumothorax or large pleural effusion. No acute bone abnormality. IMPRESSION: No acute cardiopulmonary process.\nCase CXR2230 (similarity 0.954): FINDINGS: Mediastinal contours are normal. Heart size is upper limits of normal. Lungs are clear. There is no pneumothorax or large pleural effusion. No bony abnormality. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR1481 (similarity 0.954): FINDINGS: The lungs are clear, and without focal airspace opacity. The cardiomediastinal silhouette is normal in size and contour, and stable. There is no pneumothorax or large pleural effusion. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR1713 (similarity 0.954): IMPRESSION: The heart size is top normal, cardiomediastinal silhouette within normal limits. Pulmonary vasculature appears normal. There is no focal air space consolidation. No pleural effusion or pneumothorax.\nCase CXR2540 (similarity 0.953): FINDINGS: The lungs are clear bilaterally. Specifically, no evidence of focal consolidation, pneumothorax, or pleural effusion. Cardiomediastinal silhouette is unremarkable. Visualized osseous structures of the thorax are without acute abnormality. IMPRESSION: No acute cardiopulmonary abnormality.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\n  \"findings\": [\n    {\n      \"finding\": \"Lung Opacity\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR2805\",\n        \"CXR3749\",\n        \"CXR2086\",\n        \"CXR1481\",\n        \"CXR2540\"\n      ],\n      \"rationale\": \"The lungs are clear without evidence of focal airspace consolidation or infiltrate, consistent with findings in the most similar cases.\"\n    },\n    {\n      \"finding\": \"Cardiomegaly\",\n      \"status\": \"absent\",\n      \"probability\": 0.2,\n      \"cited_case_ids\": [\n        \"CXR2230\",\n        \"CXR1713\"\n      ],\n      \"rationale\": \"The heart size is at the upper limit of normal; however, the horizontal appearance is likely due to the elevated diaphragm in late pregnancy.\"\n    },\n    {\n      \"finding\": \"Atelectasis\",\n      \"status\": \"absent\",\n      \"probability\": 0.1,\n      \"cited_case_ids\": [\n        \"CXR2805\",\n        \"CXR3749\"\n      ],\n      \"rationale\": \"No linear or plate-like opacities are seen to suggest significant atelectasis despite the patient's low lung volumes.\"\n    },\n    {\n      \"finding\": \"Lung Lesion\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR1908\"\n      ],\n      \"rationale\": \"No discrete pulmonary nodules or masses are identified within the visualized lung fields.\"\n    },\n    {\n      \"finding\": \"Pleural Effusion\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR2805\",\n        \"CXR2086\",\n        \"CXR1481\"\n      ],\n      \"rationale\": \"The costophrenic angles are sharp with no radiographic evidence of pleural fluid accumulation.\"\n    },\n    {\n      \"finding\": \"Fracture\",\n      \"status\": \"absent\",\n      \"probability\": 0.01,\n      \"cited_case_ids\": [\n        \"CXR2805\",\n        \"CXR3749\",\n        \"CXR2540\"\n      ],\n      \"rationale\": \"The visualized osseous structures, including the ribs and clavicles, show no evidence of acute or chronic fracture.\"\n    }\n  ],\n  \"impression\": \"No acute cardiopulmonary abnormality is identified. Physiological changes typical of late pregnancy, including elevated diaphragms and a horizontal cardiac axis, are noted.\"\n}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2805",
+     "CXR3749",
+     "CXR2086",
+     "CXR1481",
+     "CXR2540"
+    ],
+    "rationale": "The lungs are clear without evidence of focal airspace consolidation or infiltrate, consistent with findings in the most similar cases."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.2,
+    "cited_case_ids": [
+     "CXR2230",
+     "CXR1713"
+    ],
+    "rationale": "The heart size is at the upper limit of normal; however, the horizontal appearance is likely due to the elevated diaphragm in late pregnancy."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR2805",
+     "CXR3749"
+    ],
+    "rationale": "No linear or plate-like opacities are seen to suggest significant atelectasis despite the patient's low lung volumes."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR1908"
+    ],
+    "rationale": "No discrete pulmonary nodules or masses are identified within the visualized lung fields."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2805",
+     "CXR2086",
+     "CXR1481"
+    ],
+    "rationale": "The costophrenic angles are sharp with no radiographic evidence of pleural fluid accumulation."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.01,
+    "cited_case_ids": [
+     "CXR2805",
+     "CXR3749",
+     "CXR2540"
+    ],
+    "rationale": "The visualized osseous structures, including the ribs and clavicles, show no evidence of acute or chronic fracture."
+   }
+  ],
+  "impression": "No acute cardiopulmonary abnormality is identified. Physiological changes typical of late pregnancy, including elevated diaphragms and a horizontal cardiac axis, are noted."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2252,
+  "output": 670,
+  "thinking": 1469,
+  "total": 4391
+ },
+ "time": "2026-10-18T12:21:00"
+}

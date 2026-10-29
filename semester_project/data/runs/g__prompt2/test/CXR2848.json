@@ -1,0 +1,157 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR2848",
+ "image": "CXR2848_IM-1256-1001",
+ "indication": "Evaluate for tuberculosis",
+ "neighbours": [
+  {
+   "study": "CXR2273",
+   "similarity": 0.9618557691574097
+  },
+  {
+   "study": "CXR508",
+   "similarity": 0.9602630138397217
+  },
+  {
+   "study": "CXR1554",
+   "similarity": 0.9583404064178467
+  },
+  {
+   "study": "CXR2295",
+   "similarity": 0.9563949108123779
+  },
+  {
+   "study": "CXR2066",
+   "similarity": 0.9559110403060913
+  },
+  {
+   "study": "CXR3978",
+   "similarity": 0.9556216597557068
+  },
+  {
+   "study": "CXR1864",
+   "similarity": 0.9543945789337158
+  },
+  {
+   "study": "CXR1979",
+   "similarity": 0.9542286396026611
+  },
+  {
+   "study": "CXR1821",
+   "similarity": 0.9538848996162415
+  },
+  {
+   "study": "CXR1910",
+   "similarity": 0.9527873396873474
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: Evaluate for tuberculosis\n\nSimilar cases (most similar first):\nCase CXR2273 (similarity 0.962): FINDINGS: Lungs are clear. No pleural effusions or pneumothoraces. Heart and mediastinum of normal size and contour. IMPRESSION: Clear lungs.\nCase CXR508 (similarity 0.960): FINDINGS: Normal heart size and mediastinal contours. No focal airspace consolidation. No pleural effusion or pneumothorax. Visualized osseous structures are unremarkable. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR1554 (similarity 0.958): FINDINGS: The heart is normal in size. The mediastinum is unremarkable. The lungs are clear. Multilevel degenerative changes of the thoracic spine are noted. IMPRESSION: No acute disease.\nCase CXR2295 (similarity 0.956): FINDINGS: The cardiomediastinal silhouette is within normal limits for appearance. The thoracic aorta is calcified. No focal areas of pulmonary consolidation. No pneumothorax. No pleural effusion. The thoracic spine appears intact. IMPRESSION: 1. No acute intrathoracic abnormality.\nCase CXR2066 (similarity 0.956): FINDINGS: There is mild cardiomegaly. The aorta is tortuous. There is XXXX opacities noted in the right lower lobe, XXXX subsegmental atelectasis. There is no pneumothorax or effusion. No displaced rib fractures. If there is high clinical concern, consider dedicated rib views for further evaluation. IMPRESSION: Mild cardiomegaly, with subsegmental atelectasis in the right lower lobe.\nCase CXR3978 (similarity 0.956): FINDINGS: The heart is normal in size and contour. There is no mediastinal widening. The lungs are clear bilaterally. No pleural effusion or pneumothorax. XXXX are intact. IMPRESSION: No acute cardiopulmonary abnormalities.\nCase CXR1864 (similarity 0.954): FINDINGS: Heart size borderline enlarged. No focal alveolar consolidation, no definite pleural effusion seen. No typical findings of pulmonary edema. Dense nodule in the right lower lobe suggests a previous granulomatous process. IMPRESSION: Borderline heart size, no acute pulmonary findings\nCase CXR1979 (similarity 0.954): FINDINGS: Normal cardiomediastinal silhouette. There is no focal consolidation. There are no XXXX of a large pleural effusion. There is no pneumothorax. There is no acute bony abnormality seen. IMPRESSION: There is no radiographic evidence of acute cardiopulmonary disease.\nCase CXR1821 (similarity 0.954): FINDINGS: The heart and mediastinum are normal in size and contour. There is no focal airspace opacity, pleural effusion, or pneumothorax. There are degenerative changes in the thoracic spine. IMPRESSION: No acute cardiopulmonary finding. Specifically there is no evidence of active tuberculosis infection.\nCase CXR1910 (similarity 0.953): IMPRESSION: Heart size normal. Mildly tortuous aorta. No overt edema. No focal consolidation, no pneumothorax. No significant pleural effusion, though the extreme posterior right sulcus is excluded on the lateral image.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\": [{\"finding\": \"Lung Opacity\", \"status\": \"absent\", \"probability\": 0.05, \"cited_case_ids\": [\"CXR2273\", \"CXR508\", \"CXR1554\", \"CXR2295\", \"CXR3978\", \"CXR1979\", \"CXR1821\", \"CXR1910\"], \"rationale\": \"The lung fields are clear with no evidence of focal consolidation or airspace disease.\"}, {\"finding\": \"Cardiomegaly\", \"status\": \"absent\", \"probability\": 0.05, \"cited_case_ids\": [\"CXR2273\", \"CXR508\", \"CXR1554\", \"CXR2295\", \"CXR3978\", \"CXR1979\", \"CXR1821\", \"CXR1910\"], \"rationale\": \"The heart size is within normal limits, and the cardiomediastinal silhouette is unremarkable.\"}, {\"finding\": \"Atelectasis\", \"status\": \"absent\", \"probability\": 0.05, \"cited_case_ids\": [\"CXR2273\", \"CXR508\", \"CXR1554\", \"CXR2295\", \"CXR3978\", \"CXR1979\", \"CXR1821\", \"CXR1910\"], \"rationale\": \"There is no evidence of volume loss or discoid opacities to suggest atelectasis.\"}, {\"finding\": \"Lung Lesion\", \"status\": \"absent\", \"probability\": 0.05, \"cited_case_ids\": [\"CXR2273\", \"CXR508\", \"CXR1554\", \"CXR2295\", \"CXR3978\", \"CXR1979\", \"CXR1821\", \"CXR1910\"], \"rationale\": \"No nodules, masses, or cavitary lesions suspicious for tuberculosis or malignancy are identified.\"}, {\"finding\": \"Pleural Effusion\", \"status\": \"absent\", \"probability\": 0.05, \"cited_case_ids\": [\"CXR2273\", \"CXR508\", \"CXR2295\", \"CXR3978\", \"CXR1979\", \"CXR1910\"], \"rationale\": \"The costophrenic angles are sharp, and there is no evidence of pleural fluid.\"}, {\"finding\": \"Fracture\", \"status\": \"absent\", \"probability\": 0.05, \"cited_case_ids\": [\"CXR508\", \"CXR2295\", \"CXR1979\", \"CXR3978\"], \"rationale\": \"The visualized ribs, clavicles, and thoracic spine appear intact without evidence of acute fracture.\"}], \"impression\": \"No acute cardiopulmonary abnormality. Specifically, there is no radiographic evidence of active tuberculosis.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2273",
+     "CXR508",
+     "CXR1554",
+     "CXR2295",
+     "CXR3978",
+     "CXR1979",
+     "CXR1821",
+     "CXR1910"
+    ],
+    "rationale": "The lung fields are clear with no evidence of focal consolidation or airspace disease."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2273",
+     "CXR508",
+     "CXR1554",
+     "CXR2295",
+     "CXR3978",
+     "CXR1979",
+     "CXR1821",
+     "CXR1910"
+    ],
+    "rationale": "The heart size is within normal limits, and the cardiomediastinal silhouette is unremarkable."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2273",
+     "CXR508",
+     "CXR1554",
+     "CXR2295",
+     "CXR3978",
+     "CXR1979",
+     "CXR1821",
+     "CXR1910"
+    ],
+    "rationale": "There is no evidence of volume loss or discoid opacities to suggest atelectasis."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2273",
+     "CXR508",
+     "CXR1554",
+     "CXR2295",
+     "CXR3978",
+     "CXR1979",
+     "CXR1821",
+     "CXR1910"
+    ],
+    "rationale": "No nodules, masses, or cavitary lesions suspicious for tuberculosis or malignancy are identified."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2273",
+     "CXR508",
+     "CXR2295",
+     "CXR3978",
+     "CXR1979",
+     "CXR1910"
+    ],
+    "rationale": "The costophrenic angles are sharp, and there is no evidence of pleural fluid."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR508",
+     "CXR2295",
+     "CXR1979",
+     "CXR3978"
+    ],
+    "rationale": "The visualized ribs, clavicles, and thoracic spine appear intact without evidence of acute fracture."
+   }
+  ],
+  "impression": "No acute cardiopulmonary abnormality. Specifically, there is no radiographic evidence of active tuberculosis."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2231,
+  "output": 680,
+  "thinking": 2753,
+  "total": 5664
+ },
+ "time": "2026-10-18T14:43:10"
+}

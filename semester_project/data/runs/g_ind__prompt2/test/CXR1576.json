@@ -1,0 +1,128 @@
+{
+ "arm": "g_ind__prompt2",
+ "system": "g_ind",
+ "prompt_version": 2,
+ "study": "CXR1576",
+ "image": "CXR1576_IM-0375-1001",
+ "indication": "",
+ "neighbours": [
+  {
+   "study": "CXR2594",
+   "similarity": 0.9496026039123535
+  },
+  {
+   "study": "CXR490",
+   "similarity": 0.9448415637016296
+  },
+  {
+   "study": "CXR1426",
+   "similarity": 0.9431148171424866
+  },
+  {
+   "study": "CXR2847",
+   "similarity": 0.9425196647644043
+  },
+  {
+   "study": "CXR845",
+   "similarity": 0.9418591856956482
+  },
+  {
+   "study": "CXR3146",
+   "similarity": 0.9417848587036133
+  },
+  {
+   "study": "CXR335",
+   "similarity": 0.9385868906974792
+  },
+  {
+   "study": "CXR2347",
+   "similarity": 0.9379919767379761
+  },
+  {
+   "study": "CXR283",
+   "similarity": 0.9377663135528564
+  },
+  {
+   "study": "CXR3665",
+   "similarity": 0.9370173811912537
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nSimilar cases (most similar first):\nCase CXR2594 (similarity 0.950): FINDINGS: The heart size is normal. Tortuous aorta. Otherwise the mediastinal contour is within normal limits. Low lung volumes. Mild elevation of the right hemidiaphragm. There is streaky opacity within the right lower lobe. There are no nodules or masses. No visible pneumothorax. No visible pleural fluid. The XXXX are grossly normal. There is no visible free intraperitoneal air under the diaphragm. IMPRESSION: Streaky right lower lobe infiltrate versus atelectasis.\nCase CXR490 (similarity 0.945): FINDINGS: Patient is slightly rotated. Normal heart size. There is no pulmonary edema. There is no focal consolidation. There are no XXXX of a pleural effusion. There is no evidence of pneumothorax. IMPRESSION: There is no evidence of acute cardiopulmonary disease. .\nCase CXR1426 (similarity 0.943): IMPRESSION: Comparison XXXX, XXXX. Scoliosis as before. Clear lungs. No effusions. Unremarkable mediastinal contour. No acute cardiopulmonary abnormality identified.. Stable chest.\nCase CXR2847 (similarity 0.943): FINDINGS: The heart size is within normal limits. The thoracic aorta is tortuous, stable from the prior radiograph. Aortic stent graft overlies the descending thoracic aorta and upper abdominal aorta, grossly stable from the prior chest radiograph. There are scattered calcified granulomas. There is no focal airspace consolidation. No pleural effusion or pneumothorax. The left hemidiaphragm remains mildly elevated. There are mild degenerative changes of the spine. IMPRESSION: No acute findings.\nCase CXR845 (similarity 0.942): FINDINGS: Minimal subsegmental atelectasis posteriorly. No pleural effusions or pneumothoraces. Heart and mediastinum of normal size and contour. IMPRESSION: No focal lung opacity, pleural effusion of pneumothorax.\nCase CXR3146 (similarity 0.942): FINDINGS: No focal lung consolidation. Heart size and pulmonary vascularity are within normal limits. No pneumothorax or pleural effusion. Osseous structures are grossly intact. IMPRESSION: No acute cardiopulmonary process.\nCase CXR335 (similarity 0.939): FINDINGS: A left-sided hemodialysis catheter is in XXXX with its distal tip at the right atrium. The cardiac silhouette and mediastinal contours are within normal limits. There is no focal opacity. There is no pneumothorax. No large pleural effusion. IMPRESSION: Stable position of the left-sided hemodialysis catheter otherwise no acute cardiopulmonary disease.\nCase CXR2347 (similarity 0.938): FINDINGS: The cardiomediastinal silhouette is normal in size and contour. Atherosclerosis of the aortic XXXX. No focal consolidation, pneumothorax or large pleural effusion. T-spine osteophytes. IMPRESSION: Negative for acute abnormality.\nCase CXR283 (similarity 0.938): FINDINGS: The lungs are clear. The cardiomediastinal silhouette is within normal limits. No pleural effusion is identified. IMPRESSION: Normal chest film.\nCase CXR3665 (similarity 0.937): FINDINGS: Heart size within normal limits. Negative for focal pulmonary consolidation, pleural effusion, or pneumothorax. No upper lobe airspace disease or cavitary lesions identified. IMPRESSION: 1. No acute abnormality. 2. No evidence of pulmonary tuberculosis.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\n  \"findings\": [\n    {\n      \"finding\": \"Lung Opacity\",\n      \"status\": \"uncertain\",\n      \"probability\": 0.25,\n      \"cited_case_ids\": [\n        \"CXR2594\"\n      ],\n      \"rationale\": \"There is subtle streaky density at the right lung base which could represent a mild focal infiltrate, though it is more likely atelectasis.\"\n    },\n    {\n      \"finding\": \"Cardiomegaly\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR2594\",\n        \"CXR490\",\n        \"CXR2847\"\n      ],\n      \"rationale\": \"The heart size is within normal limits, consistent with the findings in multiple similar cases.\"\n    },\n    {\n      \"finding\": \"Atelectasis\",\n      \"status\": \"present\",\n      \"probability\": 0.65,\n      \"cited_case_ids\": [\n        \"CXR2594\",\n        \"CXR845\"\n      ],\n      \"rationale\": \"Streaky opacities at the right lung base are most likely subsegmental atelectasis, a finding supported by the most similar case.\"\n    },\n    {\n      \"finding\": \"Lung Lesion\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR2594\",\n        \"CXR2847\"\n      ],\n      \"rationale\": \"There is no evidence of discrete nodules, masses, or cavitary lesions in the lungs.\"\n    },\n    {\n      \"finding\": \"Pleural Effusion\",\n      \"status\": \"absent\",\n      \"probability\": 0.1,\n      \"cited_case_ids\": [\n        \"CXR490\",\n        \"CXR1426\",\n        \"CXR2847\"\n      ],\n      \"rationale\": \"Costophrenic angles are clear where visualized, with no sign of significant pleural fluid.\"\n    },\n    {\n      \"finding\": \"Fracture\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR3146\",\n        \"CXR2347\"\n      ],\n      \"rationale\": \"Visible osseous structures are grossly intact without acute fracture, though scoliosis and degenerative spinal changes are present.\"\n    }\n  ],\n  \"impression\": \"No acute cardiopulmonary abnormality. Findings include subtle right base atelectasis, a tortuous aorta, and degenerative changes of the spine with scoliosis.\"\n}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "uncertain",
+    "probability": 0.25,
+    "cited_case_ids": [
+     "CXR2594"
+    ],
+    "rationale": "There is subtle streaky density at the right lung base which could represent a mild focal infiltrate, though it is more likely atelectasis."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2594",
+     "CXR490",
+     "CXR2847"
+    ],
+    "rationale": "The heart size is within normal limits, consistent with the findings in multiple similar cases."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.65,
+    "cited_case_ids": [
+     "CXR2594",
+     "CXR845"
+    ],
+    "rationale": "Streaky opacities at the right lung base are most likely subsegmental atelectasis, a finding supported by the most similar case."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2594",
+     "CXR2847"
+    ],
+    "rationale": "There is no evidence of discrete nodules, masses, or cavitary lesions in the lungs."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR490",
+     "CXR1426",
+     "CXR2847"
+    ],
+    "rationale": "Costophrenic angles are clear where visualized, with no sign of significant pleural fluid."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR3146",
+     "CXR2347"
+    ],
+    "rationale": "Visible osseous structures are grossly intact without acute fracture, though scoliosis and degenerative spinal changes are present."
+   }
+  ],
+  "impression": "No acute cardiopulmonary abnormality. Findings include subtle right base atelectasis, a tortuous aorta, and degenerative changes of the spine with scoliosis."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2278,
+  "output": 641,
+  "thinking": 1495,
+  "total": 4414
+ },
+ "time": "2026-10-18T14:15:17"
+}

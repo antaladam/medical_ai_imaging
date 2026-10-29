@@ -1,0 +1,124 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR2448",
+ "image": "CXR2448_IM-0983-1001",
+ "indication": "Evaluate pneumothorax",
+ "neighbours": [
+  {
+   "study": "CXR1230",
+   "similarity": 0.9354572892189026
+  },
+  {
+   "study": "CXR394",
+   "similarity": 0.9301620125770569
+  },
+  {
+   "study": "CXR2616",
+   "similarity": 0.920554518699646
+  },
+  {
+   "study": "CXR1649",
+   "similarity": 0.9175562858581543
+  },
+  {
+   "study": "CXR1593",
+   "similarity": 0.9150196313858032
+  },
+  {
+   "study": "CXR3292",
+   "similarity": 0.9128599762916565
+  },
+  {
+   "study": "CXR308",
+   "similarity": 0.9113579988479614
+  },
+  {
+   "study": "CXR677",
+   "similarity": 0.9088832139968872
+  },
+  {
+   "study": "CXR702",
+   "similarity": 0.9052881002426147
+  },
+  {
+   "study": "CXR638",
+   "similarity": 0.9051869511604309
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: Evaluate pneumothorax\n\nSimilar cases (most similar first):\nCase CXR1230 (similarity 0.935): IMPRESSION: Left lung clear. Slight cardiomegaly. Right effusion. Right lower lobe infiltrate. Two air-fluid levels in the right hemithorax most XXXX representing hydropneumothorax. This radiographic finding could also represent empyema with a bronchopleural fistula. CT scan with IV contrast may be helpful.\nCase CXR394 (similarity 0.930): FINDINGS: There is a large airspace opacity in the right lower and middle lobes. There is no pneumothorax. Heart size is normal. Soft tissue and bony structures unremarkable. IMPRESSION: Multilobar airspace consolidation.\nCase CXR2616 (similarity 0.921): FINDINGS: Frontal and lateral views of the chest show normal size and configuration of the cardiac silhouette. The right costophrenic sulcus is blunted. There is an the right base XXXX/fluid level. The left lung is clear. IMPRESSION: 1. Right-sided small pleural effusion. 2. Right base XXXX/fluid level. Atypical location for a hiatal hernia. Cannot exclude a right lower lobe cavity. Correlation XXXX scan recommended. Does not appear to be a hydropneumothorax or empyema.\nCase CXR1649 (similarity 0.918): FINDINGS: There is a moderate layering left pleural effusion, grossly stable. There is a moderate right pleural effusion, which is partially loculated. There is some pleural fluid tracking along the right XXXX fissure. There is bibasilar airspace disease, possibly passive atelectasis. No pneumothorax is identified. Heart size is within normal limits. Right PICC tip is at the SVC. There are mild degenerative changes of the spine. IMPRESSION: 1. Partially loculated right pleural effusion, grossly stable. 2. Stable moderate layering left pleural effusion. 3. Bibasilar airspace disease, possibly atelectasis.\nCase CXR1593 (similarity 0.915): FINDINGS: Moderate sized right loculated pleural effusion with right lower lobe atelectasis. Normal cardiac contour with atherosclerotic changes throughout the aorta. Clear left lung XXXX. IMPRESSION: 1. Moderate right pleural effusion.\nCase CXR3292 (similarity 0.913): FINDINGS: Mediastinal contours are normal. Opacity within the right middle and lower lobes. No displacement of the XXXX or XXXX fissure. No pneumothorax.. IMPRESSION: Opacification of the right middle and lower lobes.\nCase CXR308 (similarity 0.911): FINDINGS: Stable appearing right-sided XXXX the opacities. There is persistent elevation of the right hemidiaphragm. The cardiac silhouette and mediastinal contours are within normal limits. There is no pneumothorax. IMPRESSION: Stable right-sided chronic lung scarring otherwise no acute cardiopulmonary disease.\nCase CXR677 (similarity 0.909): FINDINGS: PICC line catheter tip XXXX in the right atrium. Heart is not enlarged. Trachea and XXXX bronchi appear normal. Lungs are mildly under expanded. No pneumothorax. There are small areas of patchy density in the left lower lung XXXX. There is a larger area of XXXX patchy density in the right mid and lower lungs with right-sided pleural effusion. IMPRESSION: In view of the history findings are strongly suggestive of XXXX acute pneumonia with right-sided pleural effusion.\nCase CXR702 (similarity 0.905): FINDINGS: The left lung is grossly clear. The right lung demonstrates a large right pleural effusion with associated atelectatic collapse of the right middle lobe and partial collapse of the right lower lobe. XXXX opacities are seen within the aerated right lung, XXXX subsegmental atelectasis. No focal consolidation or pneumothorax identified. No acute osseous abnormality. Cardio mediastinal silhouette is stable compared to prior examinations. IMPRESSION: Large right pleural effusion with associated passive atelectasis of the right middle and lower lobes. Grossly clear left lung.\nCase CXR638 (similarity 0.905): IMPRESSION: Anterior segment right lower lobe pneumonia. No effusion. Heart size is normal. Lungs otherwise clear.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"present\",\"probability\":0.90,\"cited_case_ids\":[\"CXR394\",\"CXR3292\"],\"rationale\":\"There is significant opacification in the right mid and lower lung fields, likely representing consolidation.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"absent\",\"probability\":0.15,\"cited_case_ids\":[\"CXR394\",\"CXR1649\"],\"rationale\":\"The cardiac silhouette size is within the normal range and not enlarged.\"},{\"finding\":\"Atelectasis\",\"status\":\"present\",\"probability\":0.80,\"cited_case_ids\":[\"CXR1593\",\"CXR702\"],\"rationale\":\"Compression of the right lung parenchyma by the large fluid collection likely results in passive atelectasis.\"},{\"finding\":\"Lung Lesion\",\"status\":\"uncertain\",\"probability\":0.40,\"cited_case_ids\":[\"CXR2616\"],\"rationale\":\"The prominent air-fluid level might represent a large lung abscess cavity, although a pleural process is considered more probable.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"present\",\"probability\":0.95,\"cited_case_ids\":[\"CXR1230\",\"CXR2616\",\"CXR702\"],\"rationale\":\"A large fluid collection with an air-fluid level in the right hemithorax is consistent with hydropneumothorax or empyema.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[],\"rationale\":\"No acute or old fractures of the ribs, clavicles, or spine are visualized.\"}],\"impression\":\"Large right-sided hydropneumothorax or empyema with associated passive atelectasis; the left lung remains clear.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "present",
+    "probability": 0.9,
+    "cited_case_ids": [
+     "CXR394",
+     "CXR3292"
+    ],
+    "rationale": "There is significant opacification in the right mid and lower lung fields, likely representing consolidation."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.15,
+    "cited_case_ids": [
+     "CXR394",
+     "CXR1649"
+    ],
+    "rationale": "The cardiac silhouette size is within the normal range and not enlarged."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.8,
+    "cited_case_ids": [
+     "CXR1593",
+     "CXR702"
+    ],
+    "rationale": "Compression of the right lung parenchyma by the large fluid collection likely results in passive atelectasis."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "uncertain",
+    "probability": 0.4,
+    "cited_case_ids": [
+     "CXR2616"
+    ],
+    "rationale": "The prominent air-fluid level might represent a large lung abscess cavity, although a pleural process is considered more probable."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "present",
+    "probability": 0.95,
+    "cited_case_ids": [
+     "CXR1230",
+     "CXR2616",
+     "CXR702"
+    ],
+    "rationale": "A large fluid collection with an air-fluid level in the right hemithorax is consistent with hydropneumothorax or empyema."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [],
+    "rationale": "No acute or old fractures of the ribs, clavicles, or spine are visualized."
+   }
+  ],
+  "impression": "Large right-sided hydropneumothorax or empyema with associated passive atelectasis; the left lung remains clear."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2455,
+  "output": 388,
+  "thinking": 5382,
+  "total": 8225
+ },
+ "time": "2026-10-18T14:34:39"
+}

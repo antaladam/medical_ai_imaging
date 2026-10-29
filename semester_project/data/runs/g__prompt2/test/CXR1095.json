@@ -1,0 +1,125 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR1095",
+ "image": "CXR1095_IM-0066-1001",
+ "indication": "Preprocedure evaluation prior to bone marrow transplant",
+ "neighbours": [
+  {
+   "study": "CXR965",
+   "similarity": 0.9058824777603149
+  },
+  {
+   "study": "CXR1436",
+   "similarity": 0.9050610661506653
+  },
+  {
+   "study": "CXR2709",
+   "similarity": 0.9049729108810425
+  },
+  {
+   "study": "CXR2418",
+   "similarity": 0.9043035507202148
+  },
+  {
+   "study": "CXR3315",
+   "similarity": 0.9024500846862793
+  },
+  {
+   "study": "CXR40",
+   "similarity": 0.9021947383880615
+  },
+  {
+   "study": "CXR923",
+   "similarity": 0.9019642472267151
+  },
+  {
+   "study": "CXR2670",
+   "similarity": 0.9009767770767212
+  },
+  {
+   "study": "CXR2157",
+   "similarity": 0.9004040360450745
+  },
+  {
+   "study": "CXR843",
+   "similarity": 0.9002295136451721
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: Preprocedure evaluation prior to bone marrow transplant\n\nSimilar cases (most similar first):\nCase CXR965 (similarity 0.906): FINDINGS: The lungs appear clear. Heart and pulmonary XXXX appear normal. Mediastinal contours are normal. Pleural spaces are clear. There appears to the contrast XXXX within small colonic diverticula in the splenic flexure region. IMPRESSION: 1. No acute cardiopulmonary disease\nCase CXR1436 (similarity 0.905): FINDINGS: The cardiac and mediastinal contours are within normal limits. There are calcifications of the aortic XXXX. The lungs are hyperinflated with increased retrosternal airspace and flattening of hemidiaphragms. There is haziness in the right lung apex. There is a 1.7 cm nodular density in the medial right lung base seen on the frontal view, not identified on the lateral view. This may represent a vessel on end. There is no consolidation, pneumothorax, or effusion. There are mild degenerative changes of the spine. IMPRESSION: 1. Haziness in the right lung apex and questionable right middle lobe pulmonary nodule. These may be explained by overlapping structures, XXXX chest would be useful for further evaluation. 2. Emphysematous changes.\nCase CXR2709 (similarity 0.905): FINDINGS: There is a subtle left medial base opacity. Cardiomediastinal silhouette is normal. Pulmonary vasculature and XXXX are normal. No pneumothorax or large pleural effusion. Osseous structures and soft tissues are normal. IMPRESSION: Subtle medial left basilar opacity could represent early pneumonia.\nCase CXR2418 (similarity 0.904): FINDINGS: The trachea is midline. The cardiomediastinal silhouette is normal. Note is XXXX of calcifications in the aortic XXXX. The lungs are clear, without evidence of focal infiltrate or effusion. There is no pneumothorax. The visualized bony structures reveal no acute abnormalities. There is calcification of the chondral portions of the ribs. IMPRESSION: 1. No acute cardiopulmonary abnormalities. 2. No displaced rib fractures are seen. .\nCase CXR3315 (similarity 0.902): FINDINGS: The lungs are clear. There is no pleural effusion or pneumothorax. The heart and mediastinum are normal. The skeletal structures are normal. IMPRESSION: No acute pulmonary disease.\nCase CXR40 (similarity 0.902): FINDINGS: Mild hyperexpansion of the lungs. Numerous bilateral rib deformities. No focal airspace disease. Heart size is normal. No pneumothorax or effusion. Large, flowing anterior endplate osteophytes of the thoracic spine. IMPRESSION: Emphysema with no acute cardiopulmonary findings.\nCase CXR923 (similarity 0.902): IMPRESSION: Heart size normal. Dilated tortuous calcified aortic XXXX. Tracheostomy tube tip 4 cm above the carina. Multiple scattered small nodules throughout the lungs most XXXX represents calcified granulomas. No nodules or masses. Degenerative spurring of the thoracic spine. Review of XXXX-CT demonstrates calcified granulomas scattered throughout the lungs.\nCase CXR2670 (similarity 0.901): FINDINGS: Hyperexpanded lungs with flattened hemidiaphragms, consistent with emphysema. There is streaky airspace opacities in the left suprahilar and lingular regions. No pneumothorax or effusions. Mild bilateral costophrenic XXXX blunting XXXX represents pleural thickening and scarring. Degenerative changes of the thoracic spine. IMPRESSION: Emphysematous changes with streaky opacities in the left perihilar and lingular regions, XXXX focal atelectasis and scarring.\nCase CXR2157 (similarity 0.900): IMPRESSION: Comparison XXXX, XXXX. Well-expanded and clear lungs. Mediastinal contour within normal limits. No acute cardiopulmonary abnormality identified.\nCase CXR843 (similarity 0.900): FINDINGS: Right lower lobe XXXX calcified granuloma. Heart size within normal limits. No pleural effusions. No evidence of pneumothorax. Degenerative changes thoracic spine. IMPRESSION: No acute cardiopulmonary inability. .\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\": [{\"finding\": \"Lung Opacity\", \"status\": \"present\", \"probability\": 0.75, \"cited_case_ids\": [\"CXR2670\", \"CXR2709\"], \"rationale\": \"Streaky opacities are present in the mid-lung zones bilaterally, potentially representing mild airspace disease or chronic scarring.\"}, {\"finding\": \"Cardiomegaly\", \"status\": \"absent\", \"probability\": 0.05, \"cited_case_ids\": [\"CXR965\", \"CXR3315\"], \"rationale\": \"The heart size is within normal limits with a normal cardiomediastinal silhouette.\"}, {\"finding\": \"Atelectasis\", \"status\": \"present\", \"probability\": 0.7, \"cited_case_ids\": [\"CXR2670\"], \"rationale\": \"Linear opacities in the mid-lungs are consistent with subsegmental atelectasis or scarring.\"}, {\"finding\": \"Lung Lesion\", \"status\": \"uncertain\", \"probability\": 0.5, \"cited_case_ids\": [\"CXR1436\"], \"rationale\": \"A small nodular density in the left mid-lung is indeterminate and could represent a pulmonary nodule or an end-on vessel.\"}, {\"finding\": \"Pleural Effusion\", \"status\": \"absent\", \"probability\": 0.05, \"cited_case_ids\": [\"CXR3315\", \"CXR2418\"], \"rationale\": \"The pleural spaces are clear and the costophrenic angles are sharp.\"}, {\"finding\": \"Fracture\", \"status\": \"absent\", \"probability\": 0.05, \"cited_case_ids\": [\"CXR2418\", \"CXR3315\"], \"rationale\": \"No acute or chronic fractures are identified in the visualized thoracic skeleton.\"}], \"impression\": \"No acute cardiopulmonary disease. Chronic-appearing streaky opacities in the mid-lungs likely represent subsegmental atelectasis or scarring. An indeterminate small nodular density in the left mid-lung may be further evaluated if clinically indicated.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "present",
+    "probability": 0.75,
+    "cited_case_ids": [
+     "CXR2670",
+     "CXR2709"
+    ],
+    "rationale": "Streaky opacities are present in the mid-lung zones bilaterally, potentially representing mild airspace disease or chronic scarring."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR965",
+     "CXR3315"
+    ],
+    "rationale": "The heart size is within normal limits with a normal cardiomediastinal silhouette."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.7,
+    "cited_case_ids": [
+     "CXR2670"
+    ],
+    "rationale": "Linear opacities in the mid-lungs are consistent with subsegmental atelectasis or scarring."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "uncertain",
+    "probability": 0.5,
+    "cited_case_ids": [
+     "CXR1436"
+    ],
+    "rationale": "A small nodular density in the left mid-lung is indeterminate and could represent a pulmonary nodule or an end-on vessel."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR3315",
+     "CXR2418"
+    ],
+    "rationale": "The pleural spaces are clear and the costophrenic angles are sharp."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2418",
+     "CXR3315"
+    ],
+    "rationale": "No acute or chronic fractures are identified in the visualized thoracic skeleton."
+   }
+  ],
+  "impression": "No acute cardiopulmonary disease. Chronic-appearing streaky opacities in the mid-lungs likely represent subsegmental atelectasis or scarring. An indeterminate small nodular density in the left mid-lung may be further evaluated if clinically indicated."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2461,
+  "output": 469,
+  "thinking": 4818,
+  "total": 7748
+ },
+ "time": "2026-10-18T14:05:45"
+}

@@ -1,0 +1,131 @@
+{
+ "arm": "g_ind__prompt2",
+ "system": "g_ind",
+ "prompt_version": 2,
+ "study": "CXR41",
+ "image": "CXR41_IM-2055-1001",
+ "indication": "",
+ "neighbours": [
+  {
+   "study": "CXR1157",
+   "similarity": 0.9461064338684082
+  },
+  {
+   "study": "CXR840",
+   "similarity": 0.9330563545227051
+  },
+  {
+   "study": "CXR836",
+   "similarity": 0.9313644170761108
+  },
+  {
+   "study": "CXR2112",
+   "similarity": 0.930515706539154
+  },
+  {
+   "study": "CXR3858",
+   "similarity": 0.9272986650466919
+  },
+  {
+   "study": "CXR2072",
+   "similarity": 0.9267752766609192
+  },
+  {
+   "study": "CXR1240",
+   "similarity": 0.9266709685325623
+  },
+  {
+   "study": "CXR2054",
+   "similarity": 0.9263181686401367
+  },
+  {
+   "study": "CXR1840",
+   "similarity": 0.9261959791183472
+  },
+  {
+   "study": "CXR108",
+   "similarity": 0.9254568219184875
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nSimilar cases (most similar first):\nCase CXR1157 (similarity 0.946): FINDINGS: The heart, pulmonary XXXX and mediastinum are within normal limits. There is no pleural effusion or pneumothorax. There is a region of left upper lobe perihilar opacity identified. IMPRESSION: Left upper lobe pneumonia. Followup radiographs after appropriate therapy in 8-12 weeks are indicated to exclude an underlying abnormality.\nCase CXR840 (similarity 0.933): IMPRESSION: Heart size is normal. Left upper lobe atelectasis / infiltrate in the left perihilar region, unchanged. Two venous catheter tips overlie the mid SVC. Small medial left upper lobe pleural air collection.\nCase CXR836 (similarity 0.931): FINDINGS: The XXXX examination consists of frontal supine and lateral radiographs of the chest. Frontal view is lordotic in projection. The cardiomediastinal contours are within normal limits for supine film. No focal consolidation, pleural effusion, or pneumothorax identified. There is a calcified granuloma at the left lung base. The visualized osseous structures and upper abdomen are unremarkable. IMPRESSION: No evidence of acute thoracic XXXX. XXXX chest radiograph is recommended if XXXX is not XXXX.\nCase CXR2112 (similarity 0.931): FINDINGS: There is 1.9 cm interruption of the tunneled left central venous catheter, at the level of the overlap of the clavicle and first rib. Catheter tip may be within the proximal SVC or azygos vein. Normal heart size. XXXX left perihilar and midlung densities. No pneumothorax or large pleural effusion. IMPRESSION: 1. Left central venous catheter fracture at the level of the overlap of the clavicle and first rib. Distal catheter tip may be within the azygos vein. 2. Similar-appearing left midlung scarring.\nCase CXR3858 (similarity 0.927): FINDINGS: 3 images. Heart size is normal. There is mild tortuosity of the thoracic aorta. There are costochondral calcifications. The lungs are clear of focal infiltrate. No pleural effusion or pneumothorax. Old left clavicle fracture noted. IMPRESSION: No acute abnormality identified.\nCase CXR2072 (similarity 0.927): FINDINGS: Stable, nonenlarged cardiomediastinal silhouette. Left upper lobe calcified granuloma noted. Epigastric and right upper quadrant postsurgical changes. Interval increased bilateral interstitial opacities, with probable left lower lobe infiltrate. IMPRESSION: Stable, nonenlarged cardiomediastinal silhouette. Left upper lobe calcified granuloma noted. Epigastric and right upper quadrant postsurgical changes. Interval increased bilateral interstitial opacities, with probable left lower lobe infiltrate.\nCase CXR1240 (similarity 0.927): FINDINGS: Feeding tube passes below the left hemidiaphragm. Left subclavian central line tip is at the upper SVC. Shunt tubing courses along the anterior left hemithorax. There is grossly stable left lower lobe consolidation. Stable mild residual medial right basilar airspace disease. There is no pneumothorax. Heart size is within normal limits. There is aortic atherosclerotic vascular calcification. There are diffuse degenerative changes of the spine. IMPRESSION: 1. Stable left lung consolidation, possibly infectious pneumonia and/or aspiration. Recommend followup radiographs after treatment to ensure complete resolution. 2. Stable mild residual medial right basilar airspace disease.\nCase CXR2054 (similarity 0.926): IMPRESSION: Interstitial and alveolar opacities most confluent in the left perihilar lung may be compatible with infection, differential diagnosis includes atypical pulmonary edema, inflammation. No definite pleural effusion seen. Stable cardiomediastinal silhouette with near top normal heart size. Aeration of the left perihilar lung may be slightly improved compared with the XXXX image from XXXX.\nCase CXR1840 (similarity 0.926): FINDINGS: PA and lateral views of the chest were obtained. The cardiomediastinal silhouette is normal in size and configuration. The lungs are well aerated. There is asymmetric opacity to left suprahilar chest. No discrete correlate is seen on lateral view. Findings may reflect focal airspace disease or adenopathy. No pleural effusion. No pneumothorax. IMPRESSION: 1. Asymmetric left suprahilar opacity, consider focal airspace disease or adenopathy. Correlate clinically as to XXXX or symptoms of infection. Recommend followup radiograph to document resolution.\nCase CXR108 (similarity 0.925): FINDINGS: The heart is normal in size. The mediastinum is Within normal limits the lungs are hypoinflated. There is mild increase in perihilar markings XXXX related to patient's history bronchitis. No acute infiltrate or pleural effusion are seen. IMPRESSION: Low lung volumes with increased lung markings particularly in the left perihilar region XXXX related to history of bronchitis. No acute infiltrate.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"present\",\"probability\":0.95,\"cited_case_ids\":[\"CXR1157\",\"CXR840\",\"CXR2112\",\"CXR1240\",\"CXR2054\",\"CXR1840\"],\"rationale\":\"There is a prominent area of increased density in the left perihilar region and lower lung zone, consistent with consolidation. This finding is supported by several similar cases that also identify left-sided perihilar or lower lobe opacities.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"absent\",\"probability\":0.1,\"cited_case_ids\":[\"CXR1157\",\"CXR840\",\"CXR2112\",\"CXR3858\",\"CXR1240\",\"CXR1840\"],\"rationale\":\"The cardiomediastinal silhouette appears normal in size and contour, a finding corroborated by the majority of the similar cases.\"},{\"finding\":\"Atelectasis\",\"status\":\"uncertain\",\"probability\":0.4,\"cited_case_ids\":[\"CXR840\"],\"rationale\":\"While the left-sided opacity is suggestive of consolidation, a component of atelectasis or volume loss cannot be entirely excluded, as seen in the differential for Case CXR840.\"},{\"finding\":\"Lung Lesion\",\"status\":\"absent\",\"probability\":0.15,\"cited_case_ids\":[],\"rationale\":\"No discrete pulmonary nodules or masses are identified; the primary finding is a confluent area of opacity.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"absent\",\"probability\":0.2,\"cited_case_ids\":[\"CXR1157\",\"CXR2112\",\"CXR3858\",\"CXR2054\",\"CXR1840\"],\"rationale\":\"The right costophrenic angle is sharp, and while the left is obscured by opacity, there is no definitive evidence of a pleural effusion or meniscus sign.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[],\"rationale\":\"The visualized ribs, clavicles, and vertebral bodies appear intact without evidence of acute or old fractures.\"}],\"impression\":\"Left lung consolidation, most likely representing pneumonia or focal airspace disease.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "present",
+    "probability": 0.95,
+    "cited_case_ids": [
+     "CXR1157",
+     "CXR840",
+     "CXR2112",
+     "CXR1240",
+     "CXR2054",
+     "CXR1840"
+    ],
+    "rationale": "There is a prominent area of increased density in the left perihilar region and lower lung zone, consistent with consolidation. This finding is supported by several similar cases that also identify left-sided perihilar or lower lobe opacities."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR1157",
+     "CXR840",
+     "CXR2112",
+     "CXR3858",
+     "CXR1240",
+     "CXR1840"
+    ],
+    "rationale": "The cardiomediastinal silhouette appears normal in size and contour, a finding corroborated by the majority of the similar cases."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "uncertain",
+    "probability": 0.4,
+    "cited_case_ids": [
+     "CXR840"
+    ],
+    "rationale": "While the left-sided opacity is suggestive of consolidation, a component of atelectasis or volume loss cannot be entirely excluded, as seen in the differential for Case CXR840."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.15,
+    "cited_case_ids": [],
+    "rationale": "No discrete pulmonary nodules or masses are identified; the primary finding is a confluent area of opacity."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.2,
+    "cited_case_ids": [
+     "CXR1157",
+     "CXR2112",
+     "CXR3858",
+     "CXR2054",
+     "CXR1840"
+    ],
+    "rationale": "The right costophrenic angle is sharp, and while the left is obscured by opacity, there is no definitive evidence of a pleural effusion or meniscus sign."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [],
+    "rationale": "The visualized ribs, clavicles, and vertebral bodies appear intact without evidence of acute or old fractures."
+   }
+  ],
+  "impression": "Left lung consolidation, most likely representing pneumonia or focal airspace disease."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2609,
+  "output": 492,
+  "thinking": 1042,
+  "total": 4143
+ },
+ "time": "2026-10-18T13:45:24"
+}

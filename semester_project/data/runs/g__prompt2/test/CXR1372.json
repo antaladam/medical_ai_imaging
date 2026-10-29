@@ -1,0 +1,124 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR1372",
+ "image": "CXR1372_IM-0239-1001",
+ "indication": "Shortness of breath, Hodgkin's lymphoma",
+ "neighbours": [
+  {
+   "study": "CXR1931",
+   "similarity": 0.9655537009239197
+  },
+  {
+   "study": "CXR3071",
+   "similarity": 0.9638378620147705
+  },
+  {
+   "study": "CXR2454",
+   "similarity": 0.9633854627609253
+  },
+  {
+   "study": "CXR2756",
+   "similarity": 0.9633010029792786
+  },
+  {
+   "study": "CXR1991",
+   "similarity": 0.9632284641265869
+  },
+  {
+   "study": "CXR2050",
+   "similarity": 0.9620785713195801
+  },
+  {
+   "study": "CXR2059",
+   "similarity": 0.9619723558425903
+  },
+  {
+   "study": "CXR2873",
+   "similarity": 0.9617940187454224
+  },
+  {
+   "study": "CXR795",
+   "similarity": 0.9606888890266418
+  },
+  {
+   "study": "CXR168",
+   "similarity": 0.9603111743927002
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: Shortness of breath, Hodgkin's lymphoma\n\nSimilar cases (most similar first):\nCase CXR1931 (similarity 0.966): FINDINGS: The heart is normal in size. The mediastinum is unremarkable. The lungs are clear. IMPRESSION: No acute disease.\nCase CXR3071 (similarity 0.964): FINDINGS: Heart size is normal. The lungs are clear. There are no focal air space consolidations. No pleural effusions or pneumothoraces. The hilar and mediastinal contours are normal. Normal pulmonary vascularity. IMPRESSION: No acute abnormality.\nCase CXR2454 (similarity 0.963): FINDINGS: Cardiomediastinal silhouette appears normal in size and contour. Right lung is clear. Stable blunting of costophrenic XXXX with improved aeration of the left base compared to prior exam. No visualized pneumothorax or focal consolidation. XXXX unremarkable. IMPRESSION: Stable blunting of the left costophrenic XXXX which may represent persistent left pleural effusion versus pleural scarring.\nCase CXR2756 (similarity 0.963): FINDINGS: Right lower lobe infiltrate. The trachea is midline. Negative for pneumothorax, pleural effusion. The heart size is normal. There has been interval placement of a left chest XXXX, with its distal tip in the Left sided SVC IMPRESSION: 1. Right lower lobe infiltrate, suggestive of pneumonia\nCase CXR1991 (similarity 0.963): FINDINGS: The heart is normal in size. The mediastinum is stable. The lungs are hypoinflated. There are XXXX streaky opacities predominantly in the left lung base possibly related to scarring and atelectasis. XXXX B-lines are also noted. Definite infiltrate is not excluded. There is no large effusion. IMPRESSION: 1. Low lung volumes with streaky left basilar opacity, XXXX subsegmental atelectasis and scarring. Infiltrate is XXXX less XXXX but not entirely excluded. 2. Mild central vascular congestion and bronchovascular crowding.\nCase CXR2050 (similarity 0.962): IMPRESSION: 1. Stable appearance of XXXX scarring in the right upper lung associated with numerous XXXX XXXX granulomas. There are calcified right hilar lymph XXXX as XXXX. 2. XXXX opacities in the left lung base, XXXX atelectasis or scarring 3. Low lung volumes 4. No focal air space opacities to suggest pneumonia.\nCase CXR2059 (similarity 0.962): FINDINGS: Right lower lobe patchy opacities noted. Heart size within normal limits. No pleural effusions. No evidence of pneumothorax. Mild degenerative changes of the thoracic spine. IMPRESSION: Patchy right lower lobe opacities, XXXX infectious infiltrate.\nCase CXR2873 (similarity 0.962): FINDINGS: Heart size and vascularity normal. External contour normal. Lungs clear. No pleural effusions or pneumothoraces. IMPRESSION: No acute cardiopulmonary process.\nCase CXR795 (similarity 0.961): FINDINGS: Heart size normal. Lungs are clear. XXXX are normal. No pneumonia, effusions, edema, pneumothorax, adenopathy, nodules or masses. IMPRESSION: Normal chest No evidence of tuberculosis.\nCase CXR168 (similarity 0.960): FINDINGS: The lungs are clear bilaterally. Specifically, no evidence of focal consolidation, pneumothorax, or pleural effusion.. Cardio mediastinal silhouette is unremarkable. Visualized osseous structures of the thorax demonstrates stable mild multilevel degenerative disc disease of the thoracolumbar spine as well as chronic left-sided rib fractures without acute abnormality. IMPRESSION: No acute cardiopulmonary abnormality.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\n  \"findings\": [\n    {\n      \"finding\": \"Lung Opacity\",\n      \"status\": \"present\",\n      \"probability\": 0.85,\n      \"cited_case_ids\": [\n        \"CXR1991\",\n        \"CXR2059\"\n      ],\n      \"rationale\": \"There are patchy and streaky opacities in the lung bases, particularly on the left, which suggest airspace disease or infiltrate.\"\n    },\n    {\n      \"finding\": \"Cardiomegaly\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR1931\",\n        \"CXR3071\"\n      ],\n      \"rationale\": \"The cardiomediastinal silhouette appears normal in size and contour.\"\n    },\n    {\n      \"finding\": \"Atelectasis\",\n      \"status\": \"present\",\n      \"probability\": 0.8,\n      \"cited_case_ids\": [\n        \"CXR1991\",\n        \"CXR2050\"\n      ],\n      \"rationale\": \"Streaky opacities at the lung bases, especially the left, are characteristic of subsegmental atelectasis or scarring.\"\n    },\n    {\n      \"finding\": \"Lung Lesion\",\n      \"status\": \"absent\",\n      \"probability\": 0.15,\n      \"cited_case_ids\": [\n        \"CXR795\"\n      ],\n      \"rationale\": \"No discrete pulmonary nodules or masses are identified, despite the clinical history of Hodgkin's lymphoma.\"\n    },\n    {\n      \"finding\": \"Pleural Effusion\",\n      \"status\": \"uncertain\",\n      \"probability\": 0.45,\n      \"cited_case_ids\": [\n        \"CXR2454\"\n      ],\n      \"rationale\": \"Mild blunting of the left costophrenic angle is present, which could represent a small effusion or pleural thickening.\"\n    },\n    {\n      \"finding\": \"Fracture\",\n      \"status\": \"absent\",\n      \"probability\": 0.05,\n      \"cited_case_ids\": [\n        \"CXR168\"\n      ],\n      \"rationale\": \"No acute or chronic osseous fractures are visible in the thoracic cage.\"\n    }\n  ],\n  \"impression\": \"Basilar opacities, most prominent on the left, likely represent subsegmental atelectasis or scarring. There is mild blunting of the left costophrenic angle which may indicate a small pleural effusion.\"\n}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "present",
+    "probability": 0.85,
+    "cited_case_ids": [
+     "CXR1991",
+     "CXR2059"
+    ],
+    "rationale": "There are patchy and streaky opacities in the lung bases, particularly on the left, which suggest airspace disease or infiltrate."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR1931",
+     "CXR3071"
+    ],
+    "rationale": "The cardiomediastinal silhouette appears normal in size and contour."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.8,
+    "cited_case_ids": [
+     "CXR1991",
+     "CXR2050"
+    ],
+    "rationale": "Streaky opacities at the lung bases, especially the left, are characteristic of subsegmental atelectasis or scarring."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.15,
+    "cited_case_ids": [
+     "CXR795"
+    ],
+    "rationale": "No discrete pulmonary nodules or masses are identified, despite the clinical history of Hodgkin's lymphoma."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "uncertain",
+    "probability": 0.45,
+    "cited_case_ids": [
+     "CXR2454"
+    ],
+    "rationale": "Mild blunting of the left costophrenic angle is present, which could represent a small effusion or pleural thickening."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR168"
+    ],
+    "rationale": "No acute or chronic osseous fractures are visible in the thoracic cage."
+   }
+  ],
+  "impression": "Basilar opacities, most prominent on the left, likely represent subsegmental atelectasis or scarring. There is mild blunting of the left costophrenic angle which may indicate a small pleural effusion."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2359,
+  "output": 608,
+  "thinking": 2038,
+  "total": 5005
+ },
+ "time": "2026-10-18T14:10:07"
+}

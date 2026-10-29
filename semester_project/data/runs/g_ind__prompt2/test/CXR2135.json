@@ -1,0 +1,126 @@
+{
+ "arm": "g_ind__prompt2",
+ "system": "g_ind",
+ "prompt_version": 2,
+ "study": "CXR2135",
+ "image": "CXR2135_IM-0757-1001",
+ "indication": "",
+ "neighbours": [
+  {
+   "study": "CXR297",
+   "similarity": 0.9498604536056519
+  },
+  {
+   "study": "CXR2001",
+   "similarity": 0.9413131475448608
+  },
+  {
+   "study": "CXR1905",
+   "similarity": 0.9409154653549194
+  },
+  {
+   "study": "CXR1234",
+   "similarity": 0.9386482834815979
+  },
+  {
+   "study": "CXR1458",
+   "similarity": 0.9359394311904907
+  },
+  {
+   "study": "CXR2557",
+   "similarity": 0.9345884323120117
+  },
+  {
+   "study": "CXR3591",
+   "similarity": 0.9319887161254883
+  },
+  {
+   "study": "CXR1240",
+   "similarity": 0.9316097497940063
+  },
+  {
+   "study": "CXR592",
+   "similarity": 0.9288163781166077
+  },
+  {
+   "study": "CXR1769",
+   "similarity": 0.9287615418434143
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nSimilar cases (most similar first):\nCase CXR297 (similarity 0.950): FINDINGS: Cardiac silhouette is within normal limits in size. The lungs are hypoinflated with mild bronchovascular crowding. There is mild, XXXX opacity projected over the left lung base. This is partly due to overlying soft tissues, however, there is partial obscuration of the lateral left hemidiaphragm. The lungs are otherwise grossly clear. There is no pneumothorax or pleural effusion. There are no acute bony findings. There are degenerative endplate changes throughout the thoracic spine. IMPRESSION: Low lung volumes with mild, XXXX left basilar opacity, atelectasis versus infiltrate. .\nCase CXR2001 (similarity 0.941): IMPRESSION: Lordotic film. Low lung volumes. Heart size within normal limits for this projection. Lower thoracic spine fusion. Small area of atelectasis or infiltrate adjacent to the right inferior hilum. This may be projectional followup films may be helpful.\nCase CXR1905 (similarity 0.941): FINDINGS: Enlarged cardiac contour, stable. Calcified vasculature. Sequelae of prior granulomatous disease. No confluent consolidation, pleural effusion, or overt pulmonary edema. Mild thoracic spondylosis. IMPRESSION: No acute findings. Stable cardiac enlargement.\nCase CXR1234 (similarity 0.939): FINDINGS: 2 images. The cardiac silhouette is enlarged. Thoracic aortic atherosclerotic calcifications are present. There are finding status post sternotomy and CABG. XXXX atelectasis or scar is noted within the left midlung. There is blunting of the left costophrenic XXXX. No pneumothorax. IMPRESSION: 1. Cardiomegaly. 2. Minimal left midlung atelectasis. 3. Blunting of left costophrenic XXXX. This could indicate a small amount of pleural fluid versus pleural-parenchymal scarring.\nCase CXR1458 (similarity 0.936): FINDINGS: Stable cardiomegaly and mediastinal contour. Lungs are clear without focal consolidation, large pleural effusion, or pneumothorax. Left basilar airspace opacity XXXX secondary to epicardial fat and overlying soft tissues. DISH of the thoracic spine is noted. Otherwise, visualized osseous structures are unremarkable. IMPRESSION: Stable cardiomegaly. Clear lungs. .\nCase CXR2557 (similarity 0.935): IMPRESSION: Mild cardiomegaly. No overt edema. Lateral image is degraded by motion but there suggestion of minimal bibasilar airspace disease/atelectasis. No appreciable pleural effusion or pneumothorax.\nCase CXR3591 (similarity 0.932): FINDINGS: The heart and mediastinal contours are unchanged. There is a moderate hiatal hernia. The lungs are clear without focal infiltrate. No effusion or pneumothorax. IMPRESSION: 1. Stable appearance of the chest with moderate hiatal hernia. No acute pulmonary disease.\nCase CXR1240 (similarity 0.932): FINDINGS: Feeding tube passes below the left hemidiaphragm. Left subclavian central line tip is at the upper SVC. Shunt tubing courses along the anterior left hemithorax. There is grossly stable left lower lobe consolidation. Stable mild residual medial right basilar airspace disease. There is no pneumothorax. Heart size is within normal limits. There is aortic atherosclerotic vascular calcification. There are diffuse degenerative changes of the spine. IMPRESSION: 1. Stable left lung consolidation, possibly infectious pneumonia and/or aspiration. Recommend followup radiographs after treatment to ensure complete resolution. 2. Stable mild residual medial right basilar airspace disease.\nCase CXR592 (similarity 0.929): IMPRESSION: Heart size within normal limits. No abnormal mediastinal widening. No edema. No focal consolidation. XXXX blunting of the posterior right sulcus may reflect a XXXX right pleural effusion. No pneumothoraces. Flowing osteophytes are seen through the mid and lower thoracic spine.\nCase CXR1769 (similarity 0.929): FINDINGS: Consolidation and some atelectasis are present in the left lower lobe. Patchy interstitial infiltrates are also present in the right lower lobe. Bilateral costophrenic XXXX blunting is present. Heart and pulmonary XXXX are normal. IMPRESSION: Bibasilar airspace disease, left worse right. Bilateral pleural fluid.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"present\",\"probability\":0.95,\"cited_case_ids\":[\"CXR297\",\"CXR1240\",\"CXR1769\"],\"rationale\":\"There is a prominent area of opacity in the left lower lobe which obscures the left hemidiaphragm, consistent with consolidation or significant airspace disease.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"present\",\"probability\":0.85,\"cited_case_ids\":[\"CXR1905\",\"CXR1234\",\"CXR1458\",\"CXR2557\"],\"rationale\":\"The cardiac silhouette appears enlarged, even accounting for the partial obscuration by the left-sided lung opacity.\"},{\"finding\":\"Atelectasis\",\"status\":\"present\",\"probability\":0.8,\"cited_case_ids\":[\"CXR297\",\"CXR1234\",\"CXR1769\"],\"rationale\":\"The density in the left lower lobe likely includes a component of atelectasis given the volume loss suggested by the obscuration of the heart border.\"},{\"finding\":\"Lung Lesion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[],\"rationale\":\"No discrete nodules, masses, or suspicious cavitary lesions are identified in the visible lung fields.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"present\",\"probability\":0.75,\"cited_case_ids\":[\"CXR1234\",\"CXR592\",\"CXR1769\"],\"rationale\":\"There is blunting of the costophrenic angles, most notably on the left, which is highly suggestive of a pleural effusion.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[],\"rationale\":\"The visualized ribs, clavicles, and spine show no evidence of acute or chronic fractures.\"}],\"impression\":\"Left lower lobe consolidation and atelectasis with associated pleural effusion and cardiomegaly.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "present",
+    "probability": 0.95,
+    "cited_case_ids": [
+     "CXR297",
+     "CXR1240",
+     "CXR1769"
+    ],
+    "rationale": "There is a prominent area of opacity in the left lower lobe which obscures the left hemidiaphragm, consistent with consolidation or significant airspace disease."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "present",
+    "probability": 0.85,
+    "cited_case_ids": [
+     "CXR1905",
+     "CXR1234",
+     "CXR1458",
+     "CXR2557"
+    ],
+    "rationale": "The cardiac silhouette appears enlarged, even accounting for the partial obscuration by the left-sided lung opacity."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.8,
+    "cited_case_ids": [
+     "CXR297",
+     "CXR1234",
+     "CXR1769"
+    ],
+    "rationale": "The density in the left lower lobe likely includes a component of atelectasis given the volume loss suggested by the obscuration of the heart border."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [],
+    "rationale": "No discrete nodules, masses, or suspicious cavitary lesions are identified in the visible lung fields."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "present",
+    "probability": 0.75,
+    "cited_case_ids": [
+     "CXR1234",
+     "CXR592",
+     "CXR1769"
+    ],
+    "rationale": "There is blunting of the costophrenic angles, most notably on the left, which is highly suggestive of a pleural effusion."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [],
+    "rationale": "The visualized ribs, clavicles, and spine show no evidence of acute or chronic fractures."
+   }
+  ],
+  "impression": "Left lower lobe consolidation and atelectasis with associated pleural effusion and cardiomegaly."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2469,
+  "output": 424,
+  "thinking": 931,
+  "total": 3824
+ },
+ "time": "2026-10-18T14:27:00"
+}

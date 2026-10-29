@@ -1,0 +1,130 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR1303",
+ "image": "CXR1303_IM-0199-1001-0001",
+ "indication": "XXXX bleed",
+ "neighbours": [
+  {
+   "study": "CXR3069",
+   "similarity": 0.9455857276916504
+  },
+  {
+   "study": "CXR249",
+   "similarity": 0.9362050294876099
+  },
+  {
+   "study": "CXR2249",
+   "similarity": 0.930539608001709
+  },
+  {
+   "study": "CXR3408",
+   "similarity": 0.9271945357322693
+  },
+  {
+   "study": "CXR603",
+   "similarity": 0.9261946082115173
+  },
+  {
+   "study": "CXR3029",
+   "similarity": 0.9259008169174194
+  },
+  {
+   "study": "CXR163",
+   "similarity": 0.9246801733970642
+  },
+  {
+   "study": "CXR3093",
+   "similarity": 0.918340802192688
+  },
+  {
+   "study": "CXR1823",
+   "similarity": 0.9182770252227783
+  },
+  {
+   "study": "CXR1700",
+   "similarity": 0.9155464768409729
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: XXXX bleed\n\nSimilar cases (most similar first):\nCase CXR3069 (similarity 0.946): FINDINGS: Right upper lobe airspace disease consistent with pneumonia given patient's history. The lungs are otherwise clear. No pleural effusions or pneumothoraces. Heart and mediastinum of normal size and contour. IMPRESSION: Right upper lobe pneumonia.\nCase CXR249 (similarity 0.936): FINDINGS: Lobulated right middle lobe mass measuring 4.5 x 6.8 cm, increased in size compared to prior study, most compatible with neoplasm. Otherwise, the lungs are clear without focal consolidation. No pneumothorax or pleural effusion. Cardiomediastinal silhouette within normal limits. IMPRESSION: 1. Interval enlargement of right middle lobe mass, highly suspicious for malignancy. Recommend CT of the chest/abdomen with intravenous contrast for further evaluation. 2. Otherwise clear lungs. Dr. XXXX XXXX notified of the critical results at XXXX on XXXX, XXXX by telephone and acknowledged receipt of these results.\nCase CXR2249 (similarity 0.931): IMPRESSION: PA and lateral views of the chest show enlarging right hilar adenopathy. The lungs appear grossly clear. Heart size and pulmonary XXXX are normal. There is no pneumothorax. Pleural spaces are clear. There is mild thoracic spine degenerative change. FINDINGS COULD REPRESENT RESOLVING HISTOPLASMOSIS INFECTION, SARCOIDOSIS, OR MALIGNANCY XXXX AS LYMPHOMA OR PRIMARY LUNG CANCER. RECOMMEND CONTRAST-ENHANCED CHEST CT FOR FURTHER EVALUATION.\nCase CXR3408 (similarity 0.927): FINDINGS: The cardiomediastinal contours are within normal limits. Pulmonary vasculature is unremarkable. There is no focal airspace opacity. No pleural effusion or pneumothorax is seen. Multiple healed bilateral rib fractures. No acute bony abnormality is identified. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR603 (similarity 0.926): IMPRESSION: Heart size normal. Right hilar calcifications are suggestive of prior granulomatous disease. Otherwise the mediastinal silhouette and pulmonary vascularity are within normal limits. There is no focal airspace consolidation, pleural effusion or pneumothorax.\nCase CXR3029 (similarity 0.926): FINDINGS: Normal cardiac contour. Clear lung XXXX bilaterally. No pleural effusion or pneumothorax. Degenerative seen throughout cervical spine. IMPRESSION: No acute cardiopulmonary abnormalities.\nCase CXR163 (similarity 0.925): FINDINGS: There are no airspace opacities to suggest pneumonia. There is a vague nodular like opacity in the right midlung measuring 1.2 cm projecting through the posterior 7th and 8th ribs. This may be artifact. Chest fluoroscopy would confirm this. Heart and pulmonary XXXX appear normal. There are calcified subcarinal and right hilar lymph XXXX. The pleural spaces are clear. IMPRESSION: Nodular density noted on recent PA chest radiograph XXXX represents an artifact. No nodules noted within the lungs on a recent outside XXXX from XXXX.\nCase CXR3093 (similarity 0.918): FINDINGS: Lungs are hyperexpanded. Bullae are present in the upper lobes. No focal infiltrates. Heart size normal. IMPRESSION: Findings of COPD. No acute findings.\nCase CXR1823 (similarity 0.918): FINDINGS: Chest. Heart size is normal. Pulmonary vasculature is normal. There is a 13 mm nodule in the right lower lobe that is relatively dense, but not obviously calcified on the corresponding rib series. There are probably right hilar calcified lymph XXXX. Lungs otherwise are clear. There is no pleural effusion. Left ribs. No fracture or focal bony destruction. IMPRESSION: 1. Chest. Large nodule at the right lung base that probably represents a granuloma although not it is not densely calcified. A low KV P chest radiograph can be obtained for confirmation as a there are no comparison studies available in the XXXX. If the patient has an outside chest radiograph, comparison can be XXXX and the report addended. 2. Ribs. Normal. Critical result notification documented through Primordial. If there are questions regarding this interpretation, please XXXX XXXX.\nCase CXR1700 (similarity 0.916): IMPRESSION: Heart size is normal and lungs are clear. Soft tissue density overlying the left lateral upper chest may represent the patient's lipoma.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"absent\",\"probability\":0.15,\"cited_case_ids\":[\"CXR249\",\"CXR3408\",\"CXR3029\"],\"rationale\":\"No focal consolidation or airspace disease is identified; the right lung abnormality is highly discrete and better classified as a lung lesion.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR3069\",\"CXR249\",\"CXR3408\",\"CXR603\"],\"rationale\":\"The heart size is normal and the cardiomediastinal silhouette is within normal limits, as seen in most similar reference cases.\"},{\"finding\":\"Atelectasis\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[],\"rationale\":\"There is no evidence of linear opacities or volume loss to suggest pulmonary atelectasis.\"},{\"finding\":\"Lung Lesion\",\"status\":\"present\",\"probability\":0.98,\"cited_case_ids\":[\"CXR249\",\"CXR163\",\"CXR1823\"],\"rationale\":\"A prominent, discrete, well-circumscribed mass is visible in the right upper lobe, similar to the nodules and masses reported in CXR249 and CXR163.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR3069\",\"CXR249\",\"CXR3029\",\"CXR1823\"],\"rationale\":\"The costophrenic angles are sharp and there is no evidence of pleural fluid accumulation.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR3408\",\"CXR1823\"],\"rationale\":\"No acute or healed fractures are visualized in the ribs, clavicles, or visible spine.\"}],\"impression\":\"Discrete right upper lobe lung mass. Recommended further evaluation with contrast-enhanced chest CT for characterization.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.15,
+    "cited_case_ids": [
+     "CXR249",
+     "CXR3408",
+     "CXR3029"
+    ],
+    "rationale": "No focal consolidation or airspace disease is identified; the right lung abnormality is highly discrete and better classified as a lung lesion."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR3069",
+     "CXR249",
+     "CXR3408",
+     "CXR603"
+    ],
+    "rationale": "The heart size is normal and the cardiomediastinal silhouette is within normal limits, as seen in most similar reference cases."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [],
+    "rationale": "There is no evidence of linear opacities or volume loss to suggest pulmonary atelectasis."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "present",
+    "probability": 0.98,
+    "cited_case_ids": [
+     "CXR249",
+     "CXR163",
+     "CXR1823"
+    ],
+    "rationale": "A prominent, discrete, well-circumscribed mass is visible in the right upper lobe, similar to the nodules and masses reported in CXR249 and CXR163."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR3069",
+     "CXR249",
+     "CXR3029",
+     "CXR1823"
+    ],
+    "rationale": "The costophrenic angles are sharp and there is no evidence of pleural fluid accumulation."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR3408",
+     "CXR1823"
+    ],
+    "rationale": "No acute or healed fractures are visualized in the ribs, clavicles, or visible spine."
+   }
+  ],
+  "impression": "Discrete right upper lobe lung mass. Recommended further evaluation with contrast-enhanced chest CT for characterization."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2508,
+  "output": 446,
+  "thinking": 2110,
+  "total": 5064
+ },
+ "time": "2026-10-18T14:08:34"
+}

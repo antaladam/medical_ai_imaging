@@ -1,0 +1,140 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR1717",
+ "image": "CXR1717_IM-0473-1001",
+ "indication": "Achalasia",
+ "neighbours": [
+  {
+   "study": "CXR237",
+   "similarity": 0.9634479284286499
+  },
+  {
+   "study": "CXR332",
+   "similarity": 0.9628951549530029
+  },
+  {
+   "study": "CXR3320",
+   "similarity": 0.9602377414703369
+  },
+  {
+   "study": "CXR2075",
+   "similarity": 0.9596244692802429
+  },
+  {
+   "study": "CXR1770",
+   "similarity": 0.9588993787765503
+  },
+  {
+   "study": "CXR2175",
+   "similarity": 0.9580763578414917
+  },
+  {
+   "study": "CXR2799",
+   "similarity": 0.9564512968063354
+  },
+  {
+   "study": "CXR1410",
+   "similarity": 0.955973744392395
+  },
+  {
+   "study": "CXR1993",
+   "similarity": 0.955101490020752
+  },
+  {
+   "study": "CXR453",
+   "similarity": 0.9549992084503174
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: Achalasia\n\nSimilar cases (most similar first):\nCase CXR237 (similarity 0.963): FINDINGS: The heart size and cardiomediastinal silhouette are normal. The lungs are clear without focal airspace opacity, pleural effusion, or pneumothorax. There are numerous calcified granuloma in the right perihilar region. There are multilevel degenerative changes in the thoracic spine. IMPRESSION: No acute cardiopulmonary finding.\nCase CXR332 (similarity 0.963): FINDINGS: There are are streaky retrocardiac left lower lobe opacities, in the correct clinical setting this could represent a pneumonia. There is no pneumothorax or pleural effusion. The cardiac silhouette is within normal limits. IMPRESSION: Streaky left retrocardiac airspace opacities, in the correct clinical setting this could represent a pneumonia.\nCase CXR3320 (similarity 0.960): IMPRESSION: Chest. Heart size normal lungs are clear. Right knee. Severe osteoarthritis all 3 compartments\nCase CXR2075 (similarity 0.960): FINDINGS: The cardiomediastinal silhouette is normal in size and contour. No focal consolidation, pneumothorax or large pleural effusion. Normal XXXX. IMPRESSION: Negative for acute abnormality.\nCase CXR1770 (similarity 0.959): FINDINGS: No pneumothorax or pleural effusion. Normal cardiac contours. Clear lungs bilaterally. Redemonstration of transmetatarsal amputation. No evidence of acute fracture-dislocations. No evidence of any bony erosions or osseous infections. IMPRESSION: Right foot 1. No evidence of the bony erosions or osseous infection. Chest radiograph 1. No acute cardiopulmonary abnormalities.\nCase CXR2175 (similarity 0.958): FINDINGS: The cardiac and mediastinal silhouettes are unremarkable. The lungs are well expanded and clear. There are no focal air space opacities. There is no pneumothorax or effusion. The bony structures of the thorax are intact with no evidence of acute osseous abnormality. IMPRESSION: No evidence of acute cardiopulmonary process. Stable appearance of the chest.\nCase CXR2799 (similarity 0.956): FINDINGS: Lungs are clear bilaterally. Cardiac and mediastinal silhouettes are normal. Pulmonary vasculature is normal. No pneumothorax or pleural effusion. No acute bony abnormality. IMPRESSION: No acute cardiopulmonary abnormality.\nCase CXR1410 (similarity 0.956): FINDINGS: The heart size is normal. The mediastinal contour is within normal limits. The lungs are free of any focal infiltrates. There are no nodules or masses. No visible pneumothorax. No visible pleural fluid. The XXXX are grossly normal. There is no visible free intraperitoneal air under the diaphragm. IMPRESSION: 1. No acute radiographic cardiopulmonary process.\nCase CXR1993 (similarity 0.955): FINDINGS: Lungs are clear without focal consolidation, effusion, or pneumothorax. Hyperexpanded lungs. Normal heart size. Bony thorax and soft tissues grossly unremarkable. IMPRESSION: Mild emphysema. Negative for acute cardiopulmonary abnormality.\nCase CXR453 (similarity 0.955): IMPRESSION: Concerning findings for fibrosis in the bases of the lungs. This can be further characterized with a XXXX of the chest. No confluent lobar pneumonia or pleural effusion.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR237\",\"CXR2075\",\"CXR2175\",\"CXR2799\",\"CXR1410\",\"CXR1993\"],\"rationale\":\"The lung fields are clear without evidence of focal airspace consolidation or infiltrates.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR237\",\"CXR332\",\"CXR3320\",\"CXR2075\",\"CXR2175\",\"CXR2799\",\"CXR1410\",\"CXR1993\"],\"rationale\":\"The heart size is normal, although the mediastinum appears widened likely due to the patient's known achalasia.\"},{\"finding\":\"Atelectasis\",\"status\":\"absent\",\"probability\":0.1,\"cited_case_ids\":[],\"rationale\":\"No evidence of discoid or plate-like opacities representing volume loss.\"},{\"finding\":\"Lung Lesion\",\"status\":\"absent\",\"probability\":0.15,\"cited_case_ids\":[\"CXR237\"],\"rationale\":\"A dense, well-circumscribed nodule in the right mid-lung is consistent with a calcified granuloma, which is excluded from the definition of lung lesion.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR237\",\"CXR332\",\"CXR2075\",\"CXR1770\",\"CXR2175\",\"CXR2799\",\"CXR1410\",\"CXR1993\"],\"rationale\":\"Costophrenic angles are sharp, and no pleural fluid is visualized.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR1770\",\"CXR2175\",\"CXR2799\"],\"rationale\":\"The visualized ribs, clavicles, and thoracic spine appear intact without evidence of acute fracture.\"}],\"impression\":\"No acute cardiopulmonary abnormality. Significant widening of the mediastinal silhouette is consistent with the clinical indication of achalasia. A calcified granuloma is noted in the right lung.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR237",
+     "CXR2075",
+     "CXR2175",
+     "CXR2799",
+     "CXR1410",
+     "CXR1993"
+    ],
+    "rationale": "The lung fields are clear without evidence of focal airspace consolidation or infiltrates."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR237",
+     "CXR332",
+     "CXR3320",
+     "CXR2075",
+     "CXR2175",
+     "CXR2799",
+     "CXR1410",
+     "CXR1993"
+    ],
+    "rationale": "The heart size is normal, although the mediastinum appears widened likely due to the patient's known achalasia."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [],
+    "rationale": "No evidence of discoid or plate-like opacities representing volume loss."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.15,
+    "cited_case_ids": [
+     "CXR237"
+    ],
+    "rationale": "A dense, well-circumscribed nodule in the right mid-lung is consistent with a calcified granuloma, which is excluded from the definition of lung lesion."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR237",
+     "CXR332",
+     "CXR2075",
+     "CXR1770",
+     "CXR2175",
+     "CXR2799",
+     "CXR1410",
+     "CXR1993"
+    ],
+    "rationale": "Costophrenic angles are sharp, and no pleural fluid is visualized."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR1770",
+     "CXR2175",
+     "CXR2799"
+    ],
+    "rationale": "The visualized ribs, clavicles, and thoracic spine appear intact without evidence of acute fracture."
+   }
+  ],
+  "impression": "No acute cardiopulmonary abnormality. Significant widening of the mediastinal silhouette is consistent with the clinical indication of achalasia. A calcified granuloma is noted in the right lung."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2242,
+  "output": 511,
+  "thinking": 2380,
+  "total": 5133
+ },
+ "time": "2026-10-18T11:52:12"
+}

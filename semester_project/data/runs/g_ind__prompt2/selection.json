@@ -1,0 +1,211 @@
+{
+  "arm": "g_ind__prompt2",
+  "threshold": 0.08,
+  "threshold_rule": "one per arm: Youden J over all (study, finding) pairs of the stated probabilities on validation, ties -> higher threshold; positive = probability >= threshold",
+  "split": "val",
+  "n_studies": 400,
+  "pooled_at_threshold": {
+    "tp": 67,
+    "fp": 345,
+    "fn": 46,
+    "tn": 1942,
+    "sensitivity": 0.5929203539823009,
+    "specificity": 0.8491473546130301,
+    "precision": 0.16262135922330098,
+    "f1": 0.25523809523809526
+  },
+  "macro_auroc": 0.7235758935468976,
+  "macro_auroc_ci95": [
+    0.6784736237617531,
+    0.7819141630039335
+  ],
+  "macro": {
+    "at_threshold": {
+      "sensitivity": 0.49589963176919705,
+      "specificity": 0.8477344797375884,
+      "f1": 0.2180041898945777
+    },
+    "stated": {
+      "sensitivity": 0.26793858315597446,
+      "specificity": 0.9702314644937943,
+      "f1": 0.28345399921197795
+    }
+  },
+  "threshold_vs_stated_disagreements": 307,
+  "missing_statuses": 0,
+  "bootstrap": {
+    "n": 2000,
+    "seed": 2026,
+    "unit": "study"
+  },
+  "val_results": {
+    "Lung Opacity": {
+      "positives": 39,
+      "auroc": 0.7009375665885361,
+      "auroc_ci95": [
+        0.6110187488232917,
+        0.7942337892120627
+      ],
+      "at_threshold": {
+        "tp": 18,
+        "fp": 48,
+        "fn": 21,
+        "tn": 313,
+        "sensitivity": 0.46153846153846156,
+        "specificity": 0.8670360110803325,
+        "precision": 0.2727272727272727,
+        "f1": 0.34285714285714286
+      },
+      "stated": {
+        "tp": 11,
+        "fp": 14,
+        "fn": 28,
+        "tn": 347,
+        "sensitivity": 0.28205128205128205,
+        "specificity": 0.961218836565097,
+        "precision": 0.44,
+        "f1": 0.34375
+      }
+    },
+    "Cardiomegaly": {
+      "positives": 23,
+      "auroc": 0.9163879598662207,
+      "auroc_ci95": [
+        0.8558679546247818,
+        0.9649087852233678
+      ],
+      "at_threshold": {
+        "tp": 21,
+        "fp": 75,
+        "fn": 2,
+        "tn": 302,
+        "sensitivity": 0.9130434782608695,
+        "specificity": 0.8010610079575596,
+        "precision": 0.21875,
+        "f1": 0.35294117647058826
+      },
+      "stated": {
+        "tp": 11,
+        "fp": 13,
+        "fn": 12,
+        "tn": 364,
+        "sensitivity": 0.4782608695652174,
+        "specificity": 0.9655172413793104,
+        "precision": 0.4583333333333333,
+        "f1": 0.46808510638297873
+      }
+    },
+    "Atelectasis": {
+      "positives": 26,
+      "auroc": 0.6894282188399835,
+      "auroc_ci95": [
+        0.5569687370493162,
+        0.8196202589883129
+      ],
+      "at_threshold": {
+        "tp": 17,
+        "fp": 116,
+        "fn": 9,
+        "tn": 258,
+        "sensitivity": 0.6538461538461539,
+        "specificity": 0.6898395721925134,
+        "precision": 0.12781954887218044,
+        "f1": 0.2138364779874214
+      },
+      "stated": {
+        "tp": 11,
+        "fp": 26,
+        "fn": 15,
+        "tn": 348,
+        "sensitivity": 0.4230769230769231,
+        "specificity": 0.93048128342246,
+        "precision": 0.2972972972972973,
+        "f1": 0.3492063492063492
+      }
+    },
+    "Lung Lesion": {
+      "positives": 11,
+      "auroc": 0.6215237204954429,
+      "auroc_ci95": [
+        0.44817745613165466,
+        0.8010455713951856
+      ],
+      "at_threshold": {
+        "tp": 4,
+        "fp": 56,
+        "fn": 7,
+        "tn": 333,
+        "sensitivity": 0.36363636363636365,
+        "specificity": 0.8560411311053985,
+        "precision": 0.06666666666666667,
+        "f1": 0.11267605633802817
+      },
+      "stated": {
+        "tp": 1,
+        "fp": 9,
+        "fn": 10,
+        "tn": 380,
+        "sensitivity": 0.09090909090909091,
+        "specificity": 0.9768637532133676,
+        "precision": 0.1,
+        "f1": 0.09523809523809523
+      }
+    },
+    "Pleural Effusion": {
+      "positives": 12,
+      "auroc": 0.8403135738831615,
+      "auroc_ci95": [
+        0.6906477117214075,
+        0.958579362770074
+      ],
+      "at_threshold": {
+        "tp": 7,
+        "fp": 30,
+        "fn": 5,
+        "tn": 358,
+        "sensitivity": 0.5833333333333334,
+        "specificity": 0.9226804123711341,
+        "precision": 0.1891891891891892,
+        "f1": 0.2857142857142857
+      },
+      "stated": {
+        "tp": 4,
+        "fp": 2,
+        "fn": 8,
+        "tn": 386,
+        "sensitivity": 0.3333333333333333,
+        "specificity": 0.9948453608247423,
+        "precision": 0.6666666666666666,
+        "f1": 0.4444444444444444
+      }
+    },
+    "Fracture": {
+      "positives": 2,
+      "auroc": 0.5728643216080402,
+      "auroc_ci95": [
+        0.5500590966051493,
+        0.596770309882747
+      ],
+      "at_threshold": {
+        "tp": 0,
+        "fp": 20,
+        "fn": 2,
+        "tn": 378,
+        "sensitivity": 0.0,
+        "specificity": 0.949748743718593,
+        "precision": 0.0,
+        "f1": 0.0
+      },
+      "stated": {
+        "tp": 0,
+        "fp": 3,
+        "fn": 2,
+        "tn": 395,
+        "sensitivity": 0.0,
+        "specificity": 0.992462311557789,
+        "precision": 0.0,
+        "f1": 0.0
+      }
+    }
+  }
+}

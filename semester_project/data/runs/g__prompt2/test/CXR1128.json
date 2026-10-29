@@ -1,0 +1,125 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR1128",
+ "image": "CXR1128_IM-0084-5001",
+ "indication": "Pneumonia one XXXX ago with left-sided crackles",
+ "neighbours": [
+  {
+   "study": "CXR2289",
+   "similarity": 0.9317631721496582
+  },
+  {
+   "study": "CXR2460",
+   "similarity": 0.9308674931526184
+  },
+  {
+   "study": "CXR2513",
+   "similarity": 0.924625813961029
+  },
+  {
+   "study": "CXR862",
+   "similarity": 0.9231030344963074
+  },
+  {
+   "study": "CXR969",
+   "similarity": 0.9230257868766785
+  },
+  {
+   "study": "CXR3616",
+   "similarity": 0.9207835793495178
+  },
+  {
+   "study": "CXR3417",
+   "similarity": 0.9184406995773315
+  },
+  {
+   "study": "CXR3192",
+   "similarity": 0.9165984392166138
+  },
+  {
+   "study": "CXR2485",
+   "similarity": 0.9164609909057617
+  },
+  {
+   "study": "CXR959",
+   "similarity": 0.9159711599349976
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: Pneumonia one XXXX ago with left-sided crackles\n\nSimilar cases (most similar first):\nCase CXR2289 (similarity 0.932): FINDINGS: Lungs are clear. blunting of the left costophrenic XXXX consistent with a small left pleural effusion and associated airspace disease. The right lung is clear. Sequelae of old granulomatous disease. Heart size is upper limits of normal. Degenerative changes in the spine. IMPRESSION: 1. Heart size upper limits of normal. 2. Small left pleural effusion with associated airspace disease.\nCase CXR2460 (similarity 0.931): IMPRESSION: No active disease.\nCase CXR2513 (similarity 0.925): FINDINGS: [<Heart size and pulmonary vascularity within normal limits. There is a large hiatal hernia seen projecting in the retrocardiac region. This is XXXX from prior examination. There is associated atelectasis in the left lung base. No pleural effusion or pneumothorax is identified. IMPRESSION: 1. XXXX large hiatal hernia. 2. Left base atelectasis.\nCase CXR862 (similarity 0.923): FINDINGS: The parenchymal scar in the left lower lobe is unchanged in the interval. No XXXX infiltrates or masses in the lungs. Heart and mediastinum are normal. IMPRESSION: No change. No active disease.\nCase CXR969 (similarity 0.923): FINDINGS: Heart size upper limits of normal but stable. Tortuous aorta. The lungs are normally inflated without evidence of focal airspace disease, pleural effusion, or pneumothorax. Osseous structures are within normal limits for patient age.. IMPRESSION: 1. No acute radiographic cardiopulmonary process.\nCase CXR3616 (similarity 0.921): FINDINGS: The heart is normal in size. The mediastinum is stable. The aorta is atherosclerotic. There are emphysematous changes with increased interstitial markings, particularly in the periphery and lung bases. The lungs are clear of focal infiltrates. There is no pleural effusion. IMPRESSION: Emphysema with increased lung markings markings, possibly superimposed chronic lung disease/fibrosis.\nCase CXR3417 (similarity 0.918): FINDINGS: The lungs are hyperexpanded, consistent with COPD. Mild cardiomegaly. No focal lung consolidation. No pneumothorax or pleural effusion. Pulmonary vascularity is within normal limits. Mild degenerative changes of the thoracic spine. Aortic calcifications consistent with atherosclerotic disease. IMPRESSION: No focal lung consolidation. COPD.\nCase CXR3192 (similarity 0.917): FINDINGS: The heart is normal in size. Mild fullness of the left hilum, small interval change from prior exam. Lucencies throughout the chest XXXX representing emphysematous change. Scattered bilateral calcified granulomas. No pneumothorax. Large hiatal hernia, increased from prior exam. IMPRESSION: 1. Increased left hilar fullness. This may represent superimposed XXXX, adenopathy cannot be excluded on this exam. If there is clinical concern, suggest reference to prior exam or CT chest. 2. Large hiatal hernia, increased in size from prior exam.\nCase CXR2485 (similarity 0.916): FINDINGS: There is bilateral lower lung airspace disease. There are small to moderate sized bilateral pleural effusions, left greater than right. There is no pneumothorax. Mediastinal silhouette normal. Calcified left hilar lymph XXXX. IMPRESSION: Small to moderate sized bilateral pleural effusions with adjacent infiltrate or atelectasis.\nCase CXR959 (similarity 0.916): FINDINGS: The heart and mediastinal contours are stable. There is minimal patchy right lower lobe airspace disease identified. No pleural effusion or pneumothorax. IMPRESSION: 1. Patchy right lower lobe airspace disease may be due to atelectasis or infiltrate.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\":[{\"finding\":\"Lung Opacity\",\"status\":\"present\",\"probability\":0.85,\"cited_case_ids\":[\"CXR2289\",\"CXR2485\"],\"rationale\":\"There is an opacity in the left lower lobe/retrocardiac region, which aligns with the clinical history of recent pneumonia and left-sided crackles.\"},{\"finding\":\"Cardiomegaly\",\"status\":\"absent\",\"probability\":0.15,\"cited_case_ids\":[\"CXR969\",\"CXR3616\"],\"rationale\":\"The heart size appears within normal limits, though slightly obscured by the hiatal hernia.\"},{\"finding\":\"Atelectasis\",\"status\":\"present\",\"probability\":0.7,\"cited_case_ids\":[\"CXR2513\",\"CXR959\"],\"rationale\":\"Basilar opacity on the left may be related to atelectasis, commonly seen adjacent to large hiatal hernias or post-pneumonia.\"},{\"finding\":\"Lung Lesion\",\"status\":\"absent\",\"probability\":0.05,\"cited_case_ids\":[\"CXR862\"],\"rationale\":\"No discrete pulmonary nodules or masses are identified.\"},{\"finding\":\"Pleural Effusion\",\"status\":\"uncertain\",\"probability\":0.55,\"cited_case_ids\":[\"CXR2289\",\"CXR2485\"],\"rationale\":\"There is some blunting of the left costophrenic angle which could indicate a small amount of pleural fluid.\"},{\"finding\":\"Fracture\",\"status\":\"absent\",\"probability\":0.02,\"cited_case_ids\":[\"CXR969\"],\"rationale\":\"No acute or old fractures are visualized in the ribs or clavicles.\"}],\"impression\":\"Large hiatal hernia with an associated left lower lobe retrocardiac opacity, likely representing residual pneumonia or atelectasis. A small left pleural effusion is also possible.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "present",
+    "probability": 0.85,
+    "cited_case_ids": [
+     "CXR2289",
+     "CXR2485"
+    ],
+    "rationale": "There is an opacity in the left lower lobe/retrocardiac region, which aligns with the clinical history of recent pneumonia and left-sided crackles."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.15,
+    "cited_case_ids": [
+     "CXR969",
+     "CXR3616"
+    ],
+    "rationale": "The heart size appears within normal limits, though slightly obscured by the hiatal hernia."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.7,
+    "cited_case_ids": [
+     "CXR2513",
+     "CXR959"
+    ],
+    "rationale": "Basilar opacity on the left may be related to atelectasis, commonly seen adjacent to large hiatal hernias or post-pneumonia."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR862"
+    ],
+    "rationale": "No discrete pulmonary nodules or masses are identified."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "uncertain",
+    "probability": 0.55,
+    "cited_case_ids": [
+     "CXR2289",
+     "CXR2485"
+    ],
+    "rationale": "There is some blunting of the left costophrenic angle which could indicate a small amount of pleural fluid."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.02,
+    "cited_case_ids": [
+     "CXR969"
+    ],
+    "rationale": "No acute or old fractures are visualized in the ribs or clavicles."
+   }
+  ],
+  "impression": "Large hiatal hernia with an associated left lower lobe retrocardiac opacity, likely representing residual pneumonia or atelectasis. A small left pleural effusion is also possible."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2378,
+  "output": 395,
+  "thinking": 1540,
+  "total": 4313
+ },
+ "time": "2026-10-18T14:06:01"
+}

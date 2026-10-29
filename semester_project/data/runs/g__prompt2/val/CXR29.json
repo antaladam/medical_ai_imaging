@@ -1,0 +1,129 @@
+{
+ "arm": "g__prompt2",
+ "system": "g",
+ "prompt_version": 2,
+ "study": "CXR29",
+ "image": "CXR29_IM-1302-1001",
+ "indication": "XXXX, hypoxia.",
+ "neighbours": [
+  {
+   "study": "CXR3846",
+   "similarity": 0.9385696649551392
+  },
+  {
+   "study": "CXR3886",
+   "similarity": 0.934224009513855
+  },
+  {
+   "study": "CXR3192",
+   "similarity": 0.9318453669548035
+  },
+  {
+   "study": "CXR2048",
+   "similarity": 0.93180912733078
+  },
+  {
+   "study": "CXR161",
+   "similarity": 0.9301340579986572
+  },
+  {
+   "study": "CXR1529",
+   "similarity": 0.9293941259384155
+  },
+  {
+   "study": "CXR2454",
+   "similarity": 0.9288068413734436
+  },
+  {
+   "study": "CXR1916",
+   "similarity": 0.9284808039665222
+  },
+  {
+   "study": "CXR2424",
+   "similarity": 0.9275155067443848
+  },
+  {
+   "study": "CXR583",
+   "similarity": 0.9264148473739624
+  }
+ ],
+ "prompt": "You are a decision-support tool for a radiologist. Review this patient's frontal chest X-ray and report on six findings. A radiologist checks your output; give your best assessment.\n\nFindings and their definitions:\n- Lung Opacity: airspace opacity, consolidation, infiltrate or airspace disease in the lung. A discrete nodule or mass is not Lung Opacity (it is Lung Lesion).\n- Cardiomegaly: an enlarged heart. A borderline or upper-normal heart size counts as absent.\n- Atelectasis: collapse or incomplete expansion of lung tissue, including subsegmental or plate-like atelectasis.\n- Lung Lesion: a nodule, mass or cavity in the lung. A calcified granuloma does not count.\n- Pleural Effusion: fluid in the pleural space.\n- Fracture: a fracture of the ribs, clavicles, spine or any other visible bone. Healed or old fractures count.\n\nHow to work:\n1. Read the patient's image systematically first.\n2. Then look at the 10 most similar cases from a reference database, listed below with their reports. They are other patients whose images look similar to this one. Use them as supporting evidence to confirm or question what you see in the patient's image, not as the answer: a finding in a similar case does not mean that this patient has it.\n3. Take the clinical indication into account.\n4. For each of the six findings, give its status (present, absent or uncertain), the probability (0 to 1) that it is present in this patient, the IDs of the similar cases that support your call (an empty list if none), and a rationale of one or two sentences. Then give a short impression. Do not explain what the findings are. Cite cases by their ID exactly as written, e.g. CXR316. Give the probability with two decimals as your honest estimate; for subtle, borderline or partly obscured appearances, use intermediate values rather than a fixed low value.\n\nClinical indication: XXXX, hypoxia.\n\nSimilar cases (most similar first):\nCase CXR3846 (similarity 0.939): FINDINGS: Heart size and mediastinal contour are normal. Pulmonary vascularity is normal. The right lung is clear. There is a recurrence moderate-sized left pleural effusion. No pneumothorax. Limited right base stringy density compatible with atelectasis. Dextroscoliosis of the thoracic spine. IMPRESSION: Recurrent moderate sized left pleural effusion.\nCase CXR3886 (similarity 0.934): IMPRESSION: [&lt;The heart size and cardiomediastinal silhouette are stable and within normal limits. Pulmonary vasculature appears normal. There is no focal air space consolidation. No pleural effusion or pneumothorax.&gt;] Extensive left upper quadrant splenic calcification may reflect old granulomatous disease\nCase CXR3192 (similarity 0.932): FINDINGS: The heart is normal in size. Mild fullness of the left hilum, small interval change from prior exam. Lucencies throughout the chest XXXX representing emphysematous change. Scattered bilateral calcified granulomas. No pneumothorax. Large hiatal hernia, increased from prior exam. IMPRESSION: 1. Increased left hilar fullness. This may represent superimposed XXXX, adenopathy cannot be excluded on this exam. If there is clinical concern, suggest reference to prior exam or CT chest. 2. Large hiatal hernia, increased in size from prior exam.\nCase CXR2048 (similarity 0.932): FINDINGS: The lungs and pleural spaces show no acute abnormality. Stable right lower lobe calcified granulomas. Thin XXXX lingular scar, unchanged. Heart size and pulmonary vascularity within normal limits. Surgical clips are visualized in the right upper quadrant. IMPRESSION: 1. No acute pulmonary abnormality.\nCase CXR161 (similarity 0.930): FINDINGS: Low lung volumes are present. The heart size and pulmonary vascularity appear within normal limits. No pleural effusion or pneumothorax is seen. Scattered XXXX of left base atelectasis are noted. Left XXXX-a-XXXX is in XXXX with the tip projecting over the caval atrial junction. IMPRESSION: 1. XXXX of left base atelectasis. Otherwise, clear.\nCase CXR1529 (similarity 0.929): FINDINGS: The lungs are clear. There is no focal airspace consolidation. No pleural effusion or pneumothorax. Heart size is within normal limits. Right paratracheal density is stable from prior radiographs and may reflect tortuous vasculature. There is aortic atherosclerotic vascular calcification. There are mild degenerative changes of the spine. Surgical clips are noted in the region of the left breast. There is mild diaphragm eventration. IMPRESSION: No evidence of active disease.\nCase CXR2454 (similarity 0.929): FINDINGS: Cardiomediastinal silhouette appears normal in size and contour. Right lung is clear. Stable blunting of costophrenic XXXX with improved aeration of the left base compared to prior exam. No visualized pneumothorax or focal consolidation. XXXX unremarkable. IMPRESSION: Stable blunting of the left costophrenic XXXX which may represent persistent left pleural effusion versus pleural scarring.\nCase CXR1916 (similarity 0.928): FINDINGS: There is stable left costophrenic XXXX blunting. The patient has undergone prior left lobectomy. There are chronic appearing right basilar interstitial markings. Heart size normal. No visualized pneumothorax. There is stable appearing left upper and right upper lobe bullous disease. IMPRESSION: 1. No acute cardiopulmonary findings. 2. Unchanged chronic appearance of the left lung.\nCase CXR2424 (similarity 0.928): FINDINGS: The lungs are clear. There is no pleural effusion or pneumothorax. The heart is not significantly enlarged. The mediastinum is normal. Arthritic changes of the skeletal structures are noted. IMPRESSION: No acute pulmonary disease. No gross evidence for rib fracture.\nCase CXR583 (similarity 0.926): IMPRESSION: Right-sided perihilar calcified lymph XXXX and infracarinal calcified lymph XXXX. These XXXX represent previous granulomatous disease. Lung parenchyma is clear. No airspace disease. No pulmonary edema. Normal heart size. No XXXX of pleural effusions. No XXXX of active cardiopulmonary disease.\n\nThe patient's frontal chest X-ray follows.",
+ "model_requested": "gemini-3-flash-preview",
+ "model_version": "gemini-3-flash-preview",
+ "response_text": "{\"findings\": [{\"finding\": \"Lung Opacity\", \"status\": \"absent\", \"probability\": 0.05, \"cited_case_ids\": [\"CXR3886\", \"CXR1529\", \"CXR2424\"], \"rationale\": \"The lung parenchyma is clear without evidence of focal airspace consolidation or infiltrates.\"}, {\"finding\": \"Cardiomegaly\", \"status\": \"absent\", \"probability\": 0.1, \"cited_case_ids\": [\"CXR3846\", \"CXR3886\", \"CXR3192\", \"CXR1529\"], \"rationale\": \"The cardiomediastinal silhouette is within normal limits for size and contour, consistent with several similar cases.\"}, {\"finding\": \"Atelectasis\", \"status\": \"present\", \"probability\": 0.7, \"cited_case_ids\": [\"CXR3846\", \"CXR161\"], \"rationale\": \"Minimal linear opacities at the lung bases are consistent with mild subsegmental atelectasis, similar to findings in CXR3846.\"}, {\"finding\": \"Lung Lesion\", \"status\": \"absent\", \"probability\": 0.05, \"cited_case_ids\": [\"CXR2048\", \"CXR583\"], \"rationale\": \"No discrete pulmonary nodules, masses, or suspicious focal lesions are identified.\"}, {\"finding\": \"Pleural Effusion\", \"status\": \"absent\", \"probability\": 0.2, \"cited_case_ids\": [\"CXR2454\", \"CXR1916\"], \"rationale\": \"Mild blunting of the left costophrenic angle likely represents chronic scarring or positional change from the hiatal hernia.\"}, {\"finding\": \"Fracture\", \"status\": \"absent\", \"probability\": 0.05, \"cited_case_ids\": [\"CXR2424\"], \"rationale\": \"No acute fractures of the ribs, clavicles, or visible spine are detected.\"}], \"impression\": \"No acute cardiopulmonary disease. Findings are significant for a large hiatal hernia and mild basilar atelectasis.\"}",
+ "parsed": {
+  "findings": [
+   {
+    "finding": "Lung Opacity",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR3886",
+     "CXR1529",
+     "CXR2424"
+    ],
+    "rationale": "The lung parenchyma is clear without evidence of focal airspace consolidation or infiltrates."
+   },
+   {
+    "finding": "Cardiomegaly",
+    "status": "absent",
+    "probability": 0.1,
+    "cited_case_ids": [
+     "CXR3846",
+     "CXR3886",
+     "CXR3192",
+     "CXR1529"
+    ],
+    "rationale": "The cardiomediastinal silhouette is within normal limits for size and contour, consistent with several similar cases."
+   },
+   {
+    "finding": "Atelectasis",
+    "status": "present",
+    "probability": 0.7,
+    "cited_case_ids": [
+     "CXR3846",
+     "CXR161"
+    ],
+    "rationale": "Minimal linear opacities at the lung bases are consistent with mild subsegmental atelectasis, similar to findings in CXR3846."
+   },
+   {
+    "finding": "Lung Lesion",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2048",
+     "CXR583"
+    ],
+    "rationale": "No discrete pulmonary nodules, masses, or suspicious focal lesions are identified."
+   },
+   {
+    "finding": "Pleural Effusion",
+    "status": "absent",
+    "probability": 0.2,
+    "cited_case_ids": [
+     "CXR2454",
+     "CXR1916"
+    ],
+    "rationale": "Mild blunting of the left costophrenic angle likely represents chronic scarring or positional change from the hiatal hernia."
+   },
+   {
+    "finding": "Fracture",
+    "status": "absent",
+    "probability": 0.05,
+    "cited_case_ids": [
+     "CXR2424"
+    ],
+    "rationale": "No acute fractures of the ribs, clavicles, or visible spine are detected."
+   }
+  ],
+  "impression": "No acute cardiopulmonary disease. Findings are significant for a large hiatal hernia and mild basilar atelectasis."
+ },
+ "problems": [],
+ "usage": {
+  "input": 2489,
+  "output": 478,
+  "thinking": 2441,
+  "total": 5408
+ },
+ "time": "2026-10-18T11:22:31"
+}
