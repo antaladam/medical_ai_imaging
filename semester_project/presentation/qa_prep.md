@@ -414,8 +414,12 @@ Effusion and Fracture the two are level.
 
 **84. ★★★ What happens to the main result without Lung Lesion?**
 G − S0 drops to +0.020 [−0.020, +0.063], and to +0.008 without Lung Lesion and Fracture:
-not distinguishable from zero. The gain rests largely on the finding where S0's label does not
-match IU's nodule / mass codes. This check was promised before the test run.
+not distinguishable from zero. The gain rests largely on one finding, on which S0 is near chance
+in every split. Why S0 is so weak there is not established. It is not a different definition: S0's
+training labels (MIMIC-CXR, extracted by NegBio with the CheXpert labeller's phrases) count a
+nodule, mass or cavity and exclude calcified nodules, essentially as the ground truth does. Likely
+candidates are noisy text-mined training labels, small lesions at 224 px and poor transfer between
+hospitals. This check was promised before the test run.
 
 **85. ★★★ Why is this not "moving the goalposts" after seeing the results?**
 The opposite: the check was written down on 2026-10-17, before any test run, as "macro averages
@@ -479,7 +483,7 @@ decided.
 
 **96. ★★★ What are the main limits of the main claim?**
 S0 is the planned DenseNet, not the strongest specialist; the gain rests on Lung Lesion, where
-S0's label does not fit; Gemini has probably seen IU X-Ray; G gets finding definitions the other
+S0 is near chance; Gemini has probably seen IU X-Ray; G gets finding definitions the other
 systems do not; S0 is zero-shot. The claim is "G beats the planned zero-shot specialist on this
 collection, mainly on one finding", not "multimodal retrieval beats image models".
 

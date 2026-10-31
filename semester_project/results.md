@@ -1,7 +1,8 @@
 # Starter Agents vs. a Grounded Image + Text System for Chest X-ray Decision Support — Results
 
 Semester project report, Antal Ádám (final version, 2026-10-18; §7 "Further research" added
-2026-10-24, possibilities only). The plan it follows is
+2026-10-24, possibilities only; the explanation of S0's Lung Lesion weakness corrected
+2026-10-31, see "Corrections"). The plan it follows is
 `semester_plan.md`, frozen as of 2026-10-16. Where the work differs from the plan, the difference
 is recorded here, under "Deviations from the plan", and in `diary.md`. The plan itself is not
 edited.
@@ -33,7 +34,8 @@ the indication + the reports of the 10 most similar training cases (BiomedCLIP) 
 **Q3 — How do the results differ?**
 - **Primary, pre-declared comparison: G ranks findings better than the specialist image model S0**
   (zero-shot TorchXRayVision DenseNet): macro AUROC **0.754 vs. 0.705, +0.049 [+0.013, +0.087]**.
-  **The gain rests largely on Lung Lesion,** where S0's label does not match IU's codes: without
+  **The gain rests largely on Lung Lesion,** a finding on which S0 is near chance in every split
+  (cause not established; not a difference in definition, §5.1): without
   Lung Lesion the difference is +0.020 [−0.020, +0.063], not distinguishable from zero.
 - **Where it comes from:** Gemini reading the image alone (G-img) is level with S0 (+0.010
   [−0.029, +0.050]); adding the retrieved cases and the indication gives a gain (G − G-img
@@ -53,8 +55,8 @@ the indication + the reports of the 10 most similar training cases (BiomedCLIP) 
 IU X-Ray during training (no recalled wording was found, but recalled labels cannot be excluded);
 G receives finding definitions that the other systems do not; the test set is a single 400-study
 sample from one hospital collection. The result is "a grounded image + text system beats the
-planned zero-shot specialist on this collection, mainly on one finding where the specialist's
-label does not fit", not "multimodal retrieval beats image models". The firmer finding is the
+planned zero-shot specialist on this collection, mainly on one finding where the specialist
+performs at chance level", not "multimodal retrieval beats image models". The firmer finding is the
 within-design one: giving Gemini the retrieved cases and the indication improves its ranking
 over the image alone.
 
@@ -825,8 +827,17 @@ Findings:
 - **Padding helps where the crop cuts anatomy:** Pleural Effusion (costophrenic angles) and
   Fracture (lateral ribs) gain with padding for mimic_nb (0.842 → 0.868, 0.616 → 0.676) and for
   the ResNet (0.939 → 0.943, 0.715 → 0.746).
-- **Lung Lesion is near chance for every DenseNet** (0.49–0.56): the CheXpert / MIMIC "Lung
-  Lesion" label does not transfer to IU's MeSH nodule / mass codes.
+- **Lung Lesion is near chance for every DenseNet** (0.49–0.56). The cause is not established,
+  but it is **not a difference in definition** (checked 2026-10-31; this corrects the earlier
+  explanation, see "Corrections"). S0's training labels (`mimic_nb`) were extracted from
+  MIMIC-CXR reports by NegBio using the CheXpert labeller's mention phrases: Lung Lesion = mass,
+  nodule, nodular density / opacity / opacification, lump, cavitary lesion, carcinoma, neoplasm or
+  tumor, with "calcified nodule" mentions excluded. That is essentially this project's ground
+  truth (nodule, mass or cavity in the lung, calcified granulomas excluded, §2.4b). The remaining
+  differences are in how the labels were made (keyword rules on the IMPRESSION section vs. human
+  coding of the report; uncertain mentions ignored in training), not in what counts as a lesion.
+  Possible reasons for the weakness are noisy text-mined training labels, small lesions at
+  224 px and poor transfer between hospitals; which of these applies is not known.
 - **The ResNet-50 reference is clearly better than every DenseNet** (+0.080 macro AUROC
   [+0.052, +0.106]), most of all on Cardiomegaly, Atelectasis, Lung Lesion (via the proxy) and
   Pleural Effusion. See "Resolved decisions": the DenseNet is kept.
@@ -1197,8 +1208,8 @@ level (all intervals include zero).
    difference may be task specification.
 4. **S0 is zero-shot** (never trained on IU data); a fine-tuned image model is not in this
    comparison.
-5. **The gain depends on Lung Lesion,** the finding where S0's label is known not to match IU's
-   codes (§6; check promised before the test run, computed after it with the same bootstrap):
+5. **The gain depends on Lung Lesion,** a finding on which S0 is near chance in every split
+   (§5.1; the cause is not established and is not a difference in definition; check promised before the test run, computed after it with the same bootstrap):
 
    | Macro AUROC difference [95% CI] | All six findings | Without Lung Lesion | Without Lung Lesion and Fracture |
    |---|---|---|---|
@@ -1206,8 +1217,7 @@ level (all intervals include zero).
    | G − G-img | +0.039 [+0.008, +0.071] | +0.040 [+0.005, +0.077] | +0.030 [−0.003, +0.065] |
 
    Without Lung Lesion, G and S0 are not distinguishable. The pre-declared result stands as
-   declared, but it rests largely on one finding where the specialist is handicapped by a label
-   mismatch. What retrieval and context add within G's design (G − G-img) does not depend on Lung
+   declared, but it rests largely on one finding on which the specialist is weak. What retrieval and context add within G's design (G − G-img) does not depend on Lung
    Lesion.
 
 #### Where G's advantage comes from (secondary comparisons)
@@ -1272,8 +1282,8 @@ P3-adapted, whose generator never sees the patient's image (§3.4) and over-call
 #### Summary
 
 On the pre-declared criterion, the built grounded system beats the planned zero-shot specialist
-model (+0.049 macro AUROC). The gain rests largely on Lung Lesion, where S0's label does not
-match IU's codes; without it the two are not distinguishable (limit 5). The decomposition points
+model (+0.049 macro AUROC). The gain rests largely on Lung Lesion, a finding on which S0 is
+near chance; without it the two are not distinguishable (limit 5). The decomposition points
 to the retrieved cases and context, not to better image reading, as the source of G's edge, and
 that part holds without Lung Lesion. The comparison is further bounded by S0 not being the
 strongest available model and by possible Gemini memorisation of IU X-Ray. Against the starter apps, G's
@@ -1414,9 +1424,10 @@ patient (§2.2).
   positives, 13% of Cardiomegaly positives), and agreement with the manual codes is lowest for
   Pneumonia (κ 0.61) (§2.4b).
 - **Lung Lesion and Fracture are hard for the image-based anchors here:** S0's DenseNets and R0
-  are near chance on them on train and validation (§5.1, §5.2). For Lung Lesion this may partly
-  be a label-definition mismatch (IU's MeSH nodule / mass codes vs. the CheXpert / MIMIC "Lung
-  Lesion" label), not only a model weakness. **This changes the reading of the primary result**
+  are near chance on them on train and validation (§5.1, §5.2). For S0's Lung Lesion this is a
+  model weakness, not a definition difference: its training label defines Lung Lesion essentially
+  as the ground truth does (§5.1; an earlier version of this point suggested a label-definition
+  mismatch, see "Corrections"). **This changes the reading of the primary result**
   (check promised here on 2026-10-17, before any test run; computed 2026-10-18, §5.5): G − S0 is
   +0.049 [+0.013, +0.087] over six findings, but +0.020 [−0.020, +0.063] without Lung Lesion and
   +0.008 [−0.028, +0.044] without Lung Lesion and Fracture. Old fractures are missed by all LLM
@@ -1526,10 +1537,10 @@ one modality, one collection and one test sample.
   definitions in the prompt, and possibly another embedder; a specialist needs labelled training
   data and a training run per task. BiomedCLIP was trained on figures from PubMed Central
   (PMC-15M) across many modalities, not only chest X-rays.
-- **The task definition sits in the prompt, not in the weights (evidence from this project).**
-  S0's weakest finding, Lung Lesion, came largely from a label mismatch between its training
-  labels and IU's codes (§5.5, limit 5); G was told IU's definition. Adapting to a new site's
-  labelling conventions is a prompt change for G and retraining for a specialist.
+- **The task definition sits in the prompt, not in the weights.** Adapting to a new site's
+  labelling conventions is a prompt change for G and retraining for a specialist. This project
+  gives no direct evidence of how much that matters: S0's weakness on Lung Lesion was first
+  attributed to a label mismatch, which the documentation does not support ("Corrections").
 - **G's gain comes mostly from retrieval and context, not from reading the image better**
   (G − G-img +0.039, also without Lung Lesion; G-img − S0 +0.010; §5.5). That mechanism does not
   depend on the modality, only on a library of reported cases.
@@ -1550,9 +1561,7 @@ one modality, one collection and one test sample.
   version can change; a local model (MedGemma-4B, thesis plan) addresses this.
 
 **Defensible wording:** "A retrieval-grounded vision-language system like G can be re-targeted
-to a new imaging task without training, by changing its case index and task definitions. Within
-chest X-rays, definitions given in the prompt avoided a label mismatch that limited the
-specialist. Whether this comes with competitive accuracy in other modalities was not tested."
+to a new imaging task without training, by changing its case index and task definitions. Whether this comes with competitive accuracy in other modalities was not tested."
 
 **Possible test (thesis scale):** the same arms (G, G-img, a specialist, a kNN baseline) on a
 second public modality, most directly dermoscopy (ISIC / HAM10000), with the same frozen-before-
@@ -1667,3 +1676,34 @@ None at present.
   films. For S0, padding instead of cropping improved Pleural Effusion and Fracture (§5.1). A
   padded BiomedCLIP index is a cheap option to test when G's index is fixed; R0 would then be
   re-run on the same index (plan §3: "same BiomedCLIP index as G").
+
+## Corrections
+
+- **2026-10-31 — Why S0 is weak on Lung Lesion.** Earlier versions of this report (Summary,
+  §5.1, §5.5, §6, §7.3) explained S0's near-chance Lung Lesion score as a label-definition
+  mismatch: S0's "Lung Lesion" label was said not to match IU's MeSH nodule / mass codes, and
+  the primary result was described as resting on a finding where the specialist is
+  "handicapped by a label mismatch". This was an inference from the scores (first written
+  2026-10-17) and was never checked. Checked now against primary sources:
+  - MIMIC-CXR-JPG documentation (PhysioNet, v2.1.0): the NegBio labels, which S0
+    (`densenet121-res224-mimic_nb`) was trained on, were produced by "NegBio … run using the
+    custom mention patterns defined by the CheXpert tool"; labels come from the IMPRESSION
+    section (FINDINGS if there is none).
+  - CheXpert labeller phrase files: Lung Lesion is triggered by mass, nodular density /
+    densities, nodular opacity / opacities / opacification, nodule, lump, cavitary lesion,
+    carcinoma, neoplasm, tumor; "calcified nodul…" is excluded.
+  - TorchXRayVision 1.5.5 `MIMIC_Dataset` (installed source): positive = 1; negated mention or a
+    "No Finding" study = 0; uncertain mentions and unmentioned findings are ignored in training.
+  - This project's ground truth (§2.4b): Nodule, Mass or Cavitation in the lung, calcified
+    granulomas excluded; none of the 104 Lung Lesion positives rests only on a calcified
+    nodule code.
+
+  The two definitions are essentially the same. The differences lie in how the labels were made
+  (keyword rules on report text vs. human coding), not in what counts as a lesion. **Corrected
+  reading:** S0 is weak on Lung Lesion on IU for reasons not established (possible: noisy
+  text-mined training labels, small lesions at 224 px, poor transfer between hospitals). The
+  facts of the primary result are unchanged: the gain rests largely on Lung Lesion, and without
+  it G − S0 is not distinguishable from zero. What changes is the stated reason: S0 is weak on
+  this finding; it was not graded against a different definition. The same correction was made
+  in `presentation/final_presentation.html`, `presentation/summary_presentation.html` and
+  `presentation/qa_prep.md`.

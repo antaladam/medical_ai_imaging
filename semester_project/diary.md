@@ -1946,6 +1946,58 @@ wording does not work on these data. No API calls involved.
 - Any new test-set run would be after the fact (test declared "run once", §5.4); stated in §7.
 - To-do list: item 9 added (open, not scheduled).
 
+## 2026-10-31 — Hungarian summary; correction: why S0 is weak on Lung Lesion
+
+**Hungarian summary.** New file `osszefoglalo_hu.md`: a self-contained Hungarian summary of the
+semester project (initial question, Q1–Q3, starters, dataset and cleaning, R0 and S0, G, test
+results, conclusions), without references to other project documents. Revised on request: the
+statistical measures and the reasons for choosing them explained (new §7.2: why not plain
+accuracy, sensitivity / specificity, F1, AUROC and what it does and does not measure, macro
+average, the paired bootstrap and how to read its intervals), the reasons behind the mechanism
+measures (lift, copying control, citation baseline, memorisation baseline), impersonal wording
+throughout, and "érzékenység" replaced by "szenzitivitás" so it is not confused with
+"érzékenységvizsgálat" (the sensitivity analysis).
+
+**Correction.** Since 2026-10-17 the report, both decks and the Q&A prep explained S0's
+near-chance Lung Lesion score as a label-definition mismatch ("S0's label does not match IU's
+codes", "handicapped by a label mismatch"). That was an inference from the scores (entry
+"S0: weights, safe loading, scoring, selection": "evidently does not transfer"), never checked,
+and repeated as fact later. Checked now against primary sources:
+- MIMIC-CXR-JPG documentation (PhysioNet, v2.1.0): the NegBio labels (S0 =
+  `densenet121-res224-mimic_nb`) were made by "NegBio … run using the custom mention patterns
+  defined by the CheXpert tool"; labelled from IMPRESSION, else FINDINGS.
+- CheXpert labeller phrase files (`phrases/mention/lung_lesion.txt`,
+  `phrases/unmention/lung_lesion.txt`): mass, nodular density / densities, nodular opacity /
+  opacities / opacification, nodule, lump, cavitary lesion, carcinoma, neoplasm, tumor;
+  "calcified nodul…" excluded.
+- TorchXRayVision 1.5.5 `MIMIC_Dataset` (installed source): positive 1; negated or "No Finding"
+  0; uncertain (−1) and unmentioned findings ignored (NaN).
+- Ground truth: none of the 104 Lung Lesion positives rests only on a calcified nodule code.
+
+Result: the two definitions are essentially the same (nodule, mass or cavity; calcified ones
+excluded); only the way the labels were produced differs. **The mismatch explanation is not
+supported.** S0 is weak on Lung Lesion for reasons not established (possible: noisy text-mined
+labels, small lesions at 224 px, poor transfer between hospitals). The facts of the primary
+result are unchanged (gain concentrated in Lung Lesion; G − S0 not distinguishable without it);
+only the stated reason changes.
+
+Not used as evidence: a quick check scoring S0 against CheXbert's labels of the IU reports
+(Lung Lesion AUROC 0.500 train / 0.426 validation, vs. 0.547 / 0.482 against the ground truth;
+scratch script, not kept). CheXbert imitates the CheXpert labeller, not NegBio, and was dropped
+from the project, so it is at best a rough proxy.
+
+Files changed:
+- `results.md`: header note; Summary (2 places); §5.1 (the Lung Lesion bullet now gives the
+  definitions and their sources); §5.5 limit 5 and its reading; §5.5 summary; §6 (the Lung
+  Lesion threat); §7.3 (the "task definition sits in the prompt" point and the defensible
+  wording); new section "Corrections" at the end with the evidence.
+- `presentation/final_presentation.html`: the "rests on one finding" slide (text and speaker
+  notes), the limitations slide, the conclusions slide.
+- `presentation/summary_presentation.html`: the results slide and the conclusions slide.
+- `presentation/qa_prep.md`: Q84 (now explains why it is not a definition difference) and Q96.
+- `osszefoglalo_hu.md`: §5.2, §7.4, §8.
+Earlier diary entries keep their original wording (history); this entry records the correction.
+
 ## 2026-10-18 — Next steps (current to-do list)
 
 Moved here unchanged from the entry "Prompt 2 frozen; next steps", so the current to-do list

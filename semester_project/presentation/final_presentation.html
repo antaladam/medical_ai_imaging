@@ -1012,12 +1012,12 @@ Case CXR1726 (similarity 0.955): FINDINGS: … <span class="dim">+ 9 more</span>
     <div class="panel p-sky" style="gap:12px">
       <h3>Reading</h3>
       <p class="small"><b>Without Lung Lesion, G and S0 cannot be told apart.</b></p>
-      <p class="small">Lung Lesion is where S0 is handicapped: its label comes from other hospitals’ definitions and does not match IU’s nodule / mass codes. S0 is near chance on it in every split.</p>
+      <p class="small">Lung Lesion is where S0 is weak: near chance on it in every split. Its training label defines Lung Lesion essentially as the ground truth does, so this is not a definition problem; the exact cause is not established.</p>
       <p class="small"><b>The firmer finding:</b> what the cases and the indication add to Gemini (G − G-img) holds without Lung Lesion.</p>
       <p class="small">The pre-declared result stands as declared; this is reported next to it.</p>
     </div>
   </div>
-  <aside>A check promised before the test run. Without Lung Lesion, G − S0 is +0.020 with an interval that includes zero. Lung Lesion is exactly where S0’s label does not fit IU’s codes. In contrast, what the cases and context add within G’s own design holds without Lung Lesion.</aside>
+  <aside>A check promised before the test run. Without Lung Lesion, G − S0 is +0.020 with an interval that includes zero. Lung Lesion is exactly where S0 is near chance. Its training labels (MIMIC-CXR, NegBio with the CheXpert labeller’s phrases) count a nodule, mass or cavity and exclude calcified nodules, as the ground truth does, so the weakness is the model’s, not the definition’s; the exact cause is not established. In contrast, what the cases and context add within G’s own design holds without Lung Lesion.</aside>
 </section>
 
 <!-- 28 · 3_7 tartalomrész -->
@@ -1179,7 +1179,7 @@ Case CXR1726 (similarity 0.955): FINDINGS: … <span class="dim">+ 9 more</span>
       <h3>Bounding the main claim</h3>
       <ul class="small">
         <li><b>S0 is not the best specialist:</b> a ResNet-50 scored 0.808 vs. 0.728 on train and was not run on test</li>
-        <li><b>The gain rests on Lung Lesion,</b> where S0’s label does not fit IU’s codes</li>
+        <li><b>The gain rests on Lung Lesion,</b> where S0 is near chance (cause not established)</li>
         <li><b>Gemini has probably seen IU X-Ray;</b> no recalled wording found, recalled labels not excluded</li>
         <li><b>G gets finding definitions</b> that the other systems do not</li>
         <li><b>S0 is zero-shot;</b> a fine-tuned image model is not in the comparison</li>
@@ -1207,7 +1207,7 @@ Case CXR1726 (similarity 0.955): FINDINGS: … <span class="dim">+ 9 more</span>
   <div class="region" style="top:262px;gap:26px">
     <div class="toc"><div class="n">Q1</div><p>None of the starters ran on chest X-rays as shipped. Adapted, they answer every study, but their verdicts are coarse; P3 never reads the patient’s image.</p></div>
     <div class="toc"><div class="n">Q2</div><p>G combines P1’s systematic reading, P2’s retrieval and P3’s citations, and adds the clinical indication, a probability per finding and machine-checkable citations.</p></div>
-    <div class="toc"><div class="n">Q3</div><p>G beats the planned specialist (+0.049 macro AUROC), but mostly on Lung Lesion, where the specialist is handicapped. Robust: cases + context make Gemini better than Gemini on the image alone, and its citations are 81–96% verifiable.</p></div>
+    <div class="toc"><div class="n">Q3</div><p>G beats the planned specialist (+0.049 macro AUROC), but mostly on Lung Lesion, where the specialist is near chance. Robust: cases + context make Gemini better than Gemini on the image alone, and its citations are 81–96% verifiable.</p></div>
   </div>
   <aside>Three answers. Q1: none of the starters works on chest X-rays out of the box. Q2: G combines the starters’ strengths and fills their gaps. Q3: G beats the planned specialist on the pre-declared criterion, but mostly on one finding; the robust result is within the design.</aside>
 </section>
