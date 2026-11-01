@@ -437,7 +437,7 @@ Visszatérő minták:
 **Q3 – Összevetés:**
 
 - Az előre rögzített fő összevetésben **G valószínűségei jobban megkülönböztetik a pozitív és a negatív eseteket, mint a tervezett zero-shot specialista pontszámai** (+0,049 makró AUROC), de ez **nagyrészt a tüdőléziónak köszönhető**, amelyen a specialista a véletlen közelében teljesít; enélkül a különbség nem mutatható ki. A specialista lényegében ugyanazzal a tüdőlézió-definícióval tanult, mint amellyel az értékelés történt; gyengeségének pontos oka nem ismert.
-- **A legszilárdabb eredmény a G felépítésén belüli:** a visszakeresett esetek és a klinikai indikáció együtt jobbá teszik a Geminit annál, amit a képből egyedül tud (+0,039), és ez tüdőlézió nélkül is megmarad. A Gemini egyedül, csak a képből nagyjából annyit tud, mint a specialista.
+- A legszilárdabb eredmény a G felépítésén belüli: a visszakeresett esetek és a klinikai indikáció együtt mérsékelten javították az LLM megkülönböztető képességét a csak képes működéshez képest (+0,039 makró AUROC), és ez tüdőlézió nélkül is megmaradt; a két tényező külön hatása nem választható szét. Csak a képből a Gemini és a specialista között nem mutatható ki különbség.
 - A kiinduló alkalmazásokkal szemben G kimondott ítéletei óvatosabbak, nem pontosabbak. Valódi többlete a jól megkülönböztető valószínűség és az ellenőrizhető hivatkozás: a „present” ítéletekhez megjelölt esetek 81–96%-ában megvan az adott elváltozás.
 - A szomszédok csak kis mértékben húzzák G ítéleteit (kb. 3 százalékpont). Ha G mégis másol, az látszik az indoklásán.
 

@@ -1998,6 +1998,18 @@ Files changed:
 - `osszefoglalo_hu.md`: §5.2, §7.4, §8.
 Earlier diary entries keep their original wording (history); this entry records the correction.
 
+## 2026-11-01 — Hungarian summary: Q3 wording of the G − G-img result
+
+`osszefoglalo_hu.md` §8 (Q3, second bullet) reworded to match what the data support:
+- "jobbá teszik" → "mérsékelten javították … (+0,039 makró AUROC)": the size of the gain and
+  the metric stated; past tense (a one-off test-set result).
+- Added: the separate effects of the retrieved cases and of the clinical indication cannot be
+  separated (G − G-img changes both at once; G−ind isolates only the indication).
+- "A Gemini egyedül … nagyjából annyit tud, mint a specialista" → "Csak a képből a Gemini és a
+  specialista között nem mutatható ki különbség": no difference shown is not the same as equal.
+- Bold lead-in removed from the bullet.
+No numbers changed. Only this file changed.
+
 ## 2026-10-18 — Next steps (current to-do list)
 
 Moved here unchanged from the entry "Prompt 2 frozen; next steps", so the current to-do list
